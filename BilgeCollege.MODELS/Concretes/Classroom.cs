@@ -8,6 +8,6 @@ namespace BilgeCollege.MODELS.Concretes
 
         // Relations
         public List<Student> Students { get; set; }
-        public List<MainTopic> MainTopics { get; set; }
+        public List<AltTopic> AltTopics { get; set; }
     }
 }

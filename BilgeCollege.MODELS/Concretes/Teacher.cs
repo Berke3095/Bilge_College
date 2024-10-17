@@ -8,8 +8,6 @@ namespace BilgeCollege.MODELS.Concretes
         public string LastName { get; set; }
 
         // Relations
-        List<Student> Students { get; set; }
-
         public MainTopic MainTopic { get; set; }
         public int MainTopicId { get; set; }
     }
