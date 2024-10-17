@@ -1,4 +1,5 @@
 ﻿using BilgeCollege.MODELS.Abstracts;
+using BilgeCollege.MODELS.Concretes.CustomUser;
 
 namespace BilgeCollege.MODELS.Concretes
 {
