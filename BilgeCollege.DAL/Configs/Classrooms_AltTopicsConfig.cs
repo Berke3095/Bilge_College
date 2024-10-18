@@ -8,12 +8,6 @@ namespace BilgeCollege.DAL.Configs
     {
         public void Configure(EntityTypeBuilder<Classrooms_AltTopics> builder)
         {
-            builder
-                .Ignore(x => x.Id)
-                .Ignore(x => x.GuidId)
-                .Ignore(x => x.CreatedDate)
-                .Ignore(x => x.ModifiedDate);
-
             builder.HasKey(x => new {x.ClassroomId, x.AltTopicId});
 
         }
