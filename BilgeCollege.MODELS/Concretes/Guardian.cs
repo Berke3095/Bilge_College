@@ -10,6 +10,7 @@ namespace BilgeCollege.MODELS.Concretes
         public string Username { get; set; }
         public string Email { get; set; }
         public string HomeAddress { get; set; }
+        public string TCK { get; set; }
 
         // Relations
         public List<Student> Students { get; set; }

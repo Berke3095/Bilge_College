@@ -12,6 +12,10 @@ namespace BilgeCollege.DAL.Configs
 
             builder.Property(x => x.FirstName).HasMaxLength(50);
             builder.Property(x => x.LastName).HasMaxLength(50);
+            builder.Property(x => x.Username).HasMaxLength(100);
+            builder.Property(x => x.Email).HasMaxLength(100);
+            builder.Property(x => x.HomeAddress).HasMaxLength(255);
+            builder.Property(x => x.TCK).HasMaxLength(11);
         }
     }
 }
