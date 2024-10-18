@@ -4,11 +4,11 @@ using BilgeCollege.MODELS.Abstracts;
 
 namespace BilgeCollege.BLL.Services.Concretes
 {
-    public class ServiceManager<T> : I_ServiceManager<T> where T : BaseEntity
+    public class BaseServiceManager<T> : I_BaseServiceManager<T> where T : BaseEntity
     {
         private readonly I_Repository<T> _repository;
 
-        public ServiceManager(I_Repository<T> repository)
+        public BaseServiceManager(I_Repository<T> repository)
         {
             _repository = repository;
         }

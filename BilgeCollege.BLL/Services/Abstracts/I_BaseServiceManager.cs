@@ -2,7 +2,7 @@
 
 namespace BilgeCollege.BLL.Services.Abstracts
 {
-    public interface I_ServiceManager<T> where T : BaseEntity
+    public interface I_BaseServiceManager<T> where T : BaseEntity
     {
         public List<T> GetAll();
         public List<T> GetAllActives();
