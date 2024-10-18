@@ -17,6 +17,7 @@ namespace BilgeCollege.MODELS.Concretes
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public GenderEnum Gender { get; set; }
+        public string Email { get; set; }
 
         public string FinishedSchool { get; set; } // Middle school name
         public double FinalGrade // Middle school final grade
