@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilgeCollege.MODELS", "BilgeCollege.MODELS\BilgeCollege.MODELS.csproj", "{292732C8-2E98-43B0-A589-C6D6AC1DC342}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilgeCollege.MODELS", "BilgeCollege.MODELS\BilgeCollege.MODELS.csproj", "{292732C8-2E98-43B0-A589-C6D6AC1DC342}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilgeCollege.DAL", "BilgeCollege.DAL\BilgeCollege.DAL.csproj", "{B73A1421-4E56-40C2-BA7B-BCAB45CFD109}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilgeCollege.DAL", "BilgeCollege.DAL\BilgeCollege.DAL.csproj", "{B73A1421-4E56-40C2-BA7B-BCAB45CFD109}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilgeCollege.BLL", "BilgeCollege.BLL\BilgeCollege.BLL.csproj", "{6FEB55C4-8F15-45F2-98DA-8FE8364EEB73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B73A1421-4E56-40C2-BA7B-BCAB45CFD109}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B73A1421-4E56-40C2-BA7B-BCAB45CFD109}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B73A1421-4E56-40C2-BA7B-BCAB45CFD109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FEB55C4-8F15-45F2-98DA-8FE8364EEB73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FEB55C4-8F15-45F2-98DA-8FE8364EEB73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FEB55C4-8F15-45F2-98DA-8FE8364EEB73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FEB55C4-8F15-45F2-98DA-8FE8364EEB73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
