@@ -10,7 +10,6 @@ namespace BilgeCollege.MODELS.Concretes.CustomUser
             CreatedDate = DateTime.Now;
         }
 
-        public int CustomId { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
     }

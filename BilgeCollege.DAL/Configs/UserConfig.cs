@@ -9,8 +9,6 @@ namespace BilgeCollege.DAL.Configs
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(x => x.CustomId).ValueGeneratedOnAdd();
-
             builder.HasData(GetUsers());
         }
 
@@ -21,7 +19,6 @@ namespace BilgeCollege.DAL.Configs
 
             User admin = new User
             {
-                CustomId = 1,
                 Id = Guid.NewGuid().ToString(),
                 UserName = "Admin",
                 NormalizedUserName = "ADMIN",
