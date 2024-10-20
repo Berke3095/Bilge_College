@@ -1,0 +1,110 @@
+﻿@model LoginVM
+@{
+    ViewData["Title"] = "BilgeCollege - Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <style>
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control {
+            border-radius: 30px;
+        }
+
+        .btn-login {
+            background-color: #6f42c1;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 25px;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-login:hover {
+                background-color: #5a34a1;
+            }
+
+        .text-center h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .welcome-header {
+            font-size: 3rem;
+            font-weight: bold;
+            background: -webkit-linear-gradient(45deg, #ff6ec4, #7873f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container align-content-center vh-100">
+        <div class="container text-center mt-4">
+            <h1 class="welcome-header">Welcome To Bilge College Portal</h1>
+        </div>
+        <div class="container d-flex justify-content-center align-items-center vh-50" style="margin-top:50px;">
+            <div class="login-container col-md-6 col-lg-4 shadow-lg p-4">
+                <div class="text-center">
+                    <h1 class="display-5">Account Login</h1>
+                </div>
+
+                <form method="post">
+                    <div class="form-group mb-4">
+                        <input asp-for="Email" type="email" class="form-control" placeholder="example@@bilgecollege.com">
+                        <span asp-validation-for="Email" class="form-text text text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+                        <span asp-validation-for="Password" class="form-text text text-danger"></span>
+                    </div>
+
+                    <div class="remember-me mb-4">
+                        <label for="rememberMe" class="form-check-label">Remember Me</label>
+                        <input type="checkbox" name="bRememberMe" class="form-check-input ms-2">
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-login">Login</button>
+                    </div>
+
+                    @if (ViewData["LoginError"] != null)
+                    {
+                        <div>
+                            <span class="form-text text-danger">@ViewData["LoginError"]</span>
+                        </div>
+                    }
+
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-muted">Forgot your password?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>

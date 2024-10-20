@@ -4,9 +4,9 @@ using BilgeCollege.MODELS.Concretes;
 
 namespace BilgeCollege.BLL.Services.Concretes
 {
-    public class StudentService : BaseServiceManager<Student>, I_StudentServiceManager
+    public class StudentServiceManager : BaseServiceManager<Student>, I_StudentServiceManager
     {
-        public StudentService(I_Repository<Student> repository) : base(repository)
+        public StudentServiceManager(I_Repository<Student> repository) : base(repository)
         {
 
         }
