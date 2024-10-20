@@ -25,12 +25,11 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            TeacherVM teacherVM = new TeacherVM
+            return View(new TeacherVM
             {
                 MainTopics = _mainTopicServiceManager.GetAllActives(),
                 Teachers = _teacherService.GetAllActives()
-            };
-            return View(teacherVM);
+            });
         }
 
         [HttpPost]
@@ -60,13 +59,16 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                                 };
 
                                 _teacherService.Create(teacher);
+                                return RedirectToAction("Create", "Teacher");
                             }
                         }
                     }
                 }
-                return RedirectToAction("Create", "Teacher");
             }
-            else return View(teacherVM);
+            return View(new TeacherVM {
+                MainTopics = _mainTopicServiceManager.GetAllActives(),
+                Teachers = _teacherService.GetAllActives()
+            });
         }
     }
 }

@@ -165,9 +165,6 @@ namespace BilgeCollege.DAL.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<bool>("bRememberMe")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -183,21 +180,20 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cad28984-afbc-407d-9692-ef9bdee231b6",
+                            Id = "32e296f4-0e76-440a-b7e7-d0fbfe6d6177",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4623b3ae-b566-4df0-8d78-58f513a1541e",
-                            CreatedDate = new DateTime(2024, 10, 20, 2, 17, 41, 360, DateTimeKind.Local).AddTicks(6710),
+                            ConcurrencyStamp = "d9901010-d8e7-4c2c-9da5-425dd91de7cf",
+                            CreatedDate = new DateTime(2024, 10, 21, 1, 13, 1, 704, DateTimeKind.Local).AddTicks(3053),
                             Email = "berke_aktepe@hotmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "BERKE_AKTEPE@HOTMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMPqlUlhbBy+r1QPrGQhHSMWk9EDENu0YoTT4TmuCQ1lkmbWgg2MVtkjckomABYJ3A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECMGfKfHbfW9sRzFDD68/NIzP0yUzmXE0ALwZLVUzvHs9OFOIMQJLHcjVJpEUTKEog==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "17ab82bb-d13d-4792-a6d0-4afe6ea70308",
+                            SecurityStamp = "02ca4a74-0d04-4994-a361-25ffdedc7bb5",
                             TwoFactorEnabled = false,
-                            UserName = "Admin",
-                            bRememberMe = false
+                            UserName = "Admin"
                         });
                 });
 
@@ -556,24 +552,24 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4c7911d3-e931-4fb1-a5cd-6852ed15d31f",
+                            Id = "7737d470-a642-4854-b044-28b073f34973",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
-                            CreatedDate = new DateTime(2024, 10, 20, 2, 17, 41, 395, DateTimeKind.Local).AddTicks(1524)
+                            CreatedDate = new DateTime(2024, 10, 21, 1, 13, 1, 738, DateTimeKind.Local).AddTicks(7670)
                         },
                         new
                         {
-                            Id = "cd7afb89-ec30-42ef-b860-e1406ef16306",
+                            Id = "5d404ed3-6260-44f2-b4f2-414127c9b6bc",
                             Name = "Teacher",
                             NormalizedName = "TEACHER",
-                            CreatedDate = new DateTime(2024, 10, 20, 2, 17, 41, 395, DateTimeKind.Local).AddTicks(1537)
+                            CreatedDate = new DateTime(2024, 10, 21, 1, 13, 1, 738, DateTimeKind.Local).AddTicks(7728)
                         },
                         new
                         {
-                            Id = "c5e560e3-7b23-4cac-a069-f888ff00d577",
+                            Id = "4f61ebb7-7cb4-408d-a417-435d9d4a4d6e",
                             Name = "Guardian",
                             NormalizedName = "GUARDIAN",
-                            CreatedDate = new DateTime(2024, 10, 20, 2, 17, 41, 395, DateTimeKind.Local).AddTicks(1540)
+                            CreatedDate = new DateTime(2024, 10, 21, 1, 13, 1, 738, DateTimeKind.Local).AddTicks(7731)
                         });
                 });
 

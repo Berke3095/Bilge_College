@@ -37,7 +37,6 @@ namespace BilgeCollege.DAL.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    bRememberMe = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -337,15 +336,15 @@ namespace BilgeCollege.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Discriminator", "ModifiedDate", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4c7911d3-e931-4fb1-a5cd-6852ed15d31f", null, new DateTime(2024, 10, 20, 2, 17, 41, 395, DateTimeKind.Local).AddTicks(1524), "UserRole", null, "Admin", "ADMIN" },
-                    { "c5e560e3-7b23-4cac-a069-f888ff00d577", null, new DateTime(2024, 10, 20, 2, 17, 41, 395, DateTimeKind.Local).AddTicks(1540), "UserRole", null, "Guardian", "GUARDIAN" },
-                    { "cd7afb89-ec30-42ef-b860-e1406ef16306", null, new DateTime(2024, 10, 20, 2, 17, 41, 395, DateTimeKind.Local).AddTicks(1537), "UserRole", null, "Teacher", "TEACHER" }
+                    { "4f61ebb7-7cb4-408d-a417-435d9d4a4d6e", null, new DateTime(2024, 10, 21, 1, 13, 1, 738, DateTimeKind.Local).AddTicks(7731), "UserRole", null, "Guardian", "GUARDIAN" },
+                    { "5d404ed3-6260-44f2-b4f2-414127c9b6bc", null, new DateTime(2024, 10, 21, 1, 13, 1, 738, DateTimeKind.Local).AddTicks(7728), "UserRole", null, "Teacher", "TEACHER" },
+                    { "7737d470-a642-4854-b044-28b073f34973", null, new DateTime(2024, 10, 21, 1, 13, 1, 738, DateTimeKind.Local).AddTicks(7670), "UserRole", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "bRememberMe" },
-                values: new object[] { "cad28984-afbc-407d-9692-ef9bdee231b6", 0, "4623b3ae-b566-4df0-8d78-58f513a1541e", new DateTime(2024, 10, 20, 2, 17, 41, 360, DateTimeKind.Local).AddTicks(6710), "berke_aktepe@hotmail.com", true, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEMPqlUlhbBy+r1QPrGQhHSMWk9EDENu0YoTT4TmuCQ1lkmbWgg2MVtkjckomABYJ3A==", null, false, "17ab82bb-d13d-4792-a6d0-4afe6ea70308", false, "Admin", false });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "32e296f4-0e76-440a-b7e7-d0fbfe6d6177", 0, "d9901010-d8e7-4c2c-9da5-425dd91de7cf", new DateTime(2024, 10, 21, 1, 13, 1, 704, DateTimeKind.Local).AddTicks(3053), "berke_aktepe@hotmail.com", true, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAECMGfKfHbfW9sRzFDD68/NIzP0yUzmXE0ALwZLVUzvHs9OFOIMQJLHcjVJpEUTKEog==", null, false, "02ca4a74-0d04-4994-a361-25ffdedc7bb5", false, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AltTopics_MainTopicId",

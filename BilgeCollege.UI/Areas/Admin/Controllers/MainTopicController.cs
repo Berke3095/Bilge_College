@@ -19,17 +19,16 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            MainTopicVM mainTopicVM = new MainTopicVM
+            return View(new MainTopicVM
             {
                 MainTopics = _mainTopicServiceManager.GetAllActives()
-            };
-            return View(mainTopicVM);
+            });
         }
 
         [HttpPost]
         public IActionResult Create(MainTopicVM mainTopicVM)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 if (mainTopicVM != null)
                 {
@@ -44,7 +43,10 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 return RedirectToAction("Create", "MainTopic");
             }
 
-            return View(mainTopicVM);
+            return View(new MainTopicVM
+            {
+                MainTopics = _mainTopicServiceManager.GetAllActives()
+            });
         }
     }
 }
