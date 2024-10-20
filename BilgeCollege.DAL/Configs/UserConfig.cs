@@ -9,6 +9,8 @@ namespace BilgeCollege.DAL.Configs
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.Ignore(x => x.bRememberMe);
+
             builder.HasData(GetUsers());
         }
 

@@ -16,9 +16,9 @@ namespace BilgeCollege.UI.Areas.Admin.Models
         [RegularExpression("^[0-9]*$", ErrorMessage = "TCK must contain only numbers.")]
         public string TCK { get; set; }
 
-        [Required(ErrorMessage = "You must select a topic.")]
-        public List<MainTopic> MainTopics { get; set; }
+        public int MainTopicId { get; set; }
 
+        public List<MainTopic> MainTopics { get; set; }
         public List<Teacher> Teachers { get; set; }
     }
 }

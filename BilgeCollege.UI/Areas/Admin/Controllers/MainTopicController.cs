@@ -29,16 +29,22 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(MainTopicVM mainTopicVM)
         {
-            if(mainTopicVM != null)
+            if(ModelState.IsValid)
             {
-                MainTopic mainTopic = new MainTopic
+                if (mainTopicVM != null)
                 {
-                    TopicName = mainTopicVM.TopicName
-                };
+                    MainTopic mainTopic = new MainTopic
+                    {
+                        TopicName = mainTopicVM.TopicName
+                    };
 
-                _mainTopicServiceManager.Create(mainTopic);
+                    _mainTopicServiceManager.Create(mainTopic);
+                }
+
+                return RedirectToAction("Create", "MainTopic");
             }
-            return RedirectToAction("Create", "MainTopic");
+
+            return View(mainTopicVM);
         }
     }
 }
