@@ -1,0 +1,12 @@
+﻿@model List<Teacher>
+@{
+
+}
+<div class="container">
+    <ul>
+        @foreach(var item in Model)
+        {
+            <li>@item.FirstName @item.LastName</li>
+        }
+    </ul>
+</div>

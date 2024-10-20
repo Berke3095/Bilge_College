@@ -4,5 +4,12 @@
 }
 
 <div>
-    <h1 class="display-4">Home Page</h1>
+    @if(User.IsInRole("Admin"))
+    {
+        <h1 class="display-4">Welcome Admin!</h1>
+    }
+    else if(User.IsInRole("Teacher"))
+    {
+        <h1 class="display-4">Welcome Teacher!</h1>
+    }
 </div>

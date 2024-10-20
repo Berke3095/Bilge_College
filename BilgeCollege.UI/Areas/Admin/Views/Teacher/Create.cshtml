@@ -1,0 +1,55 @@
+﻿@model TeacherVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create Teacher";
+}
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/createTeacher.css" rel="stylesheet">
+</head>
+
+<body>
+    <div>
+        <div class="col-3">
+            <div class="text-center">
+                <h1 class="display-5">Create Teacher</h1>
+            </div>
+
+            <form method="post" class="create-container">
+                <div class="form-group mb-4">
+                    <input asp-for="FirstName" type="text" class="form-control" placeholder="Albert">
+                    <span asp-validation-for="FirstName" class="form-text text text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input asp-for="LastName" type="text" class="form-control" placeholder="Einstein">
+                    <span asp-validation-for="LastName" class="form-text text text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input asp-for="TCK" type="text" class="form-control" placeholder="11111111111">
+                    <span asp-validation-for="TCK" class="form-text text text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <select class="form-control" id="exampleSelect" name="exampleSelect" required>
+                        <option value="" disabled selected>--Select a topic--</option>
+                        @foreach (var item in Model.MainTopics)
+                        {
+                            <option value="@item.GuidId">@item.TopicName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-create">Create</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-9">
+            <partial name="_PartialTeacherList" model="Model.Teachers"></partial>
+        </div>
+    </div>
+    
+</body>

@@ -1,0 +1,43 @@
+﻿body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #772ad2;
+}
+
+footer {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    width: 100%;
+    border-top: 1px solid #dee2e6;
+}
+
+.d-flex {
+    flex: 1;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.sideNavHeads {
+    background-color: thistle;
+    width: 55%;
+    text-align: start;
+}
+
+.sideNavUl {
+    margin-left: 10px;
+}
+
+.sideNavLi {
+    width: 55%;
+    text-align: start;
+    border: none;
+}

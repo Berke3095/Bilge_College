@@ -7,55 +7,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BilgeCollege.UI.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
 
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            background-color: #772ad2;
-        }
-
-        footer {
-            background-color: #f8f9fa;
-            text-align: center;
-            padding: 10px;
-            margin-top: auto;
-            width: 100%;
-            border-top: 1px solid #dee2e6;
-        }
-
-        .d-flex {
-            flex: 1;
-        }
-
-        .main-content {
-            flex-grow: 1;
-            padding: 20px;
-        }
-        .sideNavHeads{
-            background-color: thistle;
-            width: 55%;
-            text-align: start;
-        }
-        .sideNavUl{
-            margin-left:10px;
-        }
-        .sideNavLi{
-            width: 55%;
-            text-align: start;
-            border: none;
-        }
-    </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="ms-auto" style="margin-right:30px;">
-                <a href="#" class="btn btn-danger" style="color:azure">Log Out</a>
+                <a asp-area="" asp-controller="Account" asp-action="Logout" class="btn btn-danger" style="color:azure">Log Out</a>
             </div>
         </nav>
     </header>
@@ -71,7 +30,7 @@
                         </button>
                         <div class="collapse mt-1 sideNavUl" id="Teachers">
                             <ul>
-                                <li><a href="#" class="btn btn-sm btn-primary sideNavLi" style="background-color: oldlace; color: black;">Ex</a></li>
+                                <li><a asp-area="Admin" asp-controller="Teacher" asp-action="Create" class="btn btn-sm sideNavLi" style="background-color: thistle; color: black;">Create</a></li>
                             </ul>
                         </div>
                     </li>
@@ -81,7 +40,7 @@
                         </button>
                         <div class="collapse mt-1 sideNavUl" id="Students">
                             <ul>
-                                <li><a href="#" class="btn btn-sm btn-primary sideNavLi" style="background-color: oldlace; color: black;">Ex</a></li>
+                                <li><a href="#" class="btn btn-sm sideNavLi" style="background-color: thistle; color: black;">Ex</a></li>
                             </ul>
                         </div>
                     </li>
@@ -91,7 +50,7 @@
                         </button>
                         <div class="collapse mt-1 sideNavUl" id="Topics">
                             <ul>
-                                <li><a href="#" class="btn btn-sm btn-primary sideNavLi" style="background-color: oldlace; color: black;">Ex</a></li>
+                                <li><a href="#" class="btn btn-sm sideNavLi" style="background-color: thistle; color: black;">Ex</a></li>
                             </ul>
                         </div>
                     </li>
@@ -101,7 +60,7 @@
                         </button>
                         <div class="collapse mt-1 sideNavUl" id="Classrooms">
                             <ul>
-                                <li><a href="#" class="btn btn-sm btn-primary sideNavLi" style="background-color: oldlace; color: black;">Ex</a></li>
+                                <li><a href="#" class="btn btn-sm sideNavLi" style="background-color: thistle; color: black;">Ex</a></li>
                             </ul>
                         </div>
                     </li>
@@ -111,7 +70,7 @@
                         </button>
                         <div class="collapse mt-1 sideNavUl" id="Guardians">
                             <ul>
-                                <li><a href="#" class="btn btn-sm btn-primary sideNavLi" style="background-color: oldlace; color: black;">Ex</a></li>
+                                <li><a href="#" class="btn btn-sm sideNavLi" style="background-color: thistle; color: black;">Ex</a></li>
                             </ul>
                         </div>
                     </li>
@@ -133,6 +92,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/layout.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
