@@ -1,0 +1,36 @@
+﻿@model MainTopicVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create MainTopic";
+}
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/createMainTopic.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="d-flex">
+        <div class="col-md-3">
+            <div class="text-center">
+                <h1 class="display-5">Create a Main Topic</h1>
+            </div>
+
+            <form method="post" class="create-container">
+                <div class="form-group mb-4">
+                    <input asp-for="TopicName" type="text" class="form-control" placeholder="ex: Math">
+                    <span asp-validation-for="TopicName" class="form-text text text-danger"></span>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-create">Create</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-9">
+            <partial name="_PartialMainTopicList" model="Model.MainTopics"></partial>
+        </div>
+    </div>
+
+</body>
+

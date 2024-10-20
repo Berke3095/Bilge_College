@@ -20,7 +20,7 @@
     </header>
     <div class="d-flex">
         <div class="col-md-2 flex-shrink-0 p-3" style="width:250px; margin-left:25px; background-color:#9d8fb9;">
-            <span class="fs-2 fw-semibold">Menu</span>
+            <span class="fs-2 fw-semibold"><strong>Operations</strong></span>
             @if(User.IsInRole("Admin"))
             {
                 <ul class="list-unstyled ps-0">
@@ -50,7 +50,26 @@
                         </button>
                         <div class="collapse mt-1 sideNavUl" id="Topics">
                             <ul>
-                                <li><a href="#" class="btn btn-sm sideNavLi" style="background-color: thistle; color: black;">Ex</a></li>
+                                <li class="mb-1" style="margin-top:10px;">
+                                    <button class="btn align-items-center rounded collapsed sideNavAltHeads" data-bs-toggle="collapse" data-bs-target="#MainTopics" aria-expanded="false">
+                                        MainTopics
+                                    </button>
+                                    <div class="collapse mt-1 sideNavUl" id="MainTopics">
+                                        <ul>
+                                            <li><a asp-area="Admin" asp-controller="MainTopic" asp-action="Create" class="btn btn-sm sideNavAltLi" style="background-color: thistle; color: black;">Create</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="mb-1" style="margin-top:10px;">
+                                    <button class="btn align-items-center rounded collapsed sideNavAltHeads" data-bs-toggle="collapse" data-bs-target="#AltTopics" aria-expanded="false">
+                                        AltTopics
+                                    </button>
+                                    <div class="collapse mt-1 sideNavUl" id="AltTopics">
+                                        <ul>
+                                            <li><a href="#" class="btn btn-sm sideNavAltLi" style="background-color: thistle; color: black;">Ex</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </li>

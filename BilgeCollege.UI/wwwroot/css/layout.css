@@ -40,4 +40,18 @@ footer {
     width: 55%;
     text-align: start;
     border: none;
+    margin-top: 5px;
+}
+
+.sideNavAltHeads {
+    background-color: thistle;
+    width: 65%;
+    text-align: start;
+}
+
+.sideNavAltLi {
+    width: 65%;
+    text-align: start;
+    border: none;
+    margin-top:5px;
 }

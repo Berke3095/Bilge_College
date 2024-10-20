@@ -1,4 +1,5 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
+using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.UI.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,14 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(TeacherVM teacherVM)
         {
-            return View();
+            if(teacherVM != null)
+            {
+                Teacher teacher = new Teacher
+                {
+                    
+                };
+            }
+            return RedirectToAction("Create", "Teacher");
         }
     }
 }

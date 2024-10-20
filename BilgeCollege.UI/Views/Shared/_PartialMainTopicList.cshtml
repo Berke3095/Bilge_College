@@ -1,0 +1,13 @@
+﻿@model List<MainTopic>
+@{
+
+}
+
+<div class="container">
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@item.TopicName</li>
+        }
+    </ul>
+</div>
