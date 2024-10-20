@@ -90,12 +90,9 @@
                         <button type="submit" class="btn btn-login">Login</button>
                     </div>
 
-                    @if (ViewData["LoginError"] != null)
-                    {
-                        <div>
-                            <span class="form-text text-danger">@ViewData["LoginError"]</span>
-                        </div>
-                    }
+                    <div>
+                        <span class="form-text text-danger">@ViewData["LoginError"]</span>
+                    </div>
 
                     <div class="text-center mt-3">
                         <a href="#" class="text-muted">Forgot your password?</a>

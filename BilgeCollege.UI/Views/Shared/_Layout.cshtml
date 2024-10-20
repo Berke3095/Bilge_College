@@ -7,39 +7,128 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BilgeCollege.UI.styles.css" asp-append-version="true" />
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #772ad2;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+            width: 100%;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .d-flex {
+            flex: 1;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .sideNavHeads{
+            background-color: thistle;
+            width: 55%;
+            text-align: start;
+        }
+        .sideNavUl{
+            margin-left:10px;
+        }
+        .sideNavLi{
+            width: 55%;
+            text-align: start;
+            border: none;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BilgeCollege.UI</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="ms-auto" style="margin-right:30px;">
+                <a href="#" class="btn btn-danger" style="color:azure">Log Out</a>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="d-flex">
+        <div class="col-md-2 flex-shrink-0 p-3" style="width:250px; margin-left:25px; background-color:#9d8fb9;">
+            <span class="fs-2 fw-semibold">Menu</span>
+            @if(User.IsInRole("Admin"))
+            {
+                <ul class="list-unstyled ps-0">
+                    <li class="mb-1" style="margin-top:10px;">
+                        <button class="btn align-items-center rounded collapsed sideNavHeads" data-bs-toggle="collapse" data-bs-target="#Teachers" aria-expanded="false">
+                            Teachers
+                        </button>
+                        <div class="collapse mt-1 sideNavUl" id="Teachers">
+                            <ul>
+                                <li><a href="#" class="btn btn-sm btn-primary sideNavLi" style="background-color: oldlace; color: black;">Ex</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1" style="margin-top:10px;">
+                        <button class="btn align-items-center rounded collapsed sideNavHeads" data-bs-toggle="collapse" data-bs-target="#Students" aria-expanded="false">
+                            Students
+                        </button>
+                        <div class="collapse mt-1 sideNavUl" id="Students">
+                            <ul>
+                                <li><a href="#" class="btn btn-sm btn-primary sideNavLi" style="background-color: oldlace; color: black;">Ex</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1" style="margin-top:10px;">
+                        <button class="btn align-items-center rounded collapsed sideNavHeads" data-bs-toggle="collapse" data-bs-target="#Topics" aria-expanded="false">
+                            Topics
+                        </button>
+                        <div class="collapse mt-1 sideNavUl" id="Topics">
+                            <ul>
+                                <li><a href="#" class="btn btn-sm btn-primary sideNavLi" style="background-color: oldlace; color: black;">Ex</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1" style="margin-top:10px;">
+                        <button class="btn align-items-center rounded collapsed sideNavHeads" data-bs-toggle="collapse" data-bs-target="#Classrooms" aria-expanded="false">
+                            Classrooms
+                        </button>
+                        <div class="collapse mt-1 sideNavUl" id="Classrooms">
+                            <ul>
+                                <li><a href="#" class="btn btn-sm btn-primary sideNavLi" style="background-color: oldlace; color: black;">Ex</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1" style="margin-top:10px;">
+                        <button class="btn align-items-center rounded collapsed sideNavHeads" data-bs-toggle="collapse" data-bs-target="#Guardians" aria-expanded="false">
+                            Guardians
+                        </button>
+                        <div class="collapse mt-1 sideNavUl" id="Guardians">
+                            <ul>
+                                <li><a href="#" class="btn btn-sm btn-primary sideNavLi" style="background-color: oldlace; color: black;">Ex</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            }
+            
+        </div>
+
+        <div class="main-content">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - BilgeCollege.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer>
+
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
