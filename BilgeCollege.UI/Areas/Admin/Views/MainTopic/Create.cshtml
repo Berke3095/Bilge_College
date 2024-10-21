@@ -18,7 +18,7 @@
 
             <form method="post" class="create-container">
                 <div class="form-group mb-4">
-                    <input asp-for="TopicName" type="text" class="form-control" placeholder="ex: Math">
+                    <input asp-for="TopicName" type="text" class="form-control" placeholder="Main topic, ex: Math">
                     <span asp-validation-for="TopicName" class="form-text text text-danger"></span>
                 </div>
 
@@ -27,7 +27,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-5">
             <partial name="_PartialMainTopicList" model="Model.MainTopics"></partial>
         </div>
     </div>

@@ -65,10 +65,9 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     }
                 }
             }
-            return View(new TeacherVM {
-                MainTopics = _mainTopicServiceManager.GetAllActives(),
-                Teachers = _teacherService.GetAllActives()
-            });
+            teacherVM.MainTopics = _mainTopicServiceManager.GetAllActives();
+            teacherVM.Teachers = _teacherService.GetAllActives();
+            return View(teacherVM);
         }
     }
 }

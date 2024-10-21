@@ -14,6 +14,5 @@ namespace BilgeCollege.UI.Controllers
         {
             return View();
         }
-
     }
 }

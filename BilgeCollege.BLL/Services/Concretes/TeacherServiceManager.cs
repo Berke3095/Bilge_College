@@ -46,7 +46,7 @@ namespace BilgeCollege.BLL.Services.Concretes
                 {
                     string possibleEmail = firstName.ToLower() + "." + lastName.ToLower() + i + "@bilgecollege.com";
                     emailTaken = await _userManager.FindByEmailAsync(possibleEmail);
-                    if (emailTaken != null)
+                    if (emailTaken == null)
                     {
                         user.Email = possibleEmail;
                         break;
@@ -83,7 +83,7 @@ namespace BilgeCollege.BLL.Services.Concretes
                 {
                     string possibleUsername = firstName + "_" + lastName + i;
                     usernameTaken = await _userManager.FindByNameAsync(possibleUsername);
-                    if (emailTaken != null)
+                    if (emailTaken == null)
                     {
                         user.UserName = possibleUsername;
                         break;
