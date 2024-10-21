@@ -39,11 +39,27 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             {
                 if (createMainTopicVM != null)
                 {
-                    MainTopic mainTopic = new MainTopic
-                    {
-                        TopicName = createMainTopicVM.TopicName
-                    };
+                    MainTopic mainTopic = new MainTopic();
 
+                    if (_mainTopicServiceManager.GetAll().Where(x => x.TopicName == createMainTopicVM.TopicName).ToList().Count() == 0) mainTopic.TopicName = createMainTopicVM.TopicName;
+                    else
+                    {
+                        int i = 1;
+                        while(true)
+                        {
+                            string possibleName = createMainTopicVM.TopicName + i;
+                            if (_mainTopicServiceManager.GetAll().Where(x => x.TopicName == possibleName).ToList().Count() == 0)
+                            {
+                                mainTopic.TopicName = possibleName;
+                                break;
+                            }
+                            else
+                            {
+                                i++;
+                                continue;
+                            }
+                        }
+                    }
                     _mainTopicServiceManager.Create(mainTopic);
                 }
 
