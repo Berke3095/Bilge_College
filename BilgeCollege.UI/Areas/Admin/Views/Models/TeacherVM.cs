@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
-namespace BilgeCollege.UI.Areas.Admin.Models
+namespace BilgeCollege.UI.Areas.Admin.Views.Models
 {
-    public class CreateTeacherVM
+    public class TeacherVM
     {
         [Required(ErrorMessage = "You must enter the first name.")]
         public string FirstName { get; set; }
@@ -18,11 +18,5 @@ namespace BilgeCollege.UI.Areas.Admin.Models
         public string TCK { get; set; }
 
         public int MainTopicId { get; set; }
-
-        [ValidateNever]
-        public List<MainTopic> MainTopics { get; set; }
-
-        [ValidateNever]
-        public List<Teacher> Teachers { get; set; }
     }
 }

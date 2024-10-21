@@ -1,4 +1,4 @@
-﻿@model CreateMainTopicVM
+﻿@model MainTopicVM
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Create MainTopic";
@@ -28,7 +28,7 @@
             </form>
         </div>
         <div class="col-md-5">
-            <partial name="_PartialMainTopicList" model="Model.MainTopics"></partial>
+            <partial name="_PartialMainTopicList" model="ViewBag.MainTopics" />
         </div>
     </div>
 

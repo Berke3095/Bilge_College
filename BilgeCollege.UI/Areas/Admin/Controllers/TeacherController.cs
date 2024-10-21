@@ -1,7 +1,7 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
 using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.MODELS.Concretes.CustomUser;
-using BilgeCollege.UI.Areas.Admin.Models;
+using BilgeCollege.UI.Areas.Admin.Views.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,15 +25,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            return View(new CreateTeacherVM
-            {
-                MainTopics = _mainTopicServiceManager.GetAllActives(),
-                Teachers = _teacherService.GetAllActives()
-            });
+            ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
+            ViewBag.Teachers = _teacherService.GetAllActives();
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateTeacherVM createTeacherVM)
+        public async Task<IActionResult> Create(TeacherVM createTeacherVM)
         {
             if(ModelState.IsValid)
             {
@@ -65,8 +63,8 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     }
                 }
             }
-            createTeacherVM.MainTopics = _mainTopicServiceManager.GetAllActives();
-            createTeacherVM.Teachers = _teacherService.GetAllActives();
+            ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
+            ViewBag.Teachers = _teacherService.GetAllActives();
             return View(createTeacherVM);
         }
     }

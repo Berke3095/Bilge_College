@@ -1,6 +1,6 @@
 ﻿@model List<MainTopic>
 @{
-
+    int num = 1;
 }
 
 <div class="container mt-4">
@@ -8,14 +8,16 @@
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
+                <th scope="col">#</th>
                 <th scope="col">Topic Name</th>
-                <th scope="col">Actions</th> 
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>@num</td>
                     <td>@item.TopicName</td>
                     <td>
                         <a href="#" class="btn btn-warning btn-sm">Edit</a>
@@ -24,6 +26,7 @@
                         </form>
                     </td>
                 </tr>
+                num++;
             }
         </tbody>
     </table>

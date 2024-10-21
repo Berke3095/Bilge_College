@@ -1,7 +1,6 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
-using BilgeCollege.BLL.Services.Concretes;
 using BilgeCollege.MODELS.Concretes;
-using BilgeCollege.UI.Areas.Admin.Models;
+using BilgeCollege.UI.Areas.Admin.Views.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,14 +21,12 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            return View(new CreateMainTopicVM
-            {
-                MainTopics = _mainTopicServiceManager.GetAllActives()
-            });
+            ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
+            return View();
         }
 
         [HttpPost]
-        public IActionResult Create(CreateMainTopicVM createMainTopicVM)
+        public IActionResult Create(MainTopicVM createMainTopicVM)
         {
             if (ModelState.IsValid)
             {
@@ -46,7 +43,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 return RedirectToAction("Create", "MainTopic");
             }
 
-            createMainTopicVM.MainTopics = _mainTopicServiceManager.GetAllActives();
+            ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             return View(createMainTopicVM);
         }
 
