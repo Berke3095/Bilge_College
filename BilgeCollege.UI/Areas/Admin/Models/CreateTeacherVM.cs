@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BilgeCollege.UI.Areas.Admin.Models
 {
-    public class TeacherVM
+    public class CreateTeacherVM
     {
         [Required(ErrorMessage = "You must enter the first name.")]
         public string FirstName { get; set; }

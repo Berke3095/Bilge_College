@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BilgeCollege.UI.Areas.Admin.Models
 {
-    public class MainTopicVM
+    public class CreateMainTopicVM
     {
         [Required(ErrorMessage = "You must give it a name.")]
         public string TopicName { get; set; }

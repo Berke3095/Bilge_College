@@ -5,29 +5,5 @@
 
 <div class="container mt-4">
     <p class="mb-4 text-danger">Main topic targeted for delete is used by the following teachers. In order to delete the main topic, it musn't be used by any active teachers</p>
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">TCK</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in ViewBag.Teachers)
-            {
-                <tr>
-                    <td>@item.FirstName</td>
-                    <td>@item.LastName</td>
-                    <td>@item.Email</td>
-                    <td>@item.TCK</td>
-                    <td>
-                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <partial name="_PartialTeacherList" model="ViewBag.Teachers"></partial>
 </div>

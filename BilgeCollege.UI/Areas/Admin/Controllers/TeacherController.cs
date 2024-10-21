@@ -25,7 +25,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            return View(new TeacherVM
+            return View(new CreateTeacherVM
             {
                 MainTopics = _mainTopicServiceManager.GetAllActives(),
                 Teachers = _teacherService.GetAllActives()
@@ -33,13 +33,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(TeacherVM teacherVM)
+        public async Task<IActionResult> Create(CreateTeacherVM createTeacherVM)
         {
             if(ModelState.IsValid)
             {
-                if (teacherVM != null)
+                if (createTeacherVM != null)
                 {
-                    User user = await _teacherService.CreateUserAsync(teacherVM.FirstName, teacherVM.LastName, teacherVM.TCK);
+                    User user = await _teacherService.CreateUserAsync(createTeacherVM.FirstName, createTeacherVM.LastName, createTeacherVM.TCK);
                     if (user != null)
                     {
                         var result = await _userManager.CreateAsync(user);
@@ -51,11 +51,11 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                             {
                                 Teacher teacher = new Teacher
                                 {
-                                    FirstName = teacherVM.FirstName,
-                                    LastName = teacherVM.LastName,
-                                    TCK = teacherVM.TCK,
+                                    FirstName = createTeacherVM.FirstName,
+                                    LastName = createTeacherVM.LastName,
+                                    TCK = createTeacherVM.TCK,
                                     Email = user.Email,
-                                    MainTopicId = teacherVM.MainTopicId
+                                    MainTopicId = createTeacherVM.MainTopicId
                                 };
 
                                 _teacherService.Create(teacher);
@@ -65,9 +65,9 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     }
                 }
             }
-            teacherVM.MainTopics = _mainTopicServiceManager.GetAllActives();
-            teacherVM.Teachers = _teacherService.GetAllActives();
-            return View(teacherVM);
+            createTeacherVM.MainTopics = _mainTopicServiceManager.GetAllActives();
+            createTeacherVM.Teachers = _teacherService.GetAllActives();
+            return View(createTeacherVM);
         }
     }
 }
