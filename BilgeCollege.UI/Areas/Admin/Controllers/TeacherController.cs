@@ -12,28 +12,28 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class TeacherController : Controller
     {
-        private readonly I_TeacherServiceManager _teacherService;
+        private readonly I_TeacherServiceManager _teacherServiceManager;
         private readonly I_MainTopicServiceManager _mainTopicServiceManager;
         private readonly UserManager<User> _userManager;
 
         public TeacherController(I_TeacherServiceManager teacherService, I_MainTopicServiceManager mainTopicServiceManager, UserManager<User> userManager)
         {
-            _teacherService = teacherService;
+            _teacherServiceManager = teacherService;
             _mainTopicServiceManager = mainTopicServiceManager;
             _userManager = userManager;
         }
 
         public IActionResult Recycle()
         {
-            ViewBag.ActiveTeachers = _teacherService.GetAllActives();
-            ViewBag.PassiveTeachers = _teacherService.GetAllPassives();
+            ViewBag.ActiveTeachers = _teacherServiceManager.GetAllActives();
+            ViewBag.PassiveTeachers = _teacherServiceManager.GetAllPassives();
             return View();
         }
 
         public IActionResult Create()
         {
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
-            ViewBag.Teachers = _teacherService.GetAllActives();
+            ViewBag.Teachers = _teacherServiceManager.GetAllActives();
             return View();
         }
 
@@ -44,7 +44,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             {
                 if (createTeacherVM != null)
                 {
-                    User user = await _teacherService.CreateUserAsync(createTeacherVM.FirstName, createTeacherVM.LastName, createTeacherVM.TCK);
+                    User user = await _teacherServiceManager.CreateUserAsync(createTeacherVM.FirstName, createTeacherVM.LastName, createTeacherVM.TCK);
                     if (user != null)
                     {
                         var result = await _userManager.CreateAsync(user);
@@ -60,10 +60,11 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                                     LastName = createTeacherVM.LastName,
                                     TCK = createTeacherVM.TCK,
                                     Email = user.Email,
+                                    UserId = user.Id,
                                     MainTopicId = createTeacherVM.MainTopicId
                                 };
 
-                                _teacherService.Create(teacher);
+                                _teacherServiceManager.Create(teacher);
                                 return RedirectToAction("Create", "Teacher");
                             }
                         }
@@ -71,21 +72,26 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 }
             }
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
-            ViewBag.Teachers = _teacherService.GetAllActives();
+            ViewBag.Teachers = _teacherServiceManager.GetAllActives();
             return View(createTeacherVM);
         }
 
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            _teacherService.Delete(_teacherService.GetById(id));
-            return RedirectToAction("Create", "Teacher");
+            _teacherServiceManager.Delete(_teacherServiceManager.GetById(id));
+            return RedirectToAction("Recycle", "Teacher");
         }
 
         [HttpPost]
-        public IActionResult Destroy(int id)
+        public async Task<IActionResult> Destroy(int id)
         {
-            _teacherService.Destroy(_teacherService.GetById(id));
+            var foundTeacher = _teacherServiceManager.GetById(id);
+            var teacherUserToDelete = await _userManager.FindByIdAsync(foundTeacher.UserId);
+            if (teacherUserToDelete != null) await _userManager.DeleteAsync(teacherUserToDelete);
+
+            _teacherServiceManager.Destroy(foundTeacher);
+
             return RedirectToAction("Recycle", "Teacher");
         }
     }

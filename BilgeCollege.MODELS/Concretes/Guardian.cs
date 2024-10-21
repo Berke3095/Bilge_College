@@ -12,6 +12,8 @@ namespace BilgeCollege.MODELS.Concretes
 
         // Relations
         public List<Student>? Students { get; set; }
-        
+
+        public string UserId { get; set; }
+
     }
 }

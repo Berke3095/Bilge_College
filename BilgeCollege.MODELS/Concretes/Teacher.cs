@@ -12,6 +12,7 @@ namespace BilgeCollege.MODELS.Concretes
         // Relations
         public MainTopic? MainTopic { get; set; }
         public int? MainTopicId { get; set; }
-        
+
+        public string UserId { get; set; }
     }
 }

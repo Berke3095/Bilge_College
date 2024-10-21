@@ -26,6 +26,7 @@ namespace BilgeCollege.DAL.Configs
                 NormalizedEmail = "BERKE_AKTEPE@HOTMAIL.COM",
             };
             admin.PasswordHash = passwordHasher.HashPassword(admin, "123");
+
             users.Add(admin);
 
             return users;

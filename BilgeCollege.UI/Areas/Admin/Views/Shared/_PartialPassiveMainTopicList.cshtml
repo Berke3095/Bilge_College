@@ -4,7 +4,7 @@
 }
 
 <div class="container mt-4">
-    <h2 class="mb-4">Active Main Topics List</h2>
+    <h2 class="mb-4">Passive Main Topics List</h2>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
@@ -21,8 +21,11 @@
                     <td>@item.TopicName</td>
                     <td>
                         <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                        <form asp-area="Admin" asp-controller="MainTopic" asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this topic?');">
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <form asp-area="Admin" asp-controller="MainTopic" asp-action="Recover" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to recover this topic?');">
+                            <button type="submit" class="btn btn-primary btn-sm">Recover</button>
+                        </form>
+                        <form asp-area="Admin" asp-controller="MainTopic" asp-action="Destroy" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to recover this topic?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Destroy</button>
                         </form>
                     </td>
                 </tr>

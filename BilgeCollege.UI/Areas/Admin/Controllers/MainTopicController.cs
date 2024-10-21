@@ -58,17 +58,22 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         public IActionResult Delete(int id)
         {
             _mainTopicServiceManager.Delete(_mainTopicServiceManager.GetById(id));
-            return RedirectToAction("Create", "MainTopic");
+            return RedirectToAction("Recycle", "MainTopic");
         }
 
         [HttpPost]
         public IActionResult Destroy(int id)
         {
-            int topicCheck = _teacherServiceManager.GetAllActives().Where(x => x.MainTopicId == id).Count();
-            if (topicCheck == 0) _mainTopicServiceManager.Destroy(_mainTopicServiceManager.GetById(id));
-            else return RedirectToAction("MainTopicDestroyError", "Error", new {id});
-
-            return RedirectToAction("Create", "MainTopic");
+            var owningTeachers = _teacherServiceManager.GetAll().Where(x => x.MainTopicId == id);
+            if (owningTeachers.Count() > 0)
+            {
+                foreach(var item in owningTeachers)
+                {
+                    item.MainTopicId = null;
+                }
+            }
+            _mainTopicServiceManager.Destroy(_mainTopicServiceManager.GetById(id));
+            return RedirectToAction("Recycle", "MainTopic");
         }
     }
 }

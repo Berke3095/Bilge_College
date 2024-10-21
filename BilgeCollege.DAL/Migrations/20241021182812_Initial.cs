@@ -86,6 +86,7 @@ namespace BilgeCollege.DAL.Migrations
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     HomeAddress = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     TCK = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GuidId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -288,6 +289,7 @@ namespace BilgeCollege.DAL.Migrations
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     TCK = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     MainTopicId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GuidId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -332,15 +334,15 @@ namespace BilgeCollege.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Discriminator", "ModifiedDate", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "19617742-78d9-4057-bbae-6d85749c8657", null, new DateTime(2024, 10, 21, 20, 10, 6, 639, DateTimeKind.Local).AddTicks(3709), "UserRole", null, "Guardian", "GUARDIAN" },
-                    { "b26fb227-f583-41c0-b20c-39e9c77b0711", null, new DateTime(2024, 10, 21, 20, 10, 6, 639, DateTimeKind.Local).AddTicks(3676), "UserRole", null, "Admin", "ADMIN" },
-                    { "d383eba2-b0fe-447a-8ded-c90179f1ea4f", null, new DateTime(2024, 10, 21, 20, 10, 6, 639, DateTimeKind.Local).AddTicks(3686), "UserRole", null, "Teacher", "TEACHER" }
+                    { "157ac451-d9e5-4e64-8855-fc6adfbc52c3", null, new DateTime(2024, 10, 21, 21, 28, 12, 805, DateTimeKind.Local).AddTicks(2137), "UserRole", null, "Admin", "ADMIN" },
+                    { "84620b38-0432-49b5-ab74-b9aa2478f8a3", null, new DateTime(2024, 10, 21, 21, 28, 12, 805, DateTimeKind.Local).AddTicks(2149), "UserRole", null, "Teacher", "TEACHER" },
+                    { "c7b10133-602b-4153-bd33-5d215f1064cd", null, new DateTime(2024, 10, 21, 21, 28, 12, 805, DateTimeKind.Local).AddTicks(2159), "UserRole", null, "Guardian", "GUARDIAN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "37d7b218-6bb1-4b5f-9efc-fae1aa24b8fc", 0, "b2ff4020-acd2-4b31-b759-8f433e0570ff", new DateTime(2024, 10, 21, 20, 10, 6, 603, DateTimeKind.Local).AddTicks(9603), "berke_aktepe@hotmail.com", false, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEFvoTV/RWZTOJIxLRqedT3OvBwQ50N6wlShdmkNTKQcM19JD5gksYdPAXkry3ob5Iw==", null, false, "319e0825-d449-460a-9203-e989d13128f9", false, "Admin" });
+                values: new object[] { "9b1581d9-9303-4e58-b9f3-08e971312446", 0, "e2eeed19-dc7e-4e32-b366-0b21c99eca14", new DateTime(2024, 10, 21, 21, 28, 12, 771, DateTimeKind.Local).AddTicks(8359), "berke_aktepe@hotmail.com", false, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEHGm4lzS6jFgY0ibnAwvO33ZkNdMvExTkTvjsdMHayzDu1SaAIOCbyFpZ9HH/VEPMg==", null, false, "b42445ec-0c7b-4e59-a37e-6990e6611b73", false, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AltTopics_MainTopicId",
