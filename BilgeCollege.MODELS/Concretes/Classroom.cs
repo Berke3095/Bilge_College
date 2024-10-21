@@ -8,7 +8,7 @@ namespace BilgeCollege.MODELS.Concretes
         public int MaxCapacity { get; set; } = 25;
 
         // Relations
-        public List<Student> Students { get; set; }
-        public List<Classrooms_AltTopics> Classrooms_AltTopics { get; set; }
+        public List<Student>? Students { get; set; }
+        public List<Classrooms_AltTopics>? Classrooms_AltTopics { get; set; }
     }
 }

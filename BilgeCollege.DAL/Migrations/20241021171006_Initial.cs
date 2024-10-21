@@ -232,8 +232,8 @@ namespace BilgeCollege.DAL.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FinishedSchool = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     FinalGrade = table.Column<double>(type: "float", nullable: false),
-                    GuardianId = table.Column<int>(type: "int", nullable: false),
-                    ClassroomId = table.Column<int>(type: "int", nullable: false),
+                    GuardianId = table.Column<int>(type: "int", nullable: true),
+                    ClassroomId = table.Column<int>(type: "int", nullable: true),
                     GuidId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -246,14 +246,12 @@ namespace BilgeCollege.DAL.Migrations
                         name: "FK_Students_Classrooms_ClassroomId",
                         column: x => x.ClassroomId,
                         principalTable: "Classrooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Students_Guardians_GuardianId",
                         column: x => x.GuardianId,
                         principalTable: "Guardians",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -263,7 +261,7 @@ namespace BilgeCollege.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TopicCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    MainTopicId = table.Column<int>(type: "int", nullable: false),
+                    MainTopicId = table.Column<int>(type: "int", nullable: true),
                     GuidId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -276,8 +274,7 @@ namespace BilgeCollege.DAL.Migrations
                         name: "FK_AltTopics_MainTopics_MainTopicId",
                         column: x => x.MainTopicId,
                         principalTable: "MainTopics",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -290,7 +287,7 @@ namespace BilgeCollege.DAL.Migrations
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     TCK = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    MainTopicId = table.Column<int>(type: "int", nullable: false),
+                    MainTopicId = table.Column<int>(type: "int", nullable: true),
                     GuidId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -303,8 +300,7 @@ namespace BilgeCollege.DAL.Migrations
                         name: "FK_Teachers_MainTopics_MainTopicId",
                         column: x => x.MainTopicId,
                         principalTable: "MainTopics",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -336,15 +332,15 @@ namespace BilgeCollege.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Discriminator", "ModifiedDate", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4f61ebb7-7cb4-408d-a417-435d9d4a4d6e", null, new DateTime(2024, 10, 21, 1, 13, 1, 738, DateTimeKind.Local).AddTicks(7731), "UserRole", null, "Guardian", "GUARDIAN" },
-                    { "5d404ed3-6260-44f2-b4f2-414127c9b6bc", null, new DateTime(2024, 10, 21, 1, 13, 1, 738, DateTimeKind.Local).AddTicks(7728), "UserRole", null, "Teacher", "TEACHER" },
-                    { "7737d470-a642-4854-b044-28b073f34973", null, new DateTime(2024, 10, 21, 1, 13, 1, 738, DateTimeKind.Local).AddTicks(7670), "UserRole", null, "Admin", "ADMIN" }
+                    { "19617742-78d9-4057-bbae-6d85749c8657", null, new DateTime(2024, 10, 21, 20, 10, 6, 639, DateTimeKind.Local).AddTicks(3709), "UserRole", null, "Guardian", "GUARDIAN" },
+                    { "b26fb227-f583-41c0-b20c-39e9c77b0711", null, new DateTime(2024, 10, 21, 20, 10, 6, 639, DateTimeKind.Local).AddTicks(3676), "UserRole", null, "Admin", "ADMIN" },
+                    { "d383eba2-b0fe-447a-8ded-c90179f1ea4f", null, new DateTime(2024, 10, 21, 20, 10, 6, 639, DateTimeKind.Local).AddTicks(3686), "UserRole", null, "Teacher", "TEACHER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "32e296f4-0e76-440a-b7e7-d0fbfe6d6177", 0, "d9901010-d8e7-4c2c-9da5-425dd91de7cf", new DateTime(2024, 10, 21, 1, 13, 1, 704, DateTimeKind.Local).AddTicks(3053), "berke_aktepe@hotmail.com", true, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAECMGfKfHbfW9sRzFDD68/NIzP0yUzmXE0ALwZLVUzvHs9OFOIMQJLHcjVJpEUTKEog==", null, false, "02ca4a74-0d04-4994-a361-25ffdedc7bb5", false, "Admin" });
+                values: new object[] { "37d7b218-6bb1-4b5f-9efc-fae1aa24b8fc", 0, "b2ff4020-acd2-4b31-b759-8f433e0570ff", new DateTime(2024, 10, 21, 20, 10, 6, 603, DateTimeKind.Local).AddTicks(9603), "berke_aktepe@hotmail.com", false, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEFvoTV/RWZTOJIxLRqedT3OvBwQ50N6wlShdmkNTKQcM19JD5gksYdPAXkry3ob5Iw==", null, false, "319e0825-d449-460a-9203-e989d13128f9", false, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AltTopics_MainTopicId",

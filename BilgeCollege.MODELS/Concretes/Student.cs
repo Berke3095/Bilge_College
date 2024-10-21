@@ -35,10 +35,10 @@ namespace BilgeCollege.MODELS.Concretes
         } 
 
         // Relations
-        public Guardian Guardian { get; set; }
-        public int GuardianId { get; set; }
+        public Guardian? Guardian { get; set; }
+        public int? GuardianId { get; set; }
 
-        public Classroom Classroom { get; set; }
-        public int ClassroomId { get; set; }
+        public Classroom? Classroom { get; set; }
+        public int? ClassroomId { get; set; }
     }
 }

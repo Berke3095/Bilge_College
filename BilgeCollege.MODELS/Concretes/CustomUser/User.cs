@@ -12,6 +12,5 @@ namespace BilgeCollege.MODELS.Concretes.CustomUser
 
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
-        public bool bRememberMe { get; set; }
     }
 }

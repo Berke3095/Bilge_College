@@ -2,7 +2,6 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Create Teacher";
-    int teacherNum = 1;
 }
 
 <head>
@@ -49,7 +48,7 @@
             </form>
         </div>
         <div class="col-md-9">
-            <partial name="_PartialTeacherList" model="ViewBag.Teachers" />
+            <partial name="_PartialActiveTeacherList" model="ViewBag.Teachers" />
         </div>
     </div>
     

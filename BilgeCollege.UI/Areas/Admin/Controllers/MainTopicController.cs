@@ -19,6 +19,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             _teacherServiceManager = teacherServiceManager;
         }
 
+        public IActionResult Recycle()
+        {
+            ViewBag.ActiveMainTopics = _mainTopicServiceManager.GetAllActives();
+            ViewBag.PassiveMainTopics = _mainTopicServiceManager.GetAllPassives();
+            return View();
+        }
+
         public IActionResult Create()
         {
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
@@ -45,6 +52,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             return View(createMainTopicVM);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            _mainTopicServiceManager.Delete(_mainTopicServiceManager.GetById(id));
+            return RedirectToAction("Create", "MainTopic");
         }
 
         [HttpPost]

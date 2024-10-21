@@ -7,6 +7,6 @@ namespace BilgeCollege.MODELS.Concretes
         public string TopicName { get; set; }
 
         // Relations
-        public List<AltTopic> AltTopics { get; set; }
+        public List<AltTopic>? AltTopics { get; set; }
     }
 }

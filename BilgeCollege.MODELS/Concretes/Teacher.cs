@@ -10,8 +10,8 @@ namespace BilgeCollege.MODELS.Concretes
         public string TCK { get; set; }
 
         // Relations
-        public MainTopic MainTopic { get; set; }
-        public int MainTopicId { get; set; }
+        public MainTopic? MainTopic { get; set; }
+        public int? MainTopicId { get; set; }
         
     }
 }

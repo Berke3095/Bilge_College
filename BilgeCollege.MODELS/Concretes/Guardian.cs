@@ -11,7 +11,7 @@ namespace BilgeCollege.MODELS.Concretes
         public string TCK { get; set; }
 
         // Relations
-        public List<Student> Students { get; set; }
+        public List<Student>? Students { get; set; }
         
     }
 }
