@@ -19,7 +19,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             _teacherServiceManager = teacherServiceManager;
         }
 
-        public IActionResult Recycle()
+        public IActionResult FullList()
         {
             ViewBag.ActiveMainTopics = _mainTopicServiceManager.GetAllActives();
             ViewBag.PassiveMainTopics = _mainTopicServiceManager.GetAllPassives();
@@ -74,7 +74,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         public IActionResult Delete(int id)
         {
             _mainTopicServiceManager.Delete(_mainTopicServiceManager.GetById(id));
-            return RedirectToAction("Recycle", "MainTopic");
+            return RedirectToAction("FullList", "MainTopic");
         }
 
         [HttpPost]
@@ -89,7 +89,41 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 }
             }
             _mainTopicServiceManager.Destroy(_mainTopicServiceManager.GetById(id));
-            return RedirectToAction("Recycle", "MainTopic");
+            return RedirectToAction("FullList", "MainTopic");
+        }
+
+        [HttpPost]
+        public IActionResult Recover(int id)
+        {
+            _mainTopicServiceManager.Recover(_mainTopicServiceManager.GetById(id));
+            return RedirectToAction("FullList", "MainTopic");
+        }
+
+        public IActionResult Update(int id)
+        {
+            var mainTopic = _mainTopicServiceManager.GetById(id);
+            MainTopicVM mainTopicVM = new MainTopicVM
+            {
+                Id = mainTopic.Id,
+                TopicName = mainTopic.TopicName
+            };
+            return View(mainTopicVM);
+        }
+
+        [HttpPost]
+        public IActionResult Update(MainTopicVM mainTopicVM)
+        {
+            if(mainTopicVM != null)
+            {
+                MainTopic mainTopic = new MainTopic
+                {
+                    Id = mainTopicVM.Id,
+                    TopicName = mainTopicVM.TopicName
+                };
+                _mainTopicServiceManager.Update(mainTopic);
+                return RedirectToAction("FullList", "MainTopic");
+            }
+            return View();
         }
     }
 }

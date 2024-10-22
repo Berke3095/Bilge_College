@@ -20,7 +20,8 @@
                     <td>@num</td>
                     <td>@item.TopicName</td>
                     <td>
-                        <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                        <a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="MainTopic" asp-action="Update" asp-route-id="@item.Id">Edit</a>
+
                         <form asp-area="Admin" asp-controller="MainTopic" asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this topic?');">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>

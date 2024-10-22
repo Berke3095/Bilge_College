@@ -6,6 +6,8 @@ namespace BilgeCollege.UI.Areas.Admin.Views.Models
 {
     public class TeacherVM
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "You must enter the first name.")]
         public string FirstName { get; set; }
 

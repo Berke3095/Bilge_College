@@ -23,7 +23,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Recycle()
+        public IActionResult FullList()
         {
             ViewBag.ActiveTeachers = _teacherServiceManager.GetAllActives();
             ViewBag.PassiveTeachers = _teacherServiceManager.GetAllPassives();
@@ -80,7 +80,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         public IActionResult Delete(int id)
         {
             _teacherServiceManager.Delete(_teacherServiceManager.GetById(id));
-            return RedirectToAction("Recycle", "Teacher");
+            return RedirectToAction("FullList", "Teacher");
         }
 
         [HttpPost]
@@ -92,7 +92,14 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
             _teacherServiceManager.Destroy(foundTeacher);
 
-            return RedirectToAction("Recycle", "Teacher");
+            return RedirectToAction("FullList", "Teacher");
+        }
+
+        [HttpPost]
+        public IActionResult Recover(int id)
+        {
+            _teacherServiceManager.Recover(_teacherServiceManager.GetById(id));
+            return RedirectToAction("FullList", "Teacher");
         }
     }
 }
