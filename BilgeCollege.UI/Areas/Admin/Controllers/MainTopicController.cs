@@ -117,10 +117,20 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             {
                 var mainTopic = _mainTopicServiceManager.GetById(mainTopicVM.Id);
 
-                mainTopic.TopicName = mainTopicVM.TopicName;
+                var mainTopics = _mainTopicServiceManager.GetAll();
+                mainTopics.Remove(mainTopic);
 
-                _mainTopicServiceManager.Update(mainTopic);
-                return RedirectToAction("FullList", "MainTopic");
+                if (mainTopics.Where(x => x.TopicName == mainTopicVM.TopicName).Count() == 0)
+                {
+                    mainTopic.TopicName = mainTopicVM.TopicName;
+                    _mainTopicServiceManager.Update(mainTopic);
+                    return RedirectToAction("FullList", "MainTopic");
+                }
+                else
+                {
+                    ViewData["Error"] = "There already is a main topic with this name";
+                    return View(mainTopicVM);
+                }
             }
             return View();
         }

@@ -35,6 +35,9 @@
                     <input asp-for="TopicName" type="text" class="form-control" placeholder="Main topic, ex: Math">
                     <span asp-validation-for="TopicName" class="form-text text text-danger"></span>
                 </div>
+                <div>
+                    <span class="text-danger">@ViewData["Error"]</span>
+                </div>
 
                 <div class="d-grid">
                     <button type="submit" class="btn btn-create">Confirm</button>
