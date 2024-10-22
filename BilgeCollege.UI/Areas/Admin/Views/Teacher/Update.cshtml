@@ -6,7 +6,7 @@
 
 <head>
     <title>@ViewData["Title"]</title>
-    <link href="~/css/createTeacher.css" rel="stylesheet">
+    <link href="~/css/submissionForm.css" rel="stylesheet">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
                 <h1 class="display-5">Original</h1>
             </div>
 
-            <form method="post" class="create-container">
+            <form method="post" class="form-container">
                 <div class="form-group mb-4">
                     <input type="text" class="form-control" placeholder="@Model.FirstName" disabled>
                 </div>
@@ -46,7 +46,7 @@
                 <h1 class="display-5">Updated</h1>
             </div>
 
-            <form method="post" class="create-container">
+            <form method="post" class="form-container">
                 <div class="form-group mb-4">
                     <input asp-for="FirstName" type="text" class="form-control" placeholder="First name" disabled>
                     <span asp-validation-for="FirstName" class="form-text text text-danger"></span>
@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-create">Update</button>
+                    <button type="submit" class="btn btn-submit">Update</button>
                 </div>
             </form>
         </div>

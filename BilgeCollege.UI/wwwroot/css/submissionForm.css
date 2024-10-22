@@ -1,4 +1,4 @@
-﻿.create-container {
+﻿.form-container {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 40px;
     border-radius: 8px;
@@ -9,7 +9,7 @@
     border-radius: 30px;
 }
 
-.btn-create {
+.btn-submit {
     background-color: #6f42c1;
     border: none;
     border-radius: 30px;
@@ -18,7 +18,7 @@
     transition: background-color 0.3s ease;
 }
 
-.btn-create:hover {
+.btn-submit:hover {
     background-color: #5a34a1;
 }
 

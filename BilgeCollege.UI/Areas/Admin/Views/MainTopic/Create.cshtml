@@ -6,7 +6,7 @@
 
 <head>
     <title>@ViewData["Title"]</title>
-    <link href="~/css/createMainTopic.css" rel="stylesheet">
+    <link href="~/css/submissionForm.css" rel="stylesheet">
 </head>
 
 <body>
@@ -16,14 +16,14 @@
                 <h1 class="display-5">Create a Main Topic</h1>
             </div>
 
-            <form method="post" class="create-container">
+            <form method="post" class="form-container">
                 <div class="form-group mb-4">
                     <input asp-for="TopicName" type="text" class="form-control" placeholder="Main topic, ex: Math">
                     <span asp-validation-for="TopicName" class="form-text text text-danger"></span>
                 </div>
 
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-create">Create</button>
+                    <button type="submit" class="btn btn-submit">Create</button>
                 </div>
             </form>
         </div>
