@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "FullList AltTopic";
+}
+
+<div class="d-flex">
+    <div class="col-md-6">
+        <partial name="_PartialActiveAltTopicList" model="ViewBag.ActiveAltTopics" />
+    </div>
+    <div class="col-md-6">
+        <partial name="_PartialPassiveAltTopicList" model="ViewBag.PassiveAltTopics" />
+    </div>
+</div>

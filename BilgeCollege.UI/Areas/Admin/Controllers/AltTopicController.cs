@@ -18,7 +18,15 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             _mainTopicServiceManager = mainTopicServiceManager;
         }
 
-        public IActionResult Create(string? id)
+        public IActionResult FullList()
+        {
+            ViewBag.ActiveAltTopics = _altTopicServiceManager.GetAllActives();
+            ViewBag.PassiveAltTopics = _altTopicServiceManager.GetAllPassives();
+            ViewBag.ActiveMainTopics = _mainTopicServiceManager.GetAllActives();
+            return View();
+        }
+
+        public IActionResult Create()
         {
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             ViewBag.AltTopics = _altTopicServiceManager.GetAllActives();
