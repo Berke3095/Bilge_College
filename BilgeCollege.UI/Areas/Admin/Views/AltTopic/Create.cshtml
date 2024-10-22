@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create AltTopic";
+}
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/submissionForm.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="d-flex">
+        <div class="col-md-3">
+            <div class="text-center">
+                <h1 class="display-5">Create an Alt Topic</h1>
+            </div>
+
+            <form method="post" class="form-container">
+
+                <div class="form-group mb-4">
+                    <select class="form-control" name="Id" required>
+                        <option value="" disabled selected>--Select a main topic--</option>
+                        @foreach (var item in ViewBag.MainTopics)
+                        {
+                            <option value="@item.Id">@item.TopicName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-submit">Create</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <partial name="_PartialActiveAltTopicList" model="ViewBag.AltTopics" />
+        </div>
+    </div>
+
+</body>
