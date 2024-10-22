@@ -11,18 +11,21 @@
 
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="ms-auto" style="margin-right:30px;">
-                <a asp-area="" asp-controller="Account" asp-action="Logout" class="btn btn-danger" style="color:azure">Log Out</a>
-            </div>
-        </nav>
-    </header>
-    <div class="d-flex">
-        <div class="col-md-2 flex-shrink-0 p-3" style="width:250px; margin-left:25px; background-color:#9d8fb9;">
-            <span class="fs-2 fw-semibold"><strong>Operations</strong></span>
-            @if(User.IsInRole("Admin"))
-            {
+    @if(User.IsInRole("Admin"))
+    {
+        <header class="sticky-top">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div style="margin-left:30px;">
+                    <h1>Admin Portal</h1>
+                </div>
+                <div class="ms-auto" style="margin-right:30px;">
+                    <a asp-area="" asp-controller="Account" asp-action="Logout" class="btn btn-danger" style="color:azure">Log Out</a>
+                </div>
+            </nav>
+        </header>
+        <div class="d-flex">
+            <div class="col-md-2 flex-shrink-0 p-3 side-bar">
+                <span class="fs-2 fw-semibold"><strong>Operations</strong></span>
                 <ul class="list-unstyled ps-0">
                     <li class="mb-1" style="margin-top:10px;">
                         <button class="btn align-items-center rounded collapsed sideNavHeads" data-bs-toggle="collapse" data-bs-target="#Teachers" aria-expanded="false">
@@ -96,19 +99,19 @@
                         </div>
                     </li>
                 </ul>
-            }
-            
-        </div>
 
-        <div class="main-content">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
+            </div>
+
+            <div class="main-content">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
         </div>
-    </div>
+    }
 
     <footer>
-
+        
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

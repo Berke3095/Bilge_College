@@ -24,6 +24,7 @@ footer {
 .main-content {
     flex-grow: 1;
     padding: 20px;
+    margin-left: 275px;
 }
 
 .sideNavHeads {
@@ -54,4 +55,12 @@ footer {
     text-align: start;
     border: none;
     margin-top:5px;
+}
+
+.side-bar {
+    width: 250px;
+    height:100%;
+    margin-left: 25px;
+    background-color: #9d8fb9;
+    position: fixed
 }
