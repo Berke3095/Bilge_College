@@ -115,11 +115,10 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         {
             if(mainTopicVM != null)
             {
-                MainTopic mainTopic = new MainTopic
-                {
-                    Id = mainTopicVM.Id,
-                    TopicName = mainTopicVM.TopicName
-                };
+                var mainTopic = _mainTopicServiceManager.GetById(mainTopicVM.Id);
+
+                mainTopic.TopicName = mainTopicVM.TopicName;
+
                 _mainTopicServiceManager.Update(mainTopic);
                 return RedirectToAction("FullList", "MainTopic");
             }

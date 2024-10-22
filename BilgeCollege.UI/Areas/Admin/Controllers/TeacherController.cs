@@ -27,6 +27,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         {
             ViewBag.ActiveTeachers = _teacherServiceManager.GetAllActives();
             ViewBag.PassiveTeachers = _teacherServiceManager.GetAllPassives();
+            ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             return View();
         }
 
@@ -100,6 +101,37 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         {
             _teacherServiceManager.Recover(_teacherServiceManager.GetById(id));
             return RedirectToAction("FullList", "Teacher");
+        }
+
+        public IActionResult Update(int id)
+        {
+            var teacher = _teacherServiceManager.GetById(id);
+            TeacherVM teacherVM = new TeacherVM
+            {
+                Id = teacher.Id,
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                MainTopicId = teacher.MainTopicId,
+                TCK = teacher.TCK
+            };
+
+            ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
+            return View(teacherVM);
+        }
+
+        [HttpPost]
+        public IActionResult Update(TeacherVM teacherVM)
+        {
+            if (teacherVM != null)
+            {
+                var teacher = _teacherServiceManager.GetById(teacherVM.Id);
+
+                teacher.MainTopicId = teacherVM.MainTopicId;
+
+                _teacherServiceManager.Update(teacher);
+                return RedirectToAction("FullList", "Teacher");
+            }
+            return View();
         }
     }
 }
