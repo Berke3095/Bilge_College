@@ -19,7 +19,16 @@
 
                 <div class="form-group mb-4">
                     <select class="form-control" name="Id" required>
-                        <option value="" disabled selected>--Select a main topic--</option>
+                        @if (ViewBag.SelectedMainTopic == null)
+                        {
+                            <option value="" disabled selected>--Select a main topic--</option>
+                        }
+                        else
+                        {
+                            <option value="" disabled selected>--Select a main topic--</option>
+                            <option value="@ViewBag.SelectedMainTopicId" selected>@ViewBag.SelectedMainTopic</option>
+                        }
+
                         @foreach (var item in ViewBag.MainTopics)
                         {
                             <option value="@item.Id">@item.TopicName</option>

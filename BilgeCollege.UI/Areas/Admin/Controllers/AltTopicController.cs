@@ -26,10 +26,21 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult Create()
+        public IActionResult Create(int? selectedMainTopicId)
         {
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             ViewBag.AltTopics = _altTopicServiceManager.GetAllActives();
+
+            if (selectedMainTopicId != null)
+            {
+                ViewBag.SelectedMainTopicId = selectedMainTopicId;
+
+                int selectedMainTopicIdToUse = (int)selectedMainTopicId;
+                ViewBag.SelectedMainTopic = _mainTopicServiceManager.GetById(selectedMainTopicIdToUse).TopicName;
+
+                ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives().Where(x => x.Id != selectedMainTopicId);
+            }
+
             return View();
         }
 
@@ -45,11 +56,12 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     MainTopicId = mainTopic.Id
                 };
                 _altTopicServiceManager.Create(altTopic);
-                return RedirectToAction("Create", "AltTopic");
+                return RedirectToAction("Create", "AltTopic", new { selectedMainTopicId = mainTopic.Id});
             }
 
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             ViewBag.AltTopics = _altTopicServiceManager.GetAllActives();
+
             return View();
         }
     }
