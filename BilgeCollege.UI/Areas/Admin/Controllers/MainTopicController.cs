@@ -11,11 +11,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
     public class MainTopicController : Controller
     {
         private readonly I_MainTopicServiceManager _mainTopicServiceManager;
+        private readonly I_AltTopicServiceManager _altTopicServiceManager;
         private readonly I_TeacherServiceManager _teacherServiceManager;
 
-        public MainTopicController(I_MainTopicServiceManager mainTopicServiceManager, I_TeacherServiceManager teacherServiceManager)
+        public MainTopicController(I_MainTopicServiceManager mainTopicServiceManager,I_AltTopicServiceManager altTopicServiceManager, I_TeacherServiceManager teacherServiceManager)
         {
             _mainTopicServiceManager = mainTopicServiceManager;
+            _altTopicServiceManager = altTopicServiceManager;
             _teacherServiceManager = teacherServiceManager;
         }
 
@@ -39,28 +41,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             {
                 if (createMainTopicVM != null)
                 {
-                    MainTopic mainTopic = new MainTopic();
-
-                    if (_mainTopicServiceManager.GetAll().Where(x => x.TopicName == createMainTopicVM.TopicName).ToList().Count() == 0) mainTopic.TopicName = createMainTopicVM.TopicName;
-                    else
-                    {
-                        int i = 1;
-                        while(true)
-                        {
-                            string possibleName = createMainTopicVM.TopicName + i;
-                            if (_mainTopicServiceManager.GetAll().Where(x => x.TopicName == possibleName).ToList().Count() == 0)
-                            {
-                                mainTopic.TopicName = possibleName;
-                                break;
-                            }
-                            else
-                            {
-                                i++;
-                                continue;
-                            }
-                        }
-                    }
-                    _mainTopicServiceManager.Create(mainTopic);
+                    _mainTopicServiceManager.Create(_mainTopicServiceManager.SetMainTopic(createMainTopicVM.TopicName));
                 }
 
                 return RedirectToAction("Create", "MainTopic");
@@ -73,31 +54,57 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
+            _mainTopicServiceManager.HandleRelationsOnDelete(_altTopicServiceManager, _altTopicServiceManager.GetAllPassives(), id, _teacherServiceManager);
             _mainTopicServiceManager.Delete(_mainTopicServiceManager.GetById(id));
+
+            return RedirectToAction("FullList", "MainTopic");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteAll()
+        {
+            _altTopicServiceManager.DeleteRange(_altTopicServiceManager.GetAllActives());
+            _mainTopicServiceManager.DeleteRange(_mainTopicServiceManager.GetAllActives());
             return RedirectToAction("FullList", "MainTopic");
         }
 
         [HttpPost]
         public IActionResult Destroy(int id)
         {
-            var owningTeachers = _teacherServiceManager.GetAll().Where(x => x.MainTopicId == id);
-            if (owningTeachers.Count() > 0)
-            {
-                foreach(var item in owningTeachers)
-                {
-                    item.MainTopicId = null;
-                }
-            }
+            _mainTopicServiceManager.HandleRelationsOnDestroy(_altTopicServiceManager, _altTopicServiceManager.GetAllPassives(), id, _teacherServiceManager);
             _mainTopicServiceManager.Destroy(_mainTopicServiceManager.GetById(id));
+
             return RedirectToAction("FullList", "MainTopic");
         }
 
-        [HttpPost]
-        public IActionResult Recover(int id)
-        {
-            _mainTopicServiceManager.Recover(_mainTopicServiceManager.GetById(id));
-            return RedirectToAction("FullList", "MainTopic");
-        }
+        //[HttpPost]
+        //public IActionResult DestroyAll()
+        //{
+        //    var owningTeachers = _teacherServiceManager.GetAll().Where(x => x.MainTopicId == id);
+        //    if (owningTeachers.Count() > 0)
+        //    {
+        //        foreach (var item in owningTeachers)
+        //        {
+        //            item.MainTopicId = null;
+        //        }
+        //    }
+        //    _mainTopicServiceManager.DestroyRange(_mainTopicServiceManager.GetAllPassives());
+        //    return RedirectToAction("FullList", "MainTopic");
+        //}
+
+        //[HttpPost]
+        //public IActionResult Recover(int id)
+        //{
+        //    _mainTopicServiceManager.Recover(_mainTopicServiceManager.GetById(id));
+        //    return RedirectToAction("FullList", "MainTopic");
+        //}
+
+        //[HttpPost]
+        //public IActionResult RecoverAll()
+        //{
+        //    _mainTopicServiceManager.RecoverRange(_mainTopicServiceManager.GetAllPassives());
+        //    return RedirectToAction("FullList", "MainTopic");
+        //}
 
         public IActionResult Update(int id)
         {

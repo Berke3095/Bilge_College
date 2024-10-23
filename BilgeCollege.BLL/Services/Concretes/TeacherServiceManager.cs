@@ -9,15 +9,13 @@ namespace BilgeCollege.BLL.Services.Concretes
     public class TeacherServiceManager : BaseServiceManager<Teacher>, I_TeacherServiceManager
     {
         private readonly I_Repository<Teacher> _repository;
-        private readonly UserManager<User> _userManager;
 
         public TeacherServiceManager(I_Repository<Teacher> repository, UserManager<User> userManager) : base(repository)
         {
             _repository = repository;
-            _userManager = userManager;
         }
 
-        public async Task<User> CreateUserAsync(string firstName, string lastName, string tck)
+        public async Task<User> CreateUserAsync(UserManager<User> _userManager, string firstName, string lastName, string tck)
         {
             PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
 

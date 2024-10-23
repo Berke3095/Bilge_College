@@ -66,6 +66,20 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        public IActionResult Recover(int id)
+        {
+            _altTopicServiceManager.Recover(_altTopicServiceManager.GetById(id));
+            return RedirectToAction("FullList", "MainTopic");
+        }
+
+        [HttpPost]
+        public IActionResult RecoverAll()
+        {
+            _altTopicServiceManager.RecoverRange(_altTopicServiceManager.GetAllPassives());
+            return RedirectToAction("FullList", "MainTopic");
+        }
+
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             _altTopicServiceManager.Delete(_altTopicServiceManager.GetById(id));
@@ -73,9 +87,23 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        public IActionResult DeleteAll()
+        {
+            _altTopicServiceManager.DeleteRange(_altTopicServiceManager.GetAllActives());
+            return RedirectToAction("FullList", "AltTopic");
+        }
+
+        [HttpPost]
         public IActionResult Destroy(int id)
         {
             _altTopicServiceManager.Destroy(_altTopicServiceManager.GetById(id));
+            return RedirectToAction("FullList", "AltTopic");
+        }
+
+        [HttpPost]
+        public IActionResult DestroyAll()
+        {
+            _altTopicServiceManager.DestroyRange(_altTopicServiceManager.GetAllPassives());
             return RedirectToAction("FullList", "AltTopic");
         }
     }
