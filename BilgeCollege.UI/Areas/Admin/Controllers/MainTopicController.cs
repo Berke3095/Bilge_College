@@ -121,6 +121,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             if(mainTopicVM != null)
             {
                 var mainTopic = _mainTopicServiceManager.GetById(mainTopicVM.Id);
+                var relatedAltTopics = _altTopicServiceManager.GetAll().Where(x => x.MainTopicId == mainTopic.Id).ToList();
 
                 var mainTopics = _mainTopicServiceManager.GetAll();
                 mainTopics.Remove(mainTopic);
@@ -129,6 +130,9 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 {
                     mainTopic.TopicName = mainTopicVM.TopicName;
                     _mainTopicServiceManager.Update(mainTopic);
+
+                    _mainTopicServiceManager.HandleRelationOnUpdate(_altTopicServiceManager, relatedAltTopics, mainTopic);
+
                     return RedirectToAction("FullList", "MainTopic");
                 }
                 else

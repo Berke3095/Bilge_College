@@ -13,6 +13,15 @@ namespace BilgeCollege.BLL.Services.Concretes
             _repository = repository;
         }
 
+        public void HandleRelationOnUpdate(I_AltTopicServiceManager _altTopicServiceManager, List<AltTopic> altTopicsToUpdate, MainTopic mainTopic)
+        {
+            foreach (var item in altTopicsToUpdate)
+            {
+                item.TopicCode = _altTopicServiceManager.CreateTopicCode(mainTopic);
+            }
+            _altTopicServiceManager.UpdateRange(altTopicsToUpdate);
+        }
+
         public void HandleRelationsOnDelete(I_AltTopicServiceManager _altTopicServiceManager, List<AltTopic> passiveAltTopics, int relatedId, I_TeacherServiceManager _teacherServiceManager)
         {
             var owningTeachers = _teacherServiceManager.GetAll().Where(x => x.MainTopicId == relatedId).ToList();
