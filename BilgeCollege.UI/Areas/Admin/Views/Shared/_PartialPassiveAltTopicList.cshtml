@@ -4,7 +4,17 @@
 }
 
 <div class="container mt-4">
-    <h2 class="mb-4">Passive Alt Topics List</h2>
+    <div class="d-flex justify-content-between">
+        <h2 class="mb-4">Passive Alt Topics List</h2>
+        <div style=" margin-right:100px;">
+            <form asp-area="Admin" asp-controller="AltTopic" asp-action="RecoverAll" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to recover all passive alt topics?');">
+                <button type="submit" class="btn btn-primary">Recover All</button>
+            </form>
+            <form asp-area="Admin" asp-controller="AltTopic" asp-action="DestroyAll" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to destroy all passive alt topics?');">
+                <button type="submit" class="btn btn-danger">Destroy All</button>
+            </form>
+        </div>
+    </div>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>

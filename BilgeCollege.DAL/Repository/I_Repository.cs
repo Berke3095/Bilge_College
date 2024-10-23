@@ -12,8 +12,12 @@ namespace BilgeCollege.DAL.Repository
 
         public void Create(T item);
         public void Update(T item);
+        public void UpdateRange(List<T> items);
         public void Delete(T item);
+        public void DeleteRange(List<T> items);
         public void Recover(T item);
+        public void RecoverRange(List<T> items);
         public void Destroy(T item);
+        public void DestroyRange(List<T> items);
     }
 }

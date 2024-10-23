@@ -64,5 +64,19 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            _altTopicServiceManager.Delete(_altTopicServiceManager.GetById(id));
+            return RedirectToAction("FullList", "AltTopic");
+        }
+
+        [HttpPost]
+        public IActionResult Destroy(int id)
+        {
+            _altTopicServiceManager.Destroy(_altTopicServiceManager.GetById(id));
+            return RedirectToAction("FullList", "AltTopic");
+        }
     }
 }

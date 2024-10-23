@@ -27,9 +27,24 @@ namespace BilgeCollege.DAL.Repository
             Update(item);
         }
 
+        public void DeleteRange(List<T> items)
+        {
+            foreach (T item in items)
+            {
+                item.State = MODELS.Enums.StateEnum.Passive;
+            }
+            UpdateRange(items);
+        }
+
         public void Destroy(T item)
         {
             _dbSet.Remove(item);
+            _context.SaveChanges();
+        }
+
+        public void DestroyRange(List<T> items)
+        {
+            _dbSet.RemoveRange(items);
             _context.SaveChanges();
         }
 
@@ -59,13 +74,34 @@ namespace BilgeCollege.DAL.Repository
             Update(item);
         }
 
+        public void RecoverRange(List<T> items)
+        {
+            foreach (T item in items)
+            {
+                item.State = MODELS.Enums.StateEnum.Active;
+            }
+            UpdateRange(items);
+        }
+
         public void Update(T item)
         {
             item.ModifiedDate = DateTime.Now;
 
             T original = _dbSet.Find(item.Id);
             _context.Entry(original).CurrentValues.SetValues(item);
-            _context.SaveChanges(true);
+            _context.SaveChanges();
+        }
+
+        public void UpdateRange(List<T> items)
+        {
+            foreach(T item in items)
+            {
+                item.ModifiedDate = DateTime.Now;
+
+                T original = _dbSet.Find(item.Id);
+                _context.Entry(original).CurrentValues.SetValues(item);
+            }
+            _context.SaveChanges();
         }
     }
 }

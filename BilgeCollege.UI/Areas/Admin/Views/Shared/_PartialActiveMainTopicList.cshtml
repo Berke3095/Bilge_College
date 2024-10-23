@@ -4,7 +4,12 @@
 }
 
 <div class="container mt-4">
-    <h2 class="mb-4">Active Main Topics List</h2>
+    <div class="d-flex justify-content-between">
+        <h2 class="mb-4">Active Main Topics List</h2>
+        <form asp-area="Admin" asp-controller="MainTopic" asp-action="DeleteAll" method="post" style="display:inline; margin-right:100px;" onsubmit="return confirm('Are you sure you want to delete all active main topics?');">
+            <button type="submit" class="btn btn-danger">Delete All</button>
+        </form>
+    </div>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
