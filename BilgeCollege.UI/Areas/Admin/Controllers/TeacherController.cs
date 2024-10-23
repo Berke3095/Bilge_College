@@ -5,6 +5,7 @@ using BilgeCollege.UI.Areas.Admin.Views.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.DependencyResolver;
 
 namespace BilgeCollege.UI.Areas.Admin.Controllers
 {
@@ -48,27 +49,9 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     User user = await _teacherServiceManager.CreateUserAsync(_userManager, createTeacherVM.FirstName, createTeacherVM.LastName, createTeacherVM.TCK);
                     if (user != null)
                     {
-                        var result = await _userManager.CreateAsync(user);
-                        if(result.Succeeded)
-                        {
-                            string role = "Teacher";
-                            var roleResult = await _userManager.AddToRoleAsync(user, role);
-                            if (roleResult.Succeeded)
-                            {
-                                Teacher teacher = new Teacher
-                                {
-                                    FirstName = createTeacherVM.FirstName,
-                                    LastName = createTeacherVM.LastName,
-                                    TCK = createTeacherVM.TCK,
-                                    Email = user.Email,
-                                    UserId = user.Id,
-                                    MainTopicId = createTeacherVM.MainTopicId
-                                };
-
-                                _teacherServiceManager.Create(teacher);
-                                return RedirectToAction("Create", "Teacher");
-                            }
-                        }
+                        Teacher teacher = await _teacherServiceManager.SetupTeacher(user, _userManager, createTeacherVM.FirstName, createTeacherVM.LastName, createTeacherVM.TCK, createTeacherVM.MainTopicId);
+                        _teacherServiceManager.Create(teacher);
+                        return RedirectToAction("Create", "Teacher");
                     }
                 }
             }

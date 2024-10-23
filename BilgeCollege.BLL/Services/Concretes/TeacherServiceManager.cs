@@ -99,5 +99,30 @@ namespace BilgeCollege.BLL.Services.Concretes
 
             return user;
         }
+
+        public async Task<Teacher> SetupTeacher(User user, UserManager<User> _userManager, string firstName, string lastName, string tck, int? mainTopicId)
+        {
+            var result = await _userManager.CreateAsync(user);
+            if (result.Succeeded)
+            {
+                string role = "Teacher";
+                var roleResult = await _userManager.AddToRoleAsync(user, role);
+                if (roleResult.Succeeded)
+                {
+                    Teacher teacher = new Teacher
+                    {
+                        FirstName = firstName,
+                        LastName = lastName,
+                        TCK = tck,
+                        Email = user.Email,
+                        UserId = user.Id,
+                        MainTopicId = mainTopicId
+                    };
+
+                    return teacher;
+                }
+            }
+            return null;
+        }
     }
 }

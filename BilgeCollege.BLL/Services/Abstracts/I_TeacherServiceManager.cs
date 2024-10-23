@@ -1,10 +1,12 @@
 ﻿using BilgeCollege.BLL.Utils;
 using BilgeCollege.MODELS.Concretes;
+using BilgeCollege.MODELS.Concretes.CustomUser;
+using Microsoft.AspNetCore.Identity;
 
 namespace BilgeCollege.BLL.Services.Abstracts
 {
     public interface I_TeacherServiceManager : I_BaseServiceManager<Teacher>, I_UserIntegrateServiceManager
     {
-        
+        public Task<Teacher> SetupTeacher(User user, UserManager<User> _userManager, string firstName, string lastName, string tck, int? mainTopicId);
     }
 }

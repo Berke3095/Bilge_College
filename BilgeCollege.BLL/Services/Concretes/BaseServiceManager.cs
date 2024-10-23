@@ -28,7 +28,6 @@ namespace BilgeCollege.BLL.Services.Concretes
         public void DeleteRange(List<T> items)
         {
             if(items.Count() > 0) _repository.DeleteRange(items);
-            else throw new Exception("Items trying to delete is null!");
         }
 
         public void Destroy(T item)
@@ -40,7 +39,6 @@ namespace BilgeCollege.BLL.Services.Concretes
         public void DestroyRange(List<T> items)
         {
             if (items.Count() > 0) _repository.DestroyRange(items);
-            else throw new Exception("Items trying to destroy is null!");
         }
 
         public List<T> GetAll()
@@ -72,7 +70,6 @@ namespace BilgeCollege.BLL.Services.Concretes
         public void RecoverRange(List<T> items)
         {
             if (items.Count() > 0) _repository.RecoverRange(items);
-            else throw new Exception("Items trying to recover is null!");
         }
 
         public void Update(T item)
@@ -84,7 +81,6 @@ namespace BilgeCollege.BLL.Services.Concretes
         public void UpdateRange(List<T> items)
         {
             if (items.Count() > 0) _repository.UpdateRange(items);
-            else throw new Exception("Items trying to update is null!");
         }
     }
 }

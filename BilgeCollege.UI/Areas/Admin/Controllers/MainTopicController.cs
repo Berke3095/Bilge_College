@@ -77,34 +77,32 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             return RedirectToAction("FullList", "MainTopic");
         }
 
-        //[HttpPost]
-        //public IActionResult DestroyAll()
-        //{
-        //    var owningTeachers = _teacherServiceManager.GetAll().Where(x => x.MainTopicId == id);
-        //    if (owningTeachers.Count() > 0)
-        //    {
-        //        foreach (var item in owningTeachers)
-        //        {
-        //            item.MainTopicId = null;
-        //        }
-        //    }
-        //    _mainTopicServiceManager.DestroyRange(_mainTopicServiceManager.GetAllPassives());
-        //    return RedirectToAction("FullList", "MainTopic");
-        //}
+        [HttpPost]
+        public IActionResult DestroyAll()
+        {
+            var passiveMainTopics = _mainTopicServiceManager.GetAllPassives();
+            foreach (var item in passiveMainTopics)
+            {
+                _mainTopicServiceManager.HandleRelationsOnDestroy(_altTopicServiceManager, _altTopicServiceManager.GetAllPassives(), item.Id, _teacherServiceManager);
+            }
 
-        //[HttpPost]
-        //public IActionResult Recover(int id)
-        //{
-        //    _mainTopicServiceManager.Recover(_mainTopicServiceManager.GetById(id));
-        //    return RedirectToAction("FullList", "MainTopic");
-        //}
+            _mainTopicServiceManager.DestroyRange(_mainTopicServiceManager.GetAllPassives());
+            return RedirectToAction("FullList", "MainTopic");
+        }
 
-        //[HttpPost]
-        //public IActionResult RecoverAll()
-        //{
-        //    _mainTopicServiceManager.RecoverRange(_mainTopicServiceManager.GetAllPassives());
-        //    return RedirectToAction("FullList", "MainTopic");
-        //}
+        [HttpPost]
+        public IActionResult Recover(int id)
+        {
+            _mainTopicServiceManager.Recover(_mainTopicServiceManager.GetById(id));
+            return RedirectToAction("FullList", "MainTopic");
+        }
+
+        [HttpPost]
+        public IActionResult RecoverAll()
+        {
+            _mainTopicServiceManager.RecoverRange(_mainTopicServiceManager.GetAllPassives());
+            return RedirectToAction("FullList", "MainTopic");
+        }
 
         public IActionResult Update(int id)
         {

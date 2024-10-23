@@ -32,11 +32,17 @@
                     <td>@item.TopicCode</td>
                     <td>@item.MainTopic.TopicName</td>
                     <td>
-                        <a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="AltTopic" asp-action="Update" asp-route-id="@item.Id">Edit</a>
+                        @if(item.MainTopic.State == BilgeCollege.MODELS.Enums.StateEnum.Active)
+                        {
+                            <form asp-area="Admin" asp-controller="AltTopic" asp-action="Recover" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to recover this alt topic?');">
+                                <button type="submit" class="btn btn-primary btn-sm">Recover</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-secondary btn-sm" title="Main topic is passive, cannot recover">Recover</button>
+                        }
 
-                        <form asp-area="Admin" asp-controller="AltTopic" asp-action="Recover" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to recover this alt topic?');">
-                            <button type="submit" class="btn btn-primary btn-sm">Recover</button>
-                        </form>
 
                         <form asp-area="Admin" asp-controller="AltTopic" asp-action="Destroy" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to recover this alt topic?');">
                             <button type="submit" class="btn btn-danger btn-sm">Destroy</button>

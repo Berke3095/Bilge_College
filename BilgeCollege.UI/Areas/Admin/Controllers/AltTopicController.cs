@@ -22,7 +22,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         {
             ViewBag.ActiveAltTopics = _altTopicServiceManager.GetAllActives();
             ViewBag.PassiveAltTopics = _altTopicServiceManager.GetAllPassives();
-            ViewBag.ActiveMainTopics = _mainTopicServiceManager.GetAllActives();
+            ViewBag.MainTopics = _mainTopicServiceManager.GetAll();
             return View();
         }
 
@@ -68,15 +68,31 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Recover(int id)
         {
-            _altTopicServiceManager.Recover(_altTopicServiceManager.GetById(id));
-            return RedirectToAction("FullList", "MainTopic");
+            int idOfMain = (int)_altTopicServiceManager.GetById(id).MainTopicId;
+
+            if (_mainTopicServiceManager.GetById(idOfMain).State == MODELS.Enums.StateEnum.Active) _altTopicServiceManager.Recover(_altTopicServiceManager.GetById(id));
+
+            return RedirectToAction("FullList", "AltTopic");
         }
 
         [HttpPost]
         public IActionResult RecoverAll()
         {
-            _altTopicServiceManager.RecoverRange(_altTopicServiceManager.GetAllPassives());
-            return RedirectToAction("FullList", "MainTopic");
+            var passiveAltTopics = _altTopicServiceManager.GetAllPassives();
+
+            List<AltTopic> altTopicsToDelete = new List<AltTopic>();
+
+            foreach (var item in passiveAltTopics)
+            {
+                int mainTopicId = (int)item.MainTopicId;
+                if (_mainTopicServiceManager.GetById(mainTopicId).State == MODELS.Enums.StateEnum.Active)
+                {
+                    altTopicsToDelete.Add(item);
+                }
+            }
+
+            _altTopicServiceManager.RecoverRange(altTopicsToDelete);
+            return RedirectToAction("FullList", "AltTopic");
         }
 
         [HttpPost]
