@@ -36,27 +36,28 @@ namespace BilgeCollege.UI.Controllers
                 var user = await _userManager.FindByEmailAsync(loginVM.Email);
                 if (user != null)
                 {
+                    var roles = await _userManager.GetRolesAsync(user);
+                    if (roles.Contains("Teacher"))
+                    {
+                        if (!_teacherServiceManager.GetAllActives().Any(x => x.UserId == user.Id))
+                        {
+                            ViewData["LoginError"] = "You account has been deactivated, contact the college.";
+                            return View(loginVM);
+                        }
+                    }
+                    else if (roles.Contains("Guardian"))
+                    {
+                        if (!_guardianServiceManager.GetAllActives().Any(x => x.UserId == user.Id))
+                        {
+                            ViewData["LoginError"] = "You account has been deactivated, contact the college.";
+                            return View(loginVM);
+                        }
+                    }
+
                     var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, loginVM.bRememberMe, false);
 
                     if (result.Succeeded)
                     {
-                        var roles = await _userManager.GetRolesAsync(user);
-                        if (roles.Contains("Teacher"))
-                        {
-                            if(!_teacherServiceManager.GetAllActives().Any(x => x.UserId == user.Id))
-                            {
-                                ViewData["LoginError"] = "You account has been deactivated, contact the college.";
-                                return View(loginVM);
-                            }
-                        }
-                        else if(roles.Contains("Guardian"))
-                        {
-                            if (!_guardianServiceManager.GetAllActives().Any(x => x.UserId == user.Id))
-                            {
-                                ViewData["LoginError"] = "You account has been deactivated, contact the college.";
-                                return View(loginVM);
-                            }
-                        }
                         return RedirectToAction("Index", "Home");
                     }
                     else 
