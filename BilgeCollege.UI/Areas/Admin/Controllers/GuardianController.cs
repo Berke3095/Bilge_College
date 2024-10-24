@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using BilgeCollege.BLL.Services.Abstracts;
+using BilgeCollege.BLL.Services.Concretes;
 
 namespace BilgeCollege.UI.Areas.Admin.Controllers
 {
@@ -46,6 +47,46 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
             ViewBag.Guardians = _guardianServiceManager.GetAllActives();
             return View(guardianVM);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            _guardianServiceManager.Delete(_guardianServiceManager.GetById(id));
+
+            // HANDLE ON DELETE - STUDENTS
+
+            return RedirectToAction("FullList", "Guardian");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteAll()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Recover()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RecoverAll()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Destroy()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult DestroyAll()
+        {
+            return View();
         }
     }
 }

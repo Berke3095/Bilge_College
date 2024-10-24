@@ -68,6 +68,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        public IActionResult DeleteAll()
+        {
+            _teacherServiceManager.DeleteRange(_teacherServiceManager.GetAllActives());
+            return RedirectToAction("FullList", "Teacher");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Destroy(int id)
         {
             var foundTeacher = _teacherServiceManager.GetById(id);
@@ -80,9 +87,31 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> DestroyAll()
+        {
+            var passiveTeachers = _teacherServiceManager.GetAllPassives();
+            foreach(var item in passiveTeachers)
+            {
+                var teacherUserToDelete = await _userManager.FindByIdAsync(item.UserId);
+                if (teacherUserToDelete != null) await _userManager.DeleteAsync(teacherUserToDelete);
+            }
+
+            _teacherServiceManager.DestroyRange(passiveTeachers);
+
+            return RedirectToAction("FullList", "Teacher");
+        }
+
+        [HttpPost]
         public IActionResult Recover(int id)
         {
             _teacherServiceManager.Recover(_teacherServiceManager.GetById(id));
+            return RedirectToAction("FullList", "Teacher");
+        }
+
+        [HttpPost]
+        public IActionResult RecoverAll()
+        {
+            _teacherServiceManager.RecoverRange(_teacherServiceManager.GetAllPassives());
             return RedirectToAction("FullList", "Teacher");
         }
 

@@ -11,22 +11,33 @@
 
 </head>
 <body>
-    @if(User.IsInRole("Admin"))
-    {
-        <header class="sticky-top">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div style="margin-left:30px;">
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div style="margin-left:30px;">
+                @if (User.IsInRole("Admin"))
+                {
                     <h1>Admin Portal</h1>
-                </div>
-                <div class="ms-auto" style="margin-right:30px;">
-                    <a asp-area="" asp-controller="Account" asp-action="Logout" class="btn btn-danger" style="color:azure">Log Out</a>
-                </div>
-            </nav>
-        </header>
-        <div class="d-flex">
-            <div class="col-md-2 flex-shrink-0 p-3 side-bar">
-                <span class="fs-2 fw-semibold"><strong>Operations</strong></span>
-                <ul class="list-unstyled ps-0">
+                }
+                else if(User.IsInRole("Teacher"))
+                {
+                    <h1>Teacher Portal</h1>
+                }
+                else if(User.IsInRole("Guardian"))
+                {
+                    <h1>Guardian Portal</h1>
+                }
+            </div>
+            <div class="ms-auto" style="margin-right:30px;">
+                <a asp-area="" asp-controller="Account" asp-action="Logout" class="btn btn-danger" style="color:azure">Log Out</a>
+            </div>
+        </nav>
+    </header>
+    <div class="d-flex">
+        <div class="col-md-2 flex-shrink-0 p-3 side-bar">
+            <span class="fs-2 fw-semibold"><strong>Operations</strong></span>
+            <ul class="list-unstyled ps-0">
+                @if (User.IsInRole("Admin"))
+                {
                     <li class="mb-1" style="margin-top:10px;">
                         <button class="btn align-items-center rounded collapsed sideNavHeads" data-bs-toggle="collapse" data-bs-target="#Teachers" aria-expanded="false">
                             Teachers
@@ -100,17 +111,15 @@
                             </ul>
                         </div>
                     </li>
-                </ul>
-
-            </div>
-
-            <div class="main-content">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
+                }
+            </ul>
         </div>
-    }
+        <div class="main-content">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
 
     <footer>
         
