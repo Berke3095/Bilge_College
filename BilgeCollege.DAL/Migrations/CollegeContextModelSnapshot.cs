@@ -180,18 +180,18 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9b1581d9-9303-4e58-b9f3-08e971312446",
+                            Id = "2f8ce63b-8999-408d-ae93-581cce275930",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e2eeed19-dc7e-4e32-b366-0b21c99eca14",
-                            CreatedDate = new DateTime(2024, 10, 21, 21, 28, 12, 771, DateTimeKind.Local).AddTicks(8359),
+                            ConcurrencyStamp = "c599963e-6601-4576-9a26-de168996b0fa",
+                            CreatedDate = new DateTime(2024, 10, 24, 20, 30, 57, 879, DateTimeKind.Local).AddTicks(4340),
                             Email = "berke_aktepe@hotmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BERKE_AKTEPE@HOTMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHGm4lzS6jFgY0ibnAwvO33ZkNdMvExTkTvjsdMHayzDu1SaAIOCbyFpZ9HH/VEPMg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIJWn+3oL4GIu6CtE8bGMNFErIdx3/N6xcjViFEKdxLRYY9FDZ6q/rkIhTcvN3v6iw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b42445ec-0c7b-4e59-a37e-6990e6611b73",
+                            SecurityStamp = "dc4036bc-a4c9-49bb-9ee7-4b4ed3cd8e8c",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -234,6 +234,10 @@ namespace BilgeCollege.DAL.Migrations
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
@@ -332,6 +336,10 @@ namespace BilgeCollege.DAL.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SchoolNo")
                         .IsRequired()
                         .HasMaxLength(6)
@@ -339,6 +347,14 @@ namespace BilgeCollege.DAL.Migrations
 
                     b.Property<int>("State")
                         .HasColumnType("int");
+
+                    b.Property<string>("TCK")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -384,6 +400,10 @@ namespace BilgeCollege.DAL.Migrations
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
@@ -560,24 +580,24 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "157ac451-d9e5-4e64-8855-fc6adfbc52c3",
+                            Id = "8f16a85e-e2f3-43a2-b6c1-3dd0fba9ecb0",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
-                            CreatedDate = new DateTime(2024, 10, 21, 21, 28, 12, 805, DateTimeKind.Local).AddTicks(2137)
+                            CreatedDate = new DateTime(2024, 10, 24, 20, 30, 57, 911, DateTimeKind.Local).AddTicks(9019)
                         },
                         new
                         {
-                            Id = "84620b38-0432-49b5-ab74-b9aa2478f8a3",
+                            Id = "9990f8e5-941e-496c-9084-80a4cf832fd9",
                             Name = "Teacher",
                             NormalizedName = "TEACHER",
-                            CreatedDate = new DateTime(2024, 10, 21, 21, 28, 12, 805, DateTimeKind.Local).AddTicks(2149)
+                            CreatedDate = new DateTime(2024, 10, 24, 20, 30, 57, 911, DateTimeKind.Local).AddTicks(9034)
                         },
                         new
                         {
-                            Id = "c7b10133-602b-4153-bd33-5d215f1064cd",
+                            Id = "d34a1620-336d-41f6-8998-cecf3e5b4f03",
                             Name = "Guardian",
                             NormalizedName = "GUARDIAN",
-                            CreatedDate = new DateTime(2024, 10, 21, 21, 28, 12, 805, DateTimeKind.Local).AddTicks(2159)
+                            CreatedDate = new DateTime(2024, 10, 24, 20, 30, 57, 911, DateTimeKind.Local).AddTicks(9054)
                         });
                 });
 

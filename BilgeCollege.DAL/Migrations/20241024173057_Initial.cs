@@ -86,6 +86,7 @@ namespace BilgeCollege.DAL.Migrations
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     HomeAddress = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     TCK = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GuidId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -226,11 +227,14 @@ namespace BilgeCollege.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SchoolNo = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TCK = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SchoolNo = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
                     FinishedSchool = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     FinalGrade = table.Column<double>(type: "float", nullable: false),
                     GuardianId = table.Column<int>(type: "int", nullable: true),
@@ -288,8 +292,9 @@ namespace BilgeCollege.DAL.Migrations
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     TCK = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    MainTopicId = table.Column<int>(type: "int", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MainTopicId = table.Column<int>(type: "int", nullable: true),
                     GuidId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -334,15 +339,15 @@ namespace BilgeCollege.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Discriminator", "ModifiedDate", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "157ac451-d9e5-4e64-8855-fc6adfbc52c3", null, new DateTime(2024, 10, 21, 21, 28, 12, 805, DateTimeKind.Local).AddTicks(2137), "UserRole", null, "Admin", "ADMIN" },
-                    { "84620b38-0432-49b5-ab74-b9aa2478f8a3", null, new DateTime(2024, 10, 21, 21, 28, 12, 805, DateTimeKind.Local).AddTicks(2149), "UserRole", null, "Teacher", "TEACHER" },
-                    { "c7b10133-602b-4153-bd33-5d215f1064cd", null, new DateTime(2024, 10, 21, 21, 28, 12, 805, DateTimeKind.Local).AddTicks(2159), "UserRole", null, "Guardian", "GUARDIAN" }
+                    { "8f16a85e-e2f3-43a2-b6c1-3dd0fba9ecb0", null, new DateTime(2024, 10, 24, 20, 30, 57, 911, DateTimeKind.Local).AddTicks(9019), "UserRole", null, "Admin", "ADMIN" },
+                    { "9990f8e5-941e-496c-9084-80a4cf832fd9", null, new DateTime(2024, 10, 24, 20, 30, 57, 911, DateTimeKind.Local).AddTicks(9034), "UserRole", null, "Teacher", "TEACHER" },
+                    { "d34a1620-336d-41f6-8998-cecf3e5b4f03", null, new DateTime(2024, 10, 24, 20, 30, 57, 911, DateTimeKind.Local).AddTicks(9054), "UserRole", null, "Guardian", "GUARDIAN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "9b1581d9-9303-4e58-b9f3-08e971312446", 0, "e2eeed19-dc7e-4e32-b366-0b21c99eca14", new DateTime(2024, 10, 21, 21, 28, 12, 771, DateTimeKind.Local).AddTicks(8359), "berke_aktepe@hotmail.com", false, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEHGm4lzS6jFgY0ibnAwvO33ZkNdMvExTkTvjsdMHayzDu1SaAIOCbyFpZ9HH/VEPMg==", null, false, "b42445ec-0c7b-4e59-a37e-6990e6611b73", false, "Admin" });
+                values: new object[] { "2f8ce63b-8999-408d-ae93-581cce275930", 0, "c599963e-6601-4576-9a26-de168996b0fa", new DateTime(2024, 10, 24, 20, 30, 57, 879, DateTimeKind.Local).AddTicks(4340), "berke_aktepe@hotmail.com", false, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEIJWn+3oL4GIu6CtE8bGMNFErIdx3/N6xcjViFEKdxLRYY9FDZ6q/rkIhTcvN3v6iw==", null, false, "dc4036bc-a4c9-49bb-9ee7-4b4ed3cd8e8c", false, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AltTopics_MainTopicId",

@@ -8,11 +8,13 @@ namespace BilgeCollege.MODELS.Concretes
         public string LastName { get; set; }
         public string Email { get; set; }
         public string TCK { get; set; }
+        public string PhoneNumber { get; set; }
+        public string UserId { get; set; }
 
         // Relations
         public MainTopic? MainTopic { get; set; }
         public int? MainTopicId { get; set; }
 
-        public string UserId { get; set; }
+        
     }
 }

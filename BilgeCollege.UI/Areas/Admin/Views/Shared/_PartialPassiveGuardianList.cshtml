@@ -23,6 +23,7 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">TCK</th>
+                <th scope="col">Phone Number</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -35,6 +36,7 @@
                     <td>@item.LastName</td>
                     <td>@item.Email</td>
                     <td>@item.TCK</td>
+                    <td>@item.PhoneNumber</td>
                     <td>
                         <form asp-area="Admin" asp-controller="Guardian" asp-action="Recover" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to recover this guardian?');">
                             <button type="submit" class="btn btn-primary btn-sm">Recover</button>

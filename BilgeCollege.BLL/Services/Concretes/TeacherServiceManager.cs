@@ -106,8 +106,9 @@ namespace BilgeCollege.BLL.Services.Concretes
             if (teacher != null) await userManager.DeleteAsync(teacher);
         }
 
-        public async Task<Teacher> SetupTeacher(User user, UserManager<User> _userManager, string firstName, string lastName, string tck, int? mainTopicId)
+        public async Task<Teacher> SetupTeacher(User user, UserManager<User> _userManager, string firstName, string lastName, string tck, string phoneNumber, int? mainTopicId)
         {
+            user.PhoneNumber = phoneNumber;
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
             {
@@ -119,8 +120,9 @@ namespace BilgeCollege.BLL.Services.Concretes
                     {
                         FirstName = firstName,
                         LastName = lastName,
-                        TCK = tck,
                         Email = user.Email,
+                        TCK = tck,
+                        PhoneNumber = phoneNumber,
                         UserId = user.Id,
                         MainTopicId = mainTopicId
                     };

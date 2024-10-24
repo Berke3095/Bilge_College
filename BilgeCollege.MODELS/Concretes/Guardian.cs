@@ -9,11 +9,13 @@ namespace BilgeCollege.MODELS.Concretes
         public string Email { get; set; }
         public string HomeAddress { get; set; }
         public string TCK { get; set; }
+        public string PhoneNumber { get; set; }
+        public string UserId { get; set; }
 
         // Relations
         public List<Student>? Students { get; set; }
 
-        public string UserId { get; set; }
+        
 
     }
 }

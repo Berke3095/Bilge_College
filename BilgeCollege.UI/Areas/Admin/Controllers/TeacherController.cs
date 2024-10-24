@@ -49,7 +49,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     User user = await _teacherServiceManager.CreateUserAsync(_userManager, createTeacherVM.FirstName, createTeacherVM.LastName, createTeacherVM.TCK);
                     if (user != null)
                     {
-                        Teacher teacher = await _teacherServiceManager.SetupTeacher(user, _userManager, createTeacherVM.FirstName, createTeacherVM.LastName, createTeacherVM.TCK, createTeacherVM.MainTopicId);
+                        Teacher teacher = await _teacherServiceManager.SetupTeacher(user, _userManager, createTeacherVM.FirstName, createTeacherVM.LastName, createTeacherVM.TCK, createTeacherVM.PhoneNumber, createTeacherVM.MainTopicId);
                         _teacherServiceManager.Create(teacher);
                         return RedirectToAction("Create", "Teacher");
                     }

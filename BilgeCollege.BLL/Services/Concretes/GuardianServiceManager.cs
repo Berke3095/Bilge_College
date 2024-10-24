@@ -106,8 +106,9 @@ namespace BilgeCollege.BLL.Services.Concretes
             if (guardian != null) await userManager.DeleteAsync(guardian);
         }
 
-        public async Task<Guardian> SetupGuardian(User user, UserManager<User> _userManager, string firstName, string lastName, string tck, string homeAddress)
+        public async Task<Guardian> SetupGuardian(User user, UserManager<User> _userManager, string firstName, string lastName, string tck, string phoneNumber, string homeAddress)
         {
+            user.PhoneNumber = phoneNumber;
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
             {
@@ -119,10 +120,11 @@ namespace BilgeCollege.BLL.Services.Concretes
                     {
                         FirstName = firstName,
                         LastName = lastName,
-                        TCK = tck,
                         Email = user.Email,
-                        UserId = user.Id,
-                        HomeAddress = homeAddress
+                        TCK = tck,
+                        PhoneNumber = phoneNumber,
+                        HomeAddress = homeAddress,
+                        UserId = user.Id
                     };
 
                     return guardian;

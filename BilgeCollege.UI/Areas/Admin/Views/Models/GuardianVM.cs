@@ -17,6 +17,11 @@ namespace BilgeCollege.UI.Areas.Admin.Views.Models
         [RegularExpression("^[0-9]*$", ErrorMessage = "TCK must contain only numbers.")]
         public string TCK { get; set; }
 
+        [Required(ErrorMessage = "You must enter the phone number.")]
+        [StringLength(11, MinimumLength = 11, ErrorMessage = "Phone number must be exactly 11 digits.")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Phone number must contain only numbers.")]
+        public string PhoneNumber { get; set; }
+
         [Required(ErrorMessage = "You must enter the home address.")]
         public string HomeAddress { get; set; }
     }
