@@ -1,0 +1,59 @@
+﻿@model List<Student>
+@{
+    int num = 1;
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between">
+        <h2 class="mb-4">Passive Students List</h2>
+        <div style=" margin-right:100px;">
+            <form asp-area="Admin" asp-controller="Student" asp-action="RecoverAll" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to recover all passive students?');">
+                <button type="submit" class="btn btn-primary">Recover All</button>
+            </form>
+            <form asp-area="Admin" asp-controller="Student" asp-action="DestroyAll" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to destroy all passive students?');">
+                <button type="submit" class="btn btn-danger">Destroy All</button>
+            </form>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">TCK</th>
+                <th scope="col">Guardian</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody style="background-color:bisque;">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@num - </td>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Email</td>
+                    <td>@item.TCK</td>
+                    <td>
+                        @if (item.Guardian != null)
+                        {
+                            @item.Guardian.FirstName @item.Guardian.LastName
+                        }
+                    </td>
+                    <td>
+                        <form asp-area="Admin" asp-controller="Student" asp-action="Recover" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to recover this student?');">
+                            <button type="submit" class="btn btn-primary btn-sm">Recover</button>
+                        </form>
+
+                        <form asp-area="Admin" asp-controller="Student" asp-action="Destroy" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to destroy this student?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Destroy</button>
+                        </form>
+                    </td>
+                </tr>
+                num++;
+            }
+        </tbody>
+    </table>
+</div>

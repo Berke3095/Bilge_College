@@ -17,7 +17,8 @@ namespace BilgeCollege.DAL.Configs
             {
                 new UserRole{Id = Guid.NewGuid().ToString(), Name = "Admin", NormalizedName = "ADMIN"},
                 new UserRole{Id = Guid.NewGuid().ToString(), Name = "Teacher", NormalizedName = "TEACHER"},
-                new UserRole{Id = Guid.NewGuid().ToString(), Name = "Guardian", NormalizedName = "GUARDIAN"}
+                new UserRole{Id = Guid.NewGuid().ToString(), Name = "Guardian", NormalizedName = "GUARDIAN"},
+                new UserRole{Id = Guid.NewGuid().ToString(), Name = "Student", NormalizedName = "STUDENT"}
             };
         }
     }

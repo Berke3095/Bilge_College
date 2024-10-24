@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilgeCollege.MODELS", "Bilg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilgeCollege.DAL", "BilgeCollege.DAL\BilgeCollege.DAL.csproj", "{B73A1421-4E56-40C2-BA7B-BCAB45CFD109}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilgeCollege.BLL", "BilgeCollege.BLL\BilgeCollege.BLL.csproj", "{6FEB55C4-8F15-45F2-98DA-8FE8364EEB73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilgeCollege.BLL", "BilgeCollege.BLL\BilgeCollege.BLL.csproj", "{6FEB55C4-8F15-45F2-98DA-8FE8364EEB73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilgeCollege.UI", "BilgeCollege.UI\BilgeCollege.UI.csproj", "{35C0DFD0-C9C7-4756-ABD1-55FD4DE56DC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilgeCollege.UI", "BilgeCollege.UI\BilgeCollege.UI.csproj", "{35C0DFD0-C9C7-4756-ABD1-55FD4DE56DC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -26,6 +26,10 @@
                 {
                     <h1>Guardian Portal</h1>
                 }
+                else if (User.IsInRole("Student"))
+                {
+                    <h1>Student Portal</h1>
+                }
             </div>
             <div class="ms-auto" style="margin-right:30px;">
                 <a asp-area="" asp-controller="Account" asp-action="Logout" class="btn btn-danger" style="color:azure">Log Out</a>
@@ -55,7 +59,8 @@
                         </button>
                         <div class="collapse mt-1 sideNavUl" id="Students">
                             <ul>
-                                <li><a href="#" class="btn btn-sm sideNavLi" style="background-color: thistle; color: black;">Ex</a></li>
+                                <li><a asp-area="Admin" asp-controller="Student" asp-action="Create" class="btn btn-sm sideNavLi" style="background-color: thistle; color: black;">Create</a></li>
+                                <li><a asp-area="Admin" asp-controller="Student" asp-action="FullList" class="btn btn-sm sideNavLi" style="background-color: thistle; color: black;">Full List</a></li>
                             </ul>
                         </div>
                     </li>

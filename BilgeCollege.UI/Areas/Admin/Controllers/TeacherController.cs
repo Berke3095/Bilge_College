@@ -5,7 +5,6 @@ using BilgeCollege.UI.Areas.Admin.Views.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.DependencyResolver;
 
 namespace BilgeCollege.UI.Areas.Admin.Controllers
 {
@@ -40,16 +39,16 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(TeacherVM createTeacherVM)
+        public async Task<IActionResult> Create(TeacherVM teacherVM)
         {
             if(ModelState.IsValid)
             {
-                if (createTeacherVM != null)
+                if (teacherVM != null)
                 {
-                    User user = await _teacherServiceManager.CreateUserAsync(_userManager, createTeacherVM.FirstName, createTeacherVM.LastName, createTeacherVM.TCK);
+                    User user = await _teacherServiceManager.CreateUserAsync(_userManager, teacherVM.FirstName, teacherVM.LastName, teacherVM.TCK);
                     if (user != null)
                     {
-                        Teacher teacher = await _teacherServiceManager.SetupTeacher(user, _userManager, createTeacherVM.FirstName, createTeacherVM.LastName, createTeacherVM.TCK, createTeacherVM.PhoneNumber, createTeacherVM.MainTopicId);
+                        Teacher teacher = await _teacherServiceManager.SetupTeacher(user, _userManager, teacherVM.FirstName, teacherVM.LastName, teacherVM.TCK, teacherVM.PhoneNumber, teacherVM.MainTopicId);
                         _teacherServiceManager.Create(teacher);
                         return RedirectToAction("Create", "Teacher");
                     }
@@ -57,7 +56,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             }
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             ViewBag.Teachers = _teacherServiceManager.GetAllActives();
-            return View(createTeacherVM);
+            return View(teacherVM);
         }
 
         [HttpPost]

@@ -1,0 +1,55 @@
+﻿@model StudentVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create Student";
+}
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/submissionForm.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="d-flex">
+        <div class="col-md-3 fixed">
+            <div class="text-center">
+                <h1 class="display-5">Create a Student</h1>
+            </div>
+
+            <form method="post" class="form-container">
+                <div class="form-group mb-4">
+                    <input asp-for="FirstName" type="text" class="form-control" placeholder="First name">
+                    <span asp-validation-for="FirstName" class="form-text text text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input asp-for="LastName" type="text" class="form-control" placeholder="Last name">
+                    <span asp-validation-for="LastName" class="form-text text text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input asp-for="TCK" type="text" class="form-control" placeholder="TC num., 11 digits">
+                    <span asp-validation-for="TCK" class="form-text text text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <select class="form-control" asp-for="GuardianId" required>
+                        <option value="" disabled selected>--Select a guardian--</option>
+                        @foreach (var item in ViewBag.Guardians)
+                        {
+                            <option value="@item.Id">@item.FirstName @item.LastName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-submit">Create</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-9" style="margin-left:24.7%">
+            <partial name="_PartialActiveStudentList" model="ViewBag.Students" />
+        </div>
+    </div>
+
+</body>
