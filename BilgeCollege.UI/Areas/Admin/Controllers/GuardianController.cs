@@ -104,12 +104,12 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult DestroyAll()
+        public async Task<IActionResult> DestroyAll()
         {
             var passiveGuardians = _guardianServiceManager.GetAllPassives();
             foreach(var item in passiveGuardians)
             {
-                _guardianServiceManager.HandleOnDestroy(_userManager, item);
+                await _guardianServiceManager.HandleOnDestroy(_userManager, item);
             }
 
             _guardianServiceManager.DestroyRange(passiveGuardians);
