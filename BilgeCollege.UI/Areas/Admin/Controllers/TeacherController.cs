@@ -78,8 +78,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         public async Task<IActionResult> Destroy(int id)
         {
             var foundTeacher = _teacherServiceManager.GetById(id);
-            var teacherUserToDelete = await _userManager.FindByIdAsync(foundTeacher.UserId);
-            if (teacherUserToDelete != null) await _userManager.DeleteAsync(teacherUserToDelete);
+            await _teacherServiceManager.HandleOnDestroy(_userManager, foundTeacher);
 
             _teacherServiceManager.Destroy(foundTeacher);
 
@@ -92,8 +91,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             var passiveTeachers = _teacherServiceManager.GetAllPassives();
             foreach(var item in passiveTeachers)
             {
-                var teacherUserToDelete = await _userManager.FindByIdAsync(item.UserId);
-                if (teacherUserToDelete != null) await _userManager.DeleteAsync(teacherUserToDelete);
+                await _teacherServiceManager.HandleOnDestroy(_userManager, item);
             }
 
             _teacherServiceManager.DestroyRange(passiveTeachers);

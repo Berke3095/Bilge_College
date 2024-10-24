@@ -100,6 +100,12 @@ namespace BilgeCollege.BLL.Services.Concretes
             return user;
         }
 
+        public async Task HandleOnDestroy(UserManager<User> userManager, Guardian guardianToDestroy)
+        {
+            var guardian = await userManager.FindByIdAsync(guardianToDestroy.UserId);
+            if (guardian != null) await userManager.DeleteAsync(guardian);
+        }
+
         public async Task<Guardian> SetupGuardian(User user, UserManager<User> _userManager, string firstName, string lastName, string tck, string homeAddress)
         {
             var result = await _userManager.CreateAsync(user);

@@ -100,6 +100,12 @@ namespace BilgeCollege.BLL.Services.Concretes
             return user;
         }
 
+        public async Task HandleOnDestroy(UserManager<User> userManager, Teacher teacherToDestroy)
+        {
+            var teacher = await userManager.FindByIdAsync(teacherToDestroy.UserId);
+            if (teacher != null) await userManager.DeleteAsync(teacher);
+        }
+
         public async Task<Teacher> SetupTeacher(User user, UserManager<User> _userManager, string firstName, string lastName, string tck, int? mainTopicId)
         {
             var result = await _userManager.CreateAsync(user);

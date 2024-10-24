@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "FullList Guardian";
+}
+
+<div class="d-flex">
+    <div class="col-md-6">
+        <partial name="_PartialActiveGuardianList" model="ViewBag.ActiveGuardians" />
+    </div>
+    <div class="col-md-6">
+        <partial name="_PartialPassiveGuardianList" model="ViewBag.PassiveGuardians" />
+    </div>
+</div>

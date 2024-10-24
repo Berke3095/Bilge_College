@@ -22,6 +22,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             _userManager = userManager;
         }
 
+        public IActionResult FullList()
+        {
+            ViewBag.PassiveGuardians = _guardianServiceManager.GetAllPassives();
+            ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
+            return View();
+        }
+
         public IActionResult Create()
         {
             ViewBag.Guardians = _guardianServiceManager.GetAllActives();
@@ -62,31 +69,51 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult DeleteAll()
         {
-            return View();
+            _guardianServiceManager.DeleteRange(_guardianServiceManager.GetAllActives());
+
+            // HANDLE ON DELETE - STUDENTS
+
+            return RedirectToAction("FullList", "Guardian");
         }
 
         [HttpPost]
-        public IActionResult Recover()
+        public IActionResult Recover(int id)
         {
-            return View();
+            _guardianServiceManager.Recover(_guardianServiceManager.GetById(id));
+
+            // HANDLE ON RECOVER - STUDENTS
+
+            return RedirectToAction("FullList", "Guardian");
         }
 
         [HttpPost]
         public IActionResult RecoverAll()
         {
-            return View();
+            _guardianServiceManager.RecoverRange(_guardianServiceManager.GetAllPassives());
+            return RedirectToAction("FullList", "Guardian");
         }
 
         [HttpPost]
-        public IActionResult Destroy()
+        public async Task<IActionResult> Destroy(int id)
         {
-            return View();
+            var foundGuardian = _guardianServiceManager.GetById(id);
+            await _guardianServiceManager.HandleOnDestroy(_userManager, foundGuardian);
+
+            _guardianServiceManager.Destroy(foundGuardian);
+            return RedirectToAction("FullList", "Guardian");
         }
 
         [HttpPost]
         public IActionResult DestroyAll()
         {
-            return View();
+            var passiveGuardians = _guardianServiceManager.GetAllPassives();
+            foreach(var item in passiveGuardians)
+            {
+                _guardianServiceManager.HandleOnDestroy(_userManager, item);
+            }
+
+            _guardianServiceManager.DestroyRange(passiveGuardians);
+            return RedirectToAction("FullList", "Guardian");
         }
     }
 }
