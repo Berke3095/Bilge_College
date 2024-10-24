@@ -1,5 +1,6 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
 using BilgeCollege.BLL.Services.Concretes;
+using BilgeCollege.BLL.Utils;
 using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.MODELS.Concretes.CustomUser;
 using BilgeCollege.UI.Areas.Admin.Views.Models;
@@ -46,10 +47,10 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             {
                 if (studentVM != null)
                 {
-                    User user = await _studentServiceManager.CreateUserAsync(_userManager, studentVM.FirstName, studentVM.LastName, studentVM.TCK);
+                    User user = await UserIntegrateServiceManager.CreateUserAsync(_userManager, studentVM.FirstName, studentVM.LastName, studentVM.TCK);
                     if (user != null)
                     {
-                        Student student = await _studentServiceManager.SetupStudent(user, _userManager, studentVM.FirstName, studentVM.LastName, studentVM.TCK, studentVM.GuardianId);
+                        Student student = await _studentServiceManager.SetupStudent(user, _userManager, studentVM.FirstName, studentVM.LastName, studentVM.TCK, studentVM.Gender, studentVM.FinishedSchool, studentVM.FinalGrade, studentVM.GuardianId);
                         _studentServiceManager.Create(student);
                         return RedirectToAction("Create", "Student");
                     }

@@ -20,11 +20,14 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">TCK</th>
+                <th scope="col">Gender</th>
+                <th score="col">Finished School</th>
+                <th score="col">Final Grade</th>
                 <th scope="col">Guardian</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
-        <tbody style="background-color:bisque;">
+        <tbody>
             @foreach (var item in Model)
             {
                 <tr>
@@ -33,10 +36,13 @@
                     <td>@item.LastName</td>
                     <td>@item.Email</td>
                     <td>@item.TCK</td>
+                    <td>@item.Gender</td>
+                    <td>@item.FinishedSchool</td>
+                    <td>@item.FinalGrade</td>
                     <td>
                         @if (item.Guardian != null)
                         {
-                            @item.Guardian.FirstName @item.Guardian.LastName
+                            @item.Guardian.FirstName @(" ") @item.Guardian.LastName
                         }
                     </td>
                     <td>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using BilgeCollege.BLL.Services.Abstracts;
 using BilgeCollege.BLL.Services.Concretes;
+using BilgeCollege.BLL.Utils;
 
 namespace BilgeCollege.UI.Areas.Admin.Controllers
 {
@@ -42,7 +43,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             {
                 if (guardianVM != null)
                 {
-                    User user = await _guardianServiceManager.CreateUserAsync(_userManager, guardianVM.FirstName, guardianVM.LastName, guardianVM.TCK);
+                    User user = await UserIntegrateServiceManager.CreateUserAsync(_userManager, guardianVM.FirstName, guardianVM.LastName, guardianVM.TCK);
                     if (user != null)
                     {
                         Guardian guardian = await _guardianServiceManager.SetupGuardian(user, _userManager, guardianVM.FirstName, guardianVM.LastName, guardianVM.TCK, guardianVM.PhoneNumber, guardianVM.HomeAddress);

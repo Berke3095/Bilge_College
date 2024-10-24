@@ -33,9 +33,37 @@
                 </div>
 
                 <div class="form-group mb-4">
+                    <div class="d-flex">
+                        <div>
+                            <label class="form-check-label">
+                                <input asp-for="Gender" type="radio" class="form-check-input" value="Male" />
+                                Male
+                            </label>
+                        </div>
+                        <div style="margin-left:10px;">
+                            <label class="form-check-label">
+                                <input asp-for="Gender" type="radio" class="form-check-input" value="Female" />
+                                Female
+                            </label>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Gender" class="form-text text text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input asp-for="FinishedSchool" type="text" class="form-control" placeholder="Finished school">
+                    <span asp-validation-for="FinishedSchool" class="form-text text text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input asp-for="FinalGrade" type="number" class="form-control" placeholder="Final grade" step="0.1">
+                    <span asp-validation-for="FinalGrade" class="form-text text text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
                     <select class="form-control" asp-for="GuardianId" required>
                         <option value="" disabled selected>--Select a guardian--</option>
-                        @foreach (var item in ViewBag.Guardians)
+                        @foreach (var item in ViewBag.ActiveGuardians)
                         {
                             <option value="@item.Id">@item.FirstName @item.LastName</option>
                         }
@@ -48,7 +76,7 @@
             </form>
         </div>
         <div class="col-md-9" style="margin-left:24.7%">
-            <partial name="_PartialActiveStudentList" model="ViewBag.Students" />
+            <partial name="_PartialActiveStudentList" model="ViewBag.ActiveStudents" />
         </div>
     </div>
 

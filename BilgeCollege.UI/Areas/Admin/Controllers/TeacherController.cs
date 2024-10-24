@@ -1,4 +1,5 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
+using BilgeCollege.BLL.Utils;
 using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.MODELS.Concretes.CustomUser;
 using BilgeCollege.UI.Areas.Admin.Views.Models;
@@ -45,7 +46,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             {
                 if (teacherVM != null)
                 {
-                    User user = await _teacherServiceManager.CreateUserAsync(_userManager, teacherVM.FirstName, teacherVM.LastName, teacherVM.TCK);
+                    User user = await UserIntegrateServiceManager.CreateUserAsync(_userManager, teacherVM.FirstName, teacherVM.LastName, teacherVM.TCK);
                     if (user != null)
                     {
                         Teacher teacher = await _teacherServiceManager.SetupTeacher(user, _userManager, teacherVM.FirstName, teacherVM.LastName, teacherVM.TCK, teacherVM.PhoneNumber, teacherVM.MainTopicId);
