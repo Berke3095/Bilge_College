@@ -1,5 +1,6 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
 using BilgeCollege.MODELS.Concretes;
+using BilgeCollege.UI.Areas.Admin.Views.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +12,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
     {
         private readonly I_AltTopicServiceManager _altTopicServiceManager;
         private readonly I_MainTopicServiceManager _mainTopicServiceManager;
+        private readonly I_TeacherServiceManager _teacherServiceManager;
 
-        public AltTopicController(I_AltTopicServiceManager altTopicServiceManager, I_MainTopicServiceManager mainTopicServiceManager)
+        public AltTopicController(I_AltTopicServiceManager altTopicServiceManager, I_MainTopicServiceManager mainTopicServiceManager, I_TeacherServiceManager teacherServiceManager)
         {
             _altTopicServiceManager = altTopicServiceManager;
             _mainTopicServiceManager = mainTopicServiceManager;
+            _teacherServiceManager = teacherServiceManager;
         }
 
         public IActionResult FullList()
@@ -23,6 +26,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             ViewBag.ActiveAltTopics = _altTopicServiceManager.GetAllActives();
             ViewBag.PassiveAltTopics = _altTopicServiceManager.GetAllPassives();
             ViewBag.MainTopics = _mainTopicServiceManager.GetAll();
+            ViewBag.ActiveTeachers = _teacherServiceManager.GetAllActives();
             return View();
         }
 
@@ -59,6 +63,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 return RedirectToAction("Create", "AltTopic", new { selectedMainTopicId = mainTopic.Id});
             }
 
+            ViewBag.ActiveTeachers = _teacherServiceManager.GetAllActives();
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             ViewBag.AltTopics = _altTopicServiceManager.GetAllActives();
 
@@ -98,6 +103,9 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
+            var altTopic = _altTopicServiceManager.GetById(id);
+            altTopic.TeacherId = null;
+
             _altTopicServiceManager.Delete(_altTopicServiceManager.GetById(id));
             return RedirectToAction("FullList", "AltTopic");
         }
@@ -105,6 +113,12 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult DeleteAll()
         {
+            var altTopics = _altTopicServiceManager.GetAllActives();
+            foreach (var item in altTopics)
+            {
+                item.TeacherId = null;
+            }
+
             _altTopicServiceManager.DeleteRange(_altTopicServiceManager.GetAllActives());
             return RedirectToAction("FullList", "AltTopic");
         }
@@ -121,6 +135,42 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         {
             _altTopicServiceManager.DestroyRange(_altTopicServiceManager.GetAllPassives());
             return RedirectToAction("FullList", "AltTopic");
+        }
+
+        public IActionResult Update(int id)
+        {
+            var altTopic = _altTopicServiceManager.GetById(id);
+            AltTopicVM altTopicVM = new AltTopicVM
+            {
+                Id = id,
+                MainTopicId = altTopic.MainTopicId,
+                TeacherId = altTopic.TeacherId
+            };
+
+            if(altTopicVM.TeacherId != null)
+            {
+                var teacher = _teacherServiceManager.GetById((int)altTopicVM.TeacherId);
+                ViewBag.TeacherName = teacher.FirstName + " " + teacher.LastName;
+            }
+
+            ViewBag.MainTopic = _mainTopicServiceManager.GetById((int)altTopicVM.MainTopicId).TopicName;
+            ViewBag.ActiveTeachers = _teacherServiceManager.GetAllActives().Where(x => x.MainTopicId == altTopic.MainTopicId);
+            return View(altTopicVM);
+        }
+
+        [HttpPost]
+        public IActionResult Update(AltTopic altTopicVM)
+        {
+            if (altTopicVM != null)
+            {
+                var altTopic = _altTopicServiceManager.GetById(altTopicVM.Id);
+
+                altTopic.TeacherId = altTopicVM.TeacherId;
+                _altTopicServiceManager.Update(altTopic);
+
+                return RedirectToAction("FullList", "AltTopic");
+            }
+            return View();
         }
     }
 }
