@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using BilgeCollege.BLL.Services.Abstracts;
-using BilgeCollege.BLL.Services.Concretes;
 using BilgeCollege.BLL.Utils;
 
 namespace BilgeCollege.UI.Areas.Admin.Controllers
@@ -15,11 +14,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
     public class GuardianController : Controller
     {
         private readonly I_GuardianServiceManager _guardianServiceManager;
+        private readonly I_StudentServiceManager _studentServiceManager;
         private readonly UserManager<User> _userManager;
 
-        public GuardianController(I_GuardianServiceManager guardianServiceManager, UserManager<User> userManager)
+        public GuardianController(I_GuardianServiceManager guardianServiceManager, I_StudentServiceManager studentServiceManager, UserManager<User> userManager)
         {
             _guardianServiceManager = guardianServiceManager;
+            _studentServiceManager = studentServiceManager;
             _userManager = userManager;
         }
 
@@ -60,9 +61,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            _guardianServiceManager.Delete(_guardianServiceManager.GetById(id));
+            var students = _studentServiceManager.GetAll().Where(x => x.GuardianId == id).ToList();
+            foreach (var item in students)
+            {
+                item.GuardianId = null;
+            }
 
-            // HANDLE ON DELETE - STUDENTS
+            _guardianServiceManager.Delete(_guardianServiceManager.GetById(id));
 
             return RedirectToAction("FullList", "Guardian");
         }
@@ -70,9 +75,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult DeleteAll()
         {
-            _guardianServiceManager.DeleteRange(_guardianServiceManager.GetAllActives());
+            var students = _studentServiceManager.GetAll();
+            foreach (var item in students)
+            {
+                item.GuardianId = null;
+            }
 
-            // HANDLE ON DELETE - STUDENTS
+            _guardianServiceManager.DeleteRange(_guardianServiceManager.GetAllActives());
 
             return RedirectToAction("FullList", "Guardian");
         }
@@ -81,9 +90,6 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         public IActionResult Recover(int id)
         {
             _guardianServiceManager.Recover(_guardianServiceManager.GetById(id));
-
-            // HANDLE ON RECOVER - STUDENTS
-
             return RedirectToAction("FullList", "Guardian");
         }
 
