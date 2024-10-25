@@ -1,0 +1,137 @@
+﻿@model StudentVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Update Student";
+}
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/submissionForm.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="d-flex">
+        <div class="col-md-4">
+            <div class="text-center">
+                <h1 class="display-5">Original</h1>
+            </div>
+
+            <form method="post" class="form-container">
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" placeholder="@Model.FirstName" disabled>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" placeholder="@Model.LastName" disabled>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" placeholder="@Model.TCK" disabled>
+                </div>
+
+                <div class="form-group mb-4">
+                    <div class="d-flex">
+                        <div>
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input"
+                                       value="Male"
+                                @(Model.Gender == BilgeCollege.MODELS.Enums.GenderEnum.Male ? "checked disabled" : "disabled") />
+                                Male
+                            </label>
+                        </div>
+                        <div style="margin-left:10px;">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input"
+                                       value="Female"
+                                @(Model.Gender == BilgeCollege.MODELS.Enums.GenderEnum.Female ? "checked disabled" : "disabled") />
+                                Female
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" placeholder="@Model.FinishedSchool" disabled>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input type="number" class="form-control" placeholder="@Model.FinalGrade" step="0.1" disabled>
+                </div>
+
+                <div class="form-group mb-4">
+                    <select class="form-control" asp-for="GuardianId" disabled>
+                        <option value="" disabled selected>--Select a guardian--</option>
+                        @foreach (var item in ViewBag.ActiveGuardians)
+                        {
+                            <option value="@item.Id">@item.FirstName @item.LastName</option>
+                        }
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4" style="margin-left:10px;">
+            <div class="text-center">
+                <h1 class="display-5">Updated</h1>
+            </div>
+
+            <form method="post" class="form-container">
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" placeholder="@Model.FirstName" disabled>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" placeholder="@Model.LastName" disabled>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" placeholder="@Model.TCK" disabled>
+                </div>
+
+                <div class="form-group mb-4">
+                    <div class="d-flex">
+                        <div>
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input"
+                                       value="Male"
+                                @(Model.Gender == BilgeCollege.MODELS.Enums.GenderEnum.Male ? "checked disabled" : "disabled") />
+                                Male
+                            </label>
+                        </div>
+                        <div style="margin-left:10px;">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input"
+                                       value="Female"
+                                @(Model.Gender == BilgeCollege.MODELS.Enums.GenderEnum.Female ? "checked disabled" : "disabled") />
+                                Female
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" placeholder="@Model.FinishedSchool" disabled>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input type="number" class="form-control" placeholder="@Model.FinalGrade" step="0.1" disabled>
+                </div>
+
+                <div class="form-group mb-4">
+                    <select class="form-control" asp-for="GuardianId" required>
+                        <option value="" disabled selected>--Select a guardian--</option>
+                        @foreach (var item in ViewBag.ActiveGuardians)
+                        {
+                            <option value="@item.Id">@item.FirstName @item.LastName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>

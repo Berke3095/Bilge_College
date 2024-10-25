@@ -141,6 +141,8 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 _teacherServiceManager.Update(teacher);
                 return RedirectToAction("FullList", "Teacher");
             }
+
+            ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             return View();
         }
     }
