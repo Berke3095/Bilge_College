@@ -16,7 +16,7 @@ namespace BilgeCollege.BLL.Services.Concretes
             _repository = repository;
         }
 
-        public async Task<Student> SetupStudent(User user, UserManager<User> _userManager, string firstName, string lastName, string tck, GenderEnum gender, string finishedSchool, double finalGrade, int? GuardianId)
+        public async Task<Student> SetupStudent(User user, UserManager<User> _userManager, string firstName, string lastName, string tck, GenderEnum gender, string finishedSchool, double finalGrade, int? classroomId, int? guardianId)
         {
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
@@ -32,10 +32,11 @@ namespace BilgeCollege.BLL.Services.Concretes
                         Email = user.Email,
                         TCK = tck,
                         Gender = gender,
-                        GuardianId = GuardianId,
+                        GuardianId = guardianId,
                         UserId = user.Id,
                         FinishedSchool = finishedSchool,
-                        FinalGrade = finalGrade
+                        FinalGrade = finalGrade,
+                        ClassroomId = classroomId,
                     };
 
                     return student;

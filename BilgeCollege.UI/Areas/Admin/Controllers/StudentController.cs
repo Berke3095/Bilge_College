@@ -16,25 +16,28 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
     {
         private readonly I_StudentServiceManager _studentServiceManager;
         private readonly I_GuardianServiceManager _guardianServiceManager;
+        private readonly I_ClassroomServiceManager _classroomServiceManager;
         private readonly UserManager<User> _userManager;
 
-        public StudentController(I_StudentServiceManager studentServiceManager, I_GuardianServiceManager guardianServiceManager, UserManager<User> userManager)
+        public StudentController(I_StudentServiceManager studentServiceManager, I_GuardianServiceManager guardianServiceManager, I_ClassroomServiceManager classroomServiceManager, UserManager<User> userManager)
         {
             _studentServiceManager = studentServiceManager;
             _guardianServiceManager = guardianServiceManager;
+            _classroomServiceManager = classroomServiceManager;
             _userManager = userManager;
         }
 
         public IActionResult FullList()
         {
+            ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
             ViewBag.ActiveStudents = _studentServiceManager.GetAllActives();
             ViewBag.PassiveStudents = _studentServiceManager.GetAllPassives();
-            ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
             return View();
         }
 
         public IActionResult Create()
         {
+            ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
             ViewBag.ActiveStudents = _studentServiceManager.GetAllActives();
             ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
             return View();
@@ -50,12 +53,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     User user = await UserIntegrateServiceManager.CreateUserAsync(_userManager, studentVM.FirstName, studentVM.LastName, studentVM.TCK);
                     if (user != null)
                     {
-                        Student student = await _studentServiceManager.SetupStudent(user, _userManager, studentVM.FirstName, studentVM.LastName, studentVM.TCK, studentVM.Gender, studentVM.FinishedSchool, studentVM.FinalGrade, studentVM.GuardianId);
+                        Student student = await _studentServiceManager.SetupStudent(user, _userManager, studentVM.FirstName, studentVM.LastName, studentVM.TCK, studentVM.Gender, studentVM.FinishedSchool, studentVM.FinalGrade, studentVM.ClassroomId, studentVM.GuardianId);
                         _studentServiceManager.Create(student);
                         return RedirectToAction("Create", "Student");
                     }
                 }
             }
+            ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
             ViewBag.ActiveStudents = _studentServiceManager.GetAllActives();
             ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
             return View(studentVM);

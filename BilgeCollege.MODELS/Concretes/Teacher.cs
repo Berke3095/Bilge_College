@@ -15,6 +15,7 @@ namespace BilgeCollege.MODELS.Concretes
         public MainTopic? MainTopic { get; set; }
         public int? MainTopicId { get; set; }
 
+        public List<AltTopic>? AltTopics { get; set; }
         
     }
 }

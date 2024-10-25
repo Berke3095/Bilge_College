@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace BilgeCollege.BLL.Utils
 {
-    public class UserIntegrateServiceManager
+    public static class UserIntegrateServiceManager
     {
         public static async Task<User> CreateUserAsync(UserManager<User> _userManager, string firstName, string lastName, string tck)
         {

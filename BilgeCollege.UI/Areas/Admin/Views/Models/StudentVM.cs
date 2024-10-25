@@ -29,6 +29,8 @@ namespace BilgeCollege.UI.Areas.Admin.Views.Models
         [Range(1, 2, ErrorMessage = "You must choose a gender for the student")]
         public GenderEnum Gender { get; set; }
 
+        public int? ClassroomId { get; set; }
+
         public int? GuardianId { get; set; }
     }
 }

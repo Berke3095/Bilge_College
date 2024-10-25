@@ -17,6 +17,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Topic Code</th>
                 <th score="col">Main Topic</th>
+                <th score="col">Teacher</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -26,7 +27,18 @@
                 <tr>
                     <td>@num</td>
                     <td>@item.TopicCode</td>
-                    <td>@item.MainTopic.TopicName</td>
+                    <td>
+                        @if(item.MainTopic != null)
+                        {
+                            @item.MainTopic.TopicName
+                        }
+                    </td>
+                    <td>
+                        @if (item.Teacher != null)
+                        {
+                            @item.Teacher.FirstName @(" ") @item.Teacher.LastName
+                        }  
+                    </td>
                     <td>
                         <form asp-area="Admin" asp-controller="AltTopic" asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this alt topic?');">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>

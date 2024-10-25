@@ -4,5 +4,6 @@
     {
         public string TopicCode { get; set; }
         public int? MainTopicId { get; set; }
+        public int? TeacherId { get; set; }
     }
 }

@@ -21,6 +21,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Topic Code</th>
                 <th score="col">Main Topic</th>
+                <th score="col">Teacher</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -30,20 +31,32 @@
                 <tr style="background-color:bisque;">
                     <td>@num</td>
                     <td>@item.TopicCode</td>
-                    <td>@item.MainTopic.TopicName</td>
                     <td>
-                        @if(item.MainTopic.State == BilgeCollege.MODELS.Enums.StateEnum.Active)
+                        @if (item.MainTopic != null)
                         {
-                            <form asp-area="Admin" asp-controller="AltTopic" asp-action="Recover" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to recover this alt topic?');">
-                                <button type="submit" class="btn btn-primary btn-sm">Recover</button>
-                            </form>
+                            @item.MainTopic.TopicName
                         }
-                        else
+                    </td>
+                    <td>
+                        @if (item.Teacher != null)
                         {
-                            <button type="submit" class="btn btn-secondary btn-sm" title="Main topic is passive, cannot recover">Recover</button>
+                            @item.Teacher.FirstName @(" ") @item.Teacher.LastName
                         }
-
-
+                    </td>
+                    <td>
+                        @if(item.MainTopic != null)
+                        {
+                            @if (item.MainTopic.State == BilgeCollege.MODELS.Enums.StateEnum.Active)
+                            {
+                                <form asp-area="Admin" asp-controller="AltTopic" asp-action="Recover" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to recover this alt topic?');">
+                                    <button type="submit" class="btn btn-primary btn-sm">Recover</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-secondary btn-sm" title="Main topic is passive, cannot recover">Recover</button>
+                            }
+                        }
                         <form asp-area="Admin" asp-controller="AltTopic" asp-action="Destroy" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to recover this alt topic?');">
                             <button type="submit" class="btn btn-danger btn-sm">Destroy</button>
                         </form>

@@ -8,6 +8,6 @@ namespace BilgeCollege.BLL.Services.Abstracts
 {
     public interface I_StudentServiceManager : I_BaseServiceManager<Student>
     {
-        public Task<Student> SetupStudent(User user, UserManager<User> _userManager, string firstName, string lastName, string tck, GenderEnum gender, string finishedSchool, double finalGrade, int? GuardianId);
+        public Task<Student> SetupStudent(User user, UserManager<User> _userManager, string firstName, string lastName, string tck, GenderEnum gender, string finishedSchool, double finalGrade, int? classroomId, int? guardianId);
     }
 }

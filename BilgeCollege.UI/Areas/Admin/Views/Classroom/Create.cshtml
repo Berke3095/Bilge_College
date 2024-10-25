@@ -19,11 +19,21 @@
             <form method="post" class="form-container">
                 <div class="form-group mb-4">
                     <select asp-for="Grade" class="form-control">
-                        <option value="" disabled selected>--Select a grade--</option>
-                        <option value="9">9th grade</option>
-                        <option value="10">10th grade</option>
-                        <option value="11">11th grade</option>
-                        <option value="12">12th grade</option>
+                        @if (ViewBag.SelectedGrade == null)
+                        {
+                            <option value="" selected>--Select a grade--</option>
+                        }
+                        else
+                        {
+                            <option value="">--Select a grade--</option>
+                            <option value="@ViewBag.SelectedGrade" selected>@ViewBag.SelectedGrade</option>
+                        }
+
+                        @foreach (var item in ViewBag.Grades)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                        
                     </select>
                 </div>
 

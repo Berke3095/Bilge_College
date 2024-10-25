@@ -59,6 +59,16 @@
                 </div>
 
                 <div class="form-group mb-4">
+                    <select class="form-control" asp-for="ClassroomId" disabled>
+                        <option value="" disabled selected>--Select a classroom--</option>
+                        @foreach (var item in ViewBag.ActiveClassrooms)
+                        {
+                            <option value="@item.Id">@item.Grade</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group mb-4">
                     <select class="form-control" asp-for="GuardianId" disabled>
                         <option value="" disabled selected>--Select a guardian--</option>
                         @foreach (var item in ViewBag.ActiveGuardians)
@@ -115,6 +125,16 @@
 
                 <div class="form-group mb-4">
                     <input type="number" class="form-control" placeholder="@Model.FinalGrade" step="0.1" disabled>
+                </div>
+
+                <div class="form-group mb-4">
+                    <select class="form-control" asp-for="ClassroomId" required>
+                        <option value="" disabled selected>--Select a classroom--</option>
+                        @foreach (var item in ViewBag.ActiveClassrooms)
+                        {
+                            <option value="@item.Id">@item.Grade</option>
+                        }
+                    </select>
                 </div>
 
                 <div class="form-group mb-4">

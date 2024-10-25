@@ -1,5 +1,6 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
 using BilgeCollege.BLL.Services.Concretes;
+using BilgeCollege.BLL.Utils;
 using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.UI.Areas.Admin.Views.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -25,8 +26,17 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult Create()
+        public IActionResult Create(string? selectedGrade)
         {
+            var grades = ClassroomManager.GetGrades();
+
+            if(selectedGrade != null)
+            {
+                grades.Remove(selectedGrade);
+                ViewBag.SelectedGrade = selectedGrade;
+            }
+
+            ViewBag.Grades = grades;
             ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
             return View();
         }
@@ -49,11 +59,11 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     }
 
                     _classroomServiceManager.Create(classroom);
+                    return RedirectToAction("Create", "Classroom", new { selectedGrade = classroomVM.Grade });
                 }
-
-                return RedirectToAction("Create", "Classroom");
             }
 
+            ViewBag.Grades = ClassroomManager.GetGrades();
             ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
             return View(classroomVM);
         }

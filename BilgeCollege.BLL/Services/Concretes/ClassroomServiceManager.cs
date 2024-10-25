@@ -17,13 +17,14 @@ namespace BilgeCollege.BLL.Services.Concretes
         {
             char[] alphabet = Enumerable.Range('A', 26).Select(x => (char)x).ToArray();
 
-            var classrooms = classroomServiceManager.GetAllActives().Where(x => x.Grade.Split('-')[0] == grade).ToList();
+            var namedClassrooms = classroomServiceManager.GetAllActives().Where(x => x.Grade != null);
+            var classrooms = namedClassrooms.Where(x => x.Grade.Split('-')[0] == grade).ToList();
 
             List<string> classCodes = new List<string>();
 
-            foreach(var item in classrooms)
+            foreach (var item in classrooms)
             {
-                if(item.Grade != null)
+                if (item.Grade != null)
                 {
                     classCodes.Add(item.Grade.ToString());
                 }
@@ -31,15 +32,15 @@ namespace BilgeCollege.BLL.Services.Concretes
 
             string bestCode = grade + "-" + alphabet[0].ToString();
 
-            if(classCodes.Contains(bestCode))
+            if (classCodes.Contains(bestCode))
             {
                 int i = 1;
 
-                while(true)
+                while (true)
                 {
                     bestCode = grade + "-" + alphabet[i].ToString();
 
-                    if(!classCodes.Contains(bestCode))
+                    if (!classCodes.Contains(bestCode))
                     {
                         return bestCode;
                     }
@@ -48,6 +49,7 @@ namespace BilgeCollege.BLL.Services.Concretes
             }
             else return bestCode;
 
+            return null;
         }
     }
 }
