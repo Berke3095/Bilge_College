@@ -14,13 +14,15 @@ namespace BilgeCollege.UI.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly I_TeacherServiceManager _teacherServiceManager;
         private readonly I_GuardianServiceManager _guardianServiceManager;
+        private readonly I_StudentServiceManager _studentServiceManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, I_TeacherServiceManager teacherServiceManager, I_GuardianServiceManager guardianServiceManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, I_TeacherServiceManager teacherServiceManager, I_GuardianServiceManager guardianServiceManager, I_StudentServiceManager studentServiceManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _teacherServiceManager = teacherServiceManager;
             _guardianServiceManager = guardianServiceManager;
+            _studentServiceManager = studentServiceManager;
         }
 
         public IActionResult Login()
@@ -48,6 +50,14 @@ namespace BilgeCollege.UI.Controllers
                     else if (roles.Contains("Guardian"))
                     {
                         if (!_guardianServiceManager.GetAllActives().Any(x => x.UserId == user.Id))
+                        {
+                            ViewData["LoginError"] = "You account has been deactivated, contact the college.";
+                            return View(loginVM);
+                        }
+                    }
+                    else if (roles.Contains("Student"))
+                    {
+                        if (!_studentServiceManager.GetAllActives().Any(x => x.UserId == user.Id))
                         {
                             ViewData["LoginError"] = "You account has been deactivated, contact the college.";
                             return View(loginVM);
