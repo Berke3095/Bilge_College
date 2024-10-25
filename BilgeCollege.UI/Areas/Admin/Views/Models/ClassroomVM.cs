@@ -2,6 +2,7 @@
 {
     public class ClassroomVM
     {
+        public int Id { get; set; }
         public string? Grade { get; set; }
     }
 }

@@ -43,7 +43,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                         Grade = classroomVM.Grade
                     };
 
-                    if(classroom.Grade != null)
+                    if (classroom.Grade != null)
                     {
                         classroom.Grade = _classroomServiceManager.GenerateClassCode(_classroomServiceManager, classroom.Grade);
                     }
@@ -98,6 +98,38 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         {
             _classroomServiceManager.RecoverRange(_classroomServiceManager.GetAllPassives());
             return RedirectToAction("FullList", "Classroom");
+        }
+
+        public IActionResult Update(int id)
+        {
+            var classroom = _classroomServiceManager.GetById(id);
+            ClassroomVM classroomVM = new ClassroomVM
+            {
+                Id = id,
+                Grade = classroom.Grade,
+            };
+
+            return View(classroomVM);
+        }
+
+        [HttpPost]
+        public IActionResult Update(ClassroomVM classroomVM)
+        {
+            if (classroomVM != null)
+            {
+                var classroom = _classroomServiceManager.GetById(classroomVM.Id);
+
+                if (classroomVM.Grade != null)
+                {
+                    classroom.Grade = _classroomServiceManager.GenerateClassCode(_classroomServiceManager, classroomVM.Grade);
+                }
+                else classroom.Grade = null;
+
+                _classroomServiceManager.Update(classroom);
+                return RedirectToAction("FullList", "Classroom");
+            }
+
+            return View();
         }
     }
 }

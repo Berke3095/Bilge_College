@@ -1,0 +1,51 @@
+﻿@model ClassroomVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Update Teacher";
+}
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/submissionForm.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="d-flex">
+        <div class="col-md-4">
+            <div class="text-center">
+                <h1 class="display-5">Original</h1>
+            </div>
+
+            <form method="post" class="form-container">
+                <div class="form-group mb-4">
+                    <select class="form-control" asp-for="Grade" disabled>
+                        <option value="" disabled selected>@Model.Grade</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4" style="margin-left:10px;">
+            <div class="text-center">
+                <h1 class="display-5">Updated</h1>
+            </div>
+
+            <form method="post" class="form-container">
+                <div class="form-group mb-4">
+                    <select asp-for="Grade" class="form-control">
+                        <option value="">--Select a grade--</option>
+                        <option value="9">9th grade</option>
+                        <option value="10">10th grade</option>
+                        <option value="11">11th grade</option>
+                        <option value="12">12th grade</option>
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
