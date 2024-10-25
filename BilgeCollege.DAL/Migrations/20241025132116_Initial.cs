@@ -63,8 +63,9 @@ namespace BilgeCollege.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClassroomCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Grade = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     MaxCapacity = table.Column<int>(type: "int", nullable: false),
+                    TotalStudents = table.Column<int>(type: "int", nullable: false),
                     GuidId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -338,16 +339,16 @@ namespace BilgeCollege.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Discriminator", "ModifiedDate", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "26d2bce5-a129-4fb0-8dd7-65af19e925bf", null, new DateTime(2024, 10, 24, 22, 57, 5, 446, DateTimeKind.Local).AddTicks(9957), "UserRole", null, "Teacher", "TEACHER" },
-                    { "4a499dfc-662c-4b33-a65d-4482c9724419", null, new DateTime(2024, 10, 24, 22, 57, 5, 446, DateTimeKind.Local).AddTicks(9946), "UserRole", null, "Admin", "ADMIN" },
-                    { "64fe5941-4878-4b6b-bfab-aa17ab155a89", null, new DateTime(2024, 10, 24, 22, 57, 5, 446, DateTimeKind.Local).AddTicks(9969), "UserRole", null, "Student", "STUDENT" },
-                    { "ef0ec43f-391f-48aa-80b4-016e479cf045", null, new DateTime(2024, 10, 24, 22, 57, 5, 446, DateTimeKind.Local).AddTicks(9965), "UserRole", null, "Guardian", "GUARDIAN" }
+                    { "1e22d9fe-2704-4f54-b2a3-cc0cb95a68cf", null, new DateTime(2024, 10, 25, 16, 21, 16, 505, DateTimeKind.Local).AddTicks(76), "UserRole", null, "Guardian", "GUARDIAN" },
+                    { "24aa5fde-76bb-431d-9cbb-baa64fa2a0b4", null, new DateTime(2024, 10, 25, 16, 21, 16, 505, DateTimeKind.Local).AddTicks(72), "UserRole", null, "Teacher", "TEACHER" },
+                    { "63350b9a-d1f7-455c-bb4b-37a677841e77", null, new DateTime(2024, 10, 25, 16, 21, 16, 505, DateTimeKind.Local).AddTicks(88), "UserRole", null, "Student", "STUDENT" },
+                    { "c0e3ec1e-1d60-4ba8-8a38-bb9c173ff144", null, new DateTime(2024, 10, 25, 16, 21, 16, 505, DateTimeKind.Local).AddTicks(62), "UserRole", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "ba25e425-cfad-4168-a937-7ef32fbf226c", 0, "513dca9d-becb-4d7e-bec6-153842c3087a", new DateTime(2024, 10, 24, 22, 57, 5, 409, DateTimeKind.Local).AddTicks(7246), "berke_aktepe@hotmail.com", false, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEAZsUmUt/vk3LQ61GsTAZQQADUn7L9zQce0cONAyHXushp0quPZ0UlAo40NnNaO8Ag==", null, false, "bd43555f-0d00-491c-b43a-61b0a980de05", false, "Admin" });
+                values: new object[] { "f97647a5-8363-4825-871b-d72bdee8751b", 0, "0166ac7f-6862-47e9-9757-c24593ba6203", new DateTime(2024, 10, 25, 16, 21, 16, 470, DateTimeKind.Local).AddTicks(2432), "berke_aktepe@hotmail.com", false, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEEhByHAR53kXn6h/8yTwXzYnbQPOxKMS6kq3/F9jP7ulUc9bi2nJuc/Joo8KeMWQ2g==", null, false, "ad72cdcd-b7bb-494f-a6bb-598ae5d54c39", false, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AltTopics_MainTopicId",

@@ -1,0 +1,42 @@
+﻿@model ClassroomVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create Classroom";
+}
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/submissionForm.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="d-flex">
+        <div class="col-md-3 fixed">
+            <div class="text-center">
+                <h1 class="display-5">Create a Classroom</h1>
+            </div>
+
+            <form method="post" class="form-container">
+                <div class="form-group mb-4">
+                    <select asp-for="Grade" class="form-control">
+                        <option value="" disabled selected>--Select a grade--</option>
+                        <option value="9">9th grade</option>
+                        <option value="10">10th grade</option>
+                        <option value="11">11th grade</option>
+                        <option value="12">12th grade</option>
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-submit">Create</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-5" style="margin-left:29%">
+            <partial name="_PartialActiveClassroomList" model="ViewBag.ActiveClassrooms" />
+        </div>
+    </div>
+
+</body>
+
+

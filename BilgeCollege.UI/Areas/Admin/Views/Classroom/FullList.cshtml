@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "FullList Classroom";
+}
+
+<div class="d-flex">
+    <div class="col-md-5">
+        <partial name="_PartialActiveClassroomList" model="ViewBag.ActiveClassrooms" />
+    </div>
+    <div class="col-md-5">
+        <partial name="_PartialPassiveClassroomList" model="ViewBag.PassiveClassrooms" />
+    </div>
+</div>
+

@@ -10,7 +10,7 @@ namespace BilgeCollege.DAL.Configs
         {
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.ClassroomCode).HasMaxLength(20);
+            builder.Property(x => x.Grade).HasMaxLength(20);
         }
     }
 }

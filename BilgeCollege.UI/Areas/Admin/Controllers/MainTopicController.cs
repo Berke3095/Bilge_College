@@ -35,20 +35,20 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(MainTopicVM createMainTopicVM)
+        public IActionResult Create(MainTopicVM mainTopicVM)
         {
             if (ModelState.IsValid)
             {
-                if (createMainTopicVM != null)
+                if (mainTopicVM != null)
                 {
-                    _mainTopicServiceManager.Create(_mainTopicServiceManager.SetMainTopic(createMainTopicVM.TopicName));
+                    _mainTopicServiceManager.Create(_mainTopicServiceManager.SetMainTopic(mainTopicVM.TopicName));
                 }
 
                 return RedirectToAction("Create", "MainTopic");
             }
 
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
-            return View(createMainTopicVM);
+            return View(mainTopicVM);
         }
 
         [HttpPost]

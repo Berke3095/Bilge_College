@@ -1,0 +1,41 @@
+﻿@model List<Classroom>
+@{
+    int num = 1;
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between">
+        <h2 class="mb-4">Active Classrooms List</h2>
+        <form asp-area="Admin" asp-controller="Classroom" asp-action="DeleteAll" method="post" style="display:inline; margin-right:100px;" onsubmit="return confirm('Are you sure you want to delete all active classrooms?');">
+            <button type="submit" class="btn btn-danger">Delete All</button>
+        </form>
+    </div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Class Name</th>
+                <th scope="col">Student Count</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@num</td>
+                    <td>@item.Grade</td>
+                    <td>@item.TotalStudents @("/") @item.MaxCapacity</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="Classroom" asp-action="Update" asp-route-id="@item.Id">Edit</a>
+
+                        <form asp-area="Admin" asp-controller="Classroom" asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this classroom?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                num++;
+            }
+        </tbody>
+    </table>
+</div>
