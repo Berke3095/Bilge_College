@@ -27,7 +27,7 @@
             @foreach (var item in Model)
             {
                 <tr style="background-color:bisque;">
-                    <td>@num - </td>
+                    <td>@num</td>
                     <td>@item.TopicName</td>
                     <td>
                         <a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="MainTopic" asp-action="Update" asp-route-id="@item.Id">Edit</a>

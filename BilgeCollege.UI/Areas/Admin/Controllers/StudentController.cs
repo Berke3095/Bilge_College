@@ -60,5 +60,53 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
             return View(studentVM);
         }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            _studentServiceManager.Delete(_studentServiceManager.GetById(id));
+
+            // HANDLE ON DELETE - CLASSROOM
+
+            return RedirectToAction("FullList", "Student");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteAll()
+        {
+            _studentServiceManager.DeleteRange(_studentServiceManager.GetAllActives());
+
+            // HANDLE ON DELETE - CLASSROOM
+
+            return RedirectToAction("FullList", "Student");
+        }
+
+        [HttpPost]
+        public IActionResult Recover(int id)
+        {
+            _studentServiceManager.Recover(_studentServiceManager.GetById(id));
+            return RedirectToAction("FullList", "Student");
+        }
+
+        [HttpPost]
+        public IActionResult RecoverAll()
+        {
+            _studentServiceManager.RecoverRange(_studentServiceManager.GetAllPassives());
+            return RedirectToAction("FullList", "Student");
+        }
+
+        [HttpPost]
+        public ActionResult Destroy(int id)
+        {
+            _studentServiceManager.Destroy(_studentServiceManager.GetById(id));
+            return RedirectToAction("FullList", "Student");
+        }
+
+        [HttpPost]
+        public ActionResult DestroyAll()
+        {
+            _studentServiceManager.DestroyRange(_studentServiceManager.GetAllPassives());
+            return RedirectToAction("FullList", "Student");
+        }
     }
 }
