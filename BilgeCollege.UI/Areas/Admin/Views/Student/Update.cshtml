@@ -86,6 +86,7 @@
             </div>
 
             <form method="post" class="form-container">
+
                 <div class="form-group mb-4">
                     <input type="text" class="form-control" placeholder="@Model.FirstName" disabled>
                 </div>
@@ -135,6 +136,9 @@
                             <option value="@item.Id">@item.Grade</option>
                         }
                     </select>
+                    <div>
+                        <span class="form-text text text-danger">@ViewData["FullClassroomError"]</span>
+                    </div>
                 </div>
 
                 <div class="form-group mb-4">
@@ -150,6 +154,7 @@
                 <div class="d-grid">
                     <button type="submit" class="btn btn-submit">Update</button>
                 </div>
+
             </form>
         </div>
     </div>

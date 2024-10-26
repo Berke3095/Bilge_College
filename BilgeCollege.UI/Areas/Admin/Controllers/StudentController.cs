@@ -170,6 +170,31 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 var student = _studentServiceManager.GetById(studentVM.Id);
 
                 student.GuardianId = studentVM.GuardianId;
+
+                var classroomForCheck = _classroomServiceManager.GetById((int)studentVM.ClassroomId);
+                if (classroomForCheck != null)
+                {
+                    if(classroomForCheck.TotalStudents >= classroomForCheck.MaxCapacity)
+                    {
+                        ViewData["FullClassroomError"] = "Classroom is full.";
+                        ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
+                        ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
+                        StudentVM studentVMforError = new StudentVM
+                        {
+                            Id = student.Id,
+                            FirstName = student.FirstName,
+                            LastName = student.LastName,
+                            TCK = student.TCK,
+                            FinishedSchool = student.FinishedSchool,
+                            FinalGrade = student.FinalGrade,
+                            Gender = student.Gender,
+                            GuardianId = student.GuardianId,
+                            ClassroomId = student.ClassroomId
+                        };
+                        return View(studentVMforError);
+                    }
+                }
+
                 student.ClassroomId = studentVM.ClassroomId;
 
                 if(_previousClassroomId != null)
