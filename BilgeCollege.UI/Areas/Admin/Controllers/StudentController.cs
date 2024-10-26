@@ -1,9 +1,9 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
-using BilgeCollege.BLL.Services.Concretes;
 using BilgeCollege.BLL.Utils;
 using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.MODELS.Concretes.CustomUser;
 using BilgeCollege.UI.Areas.Admin.Views.Models;
+using BilgeCollege.UI.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -140,20 +140,11 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         public IActionResult Update(int id)
         {
             var student = _studentServiceManager.GetById(id);
-            StudentVM studentVM = new StudentVM
-            {
-                Id = student.Id,
-                FirstName = student.FirstName,
-                LastName = student.LastName,
-                TCK = student.TCK,
-                FinishedSchool = student.FinishedSchool,
-                FinalGrade = student.FinalGrade,
-                Gender = student.Gender,
-                GuardianId = student.GuardianId,
-                ClassroomId = student.ClassroomId
-            };
+            StudentVM studentVM = Mapper.StudentToStudentVM(student);
 
-            if(studentVM.ClassroomId != null) _previousClassroomId = (int)studentVM.ClassroomId;
+            _previousClassroomId = null;
+
+            if (studentVM.ClassroomId != null) _previousClassroomId = (int)studentVM.ClassroomId;
             else _previousClassroomId = null;
             
 
@@ -179,18 +170,8 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                         ViewData["FullClassroomError"] = "Classroom is full.";
                         ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
                         ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
-                        StudentVM studentVMforError = new StudentVM
-                        {
-                            Id = student.Id,
-                            FirstName = student.FirstName,
-                            LastName = student.LastName,
-                            TCK = student.TCK,
-                            FinishedSchool = student.FinishedSchool,
-                            FinalGrade = student.FinalGrade,
-                            Gender = student.Gender,
-                            GuardianId = student.GuardianId,
-                            ClassroomId = student.ClassroomId
-                        };
+
+                        StudentVM studentVMforError = Mapper.StudentToStudentVM(student);
                         return View(studentVMforError);
                     }
                 }
@@ -207,7 +188,6 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                         var classroomNow = _classroomServiceManager.GetById((int)student.ClassroomId);
                         classroomNow.TotalStudents++;
                     }
-                    _previousClassroomId = null;
                 }
                 else
                 {
@@ -219,9 +199,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 return RedirectToAction("FullList", "Student");
             }
 
-            ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
-            ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
-            return View();
+            return View(); // Exception
         }
     }
 }

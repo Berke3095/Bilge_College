@@ -3,6 +3,7 @@ using BilgeCollege.BLL.Utils;
 using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.MODELS.Concretes.CustomUser;
 using BilgeCollege.UI.Areas.Admin.Views.Models;
+using BilgeCollege.UI.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -130,14 +131,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         public IActionResult Update(int id)
         {
             var teacher = _teacherServiceManager.GetById(id);
-            TeacherVM teacherVM = new TeacherVM
-            {
-                Id = teacher.Id,
-                FirstName = teacher.FirstName,
-                LastName = teacher.LastName,
-                MainTopicId = teacher.MainTopicId,
-                TCK = teacher.TCK
-            };
+            TeacherVM teacherVM = Mapper.TeacherToTeacherVM(teacher);
 
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             return View(teacherVM);

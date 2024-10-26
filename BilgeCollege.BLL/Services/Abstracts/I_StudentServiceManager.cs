@@ -1,5 +1,4 @@
-﻿using BilgeCollege.BLL.Utils;
-using BilgeCollege.MODELS.Concretes;
+﻿using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.MODELS.Concretes.CustomUser;
 using BilgeCollege.MODELS.Enums;
 using Microsoft.AspNetCore.Identity;

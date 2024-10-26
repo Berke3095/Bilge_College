@@ -171,7 +171,8 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
                 return RedirectToAction("FullList", "AltTopic");
             }
-            return View();
+
+            return View(); // Exception
         }
     }
 }
