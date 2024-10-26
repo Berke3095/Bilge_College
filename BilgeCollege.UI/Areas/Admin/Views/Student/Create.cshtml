@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="form-group mb-4">
-                    <select class="form-control" asp-for="ClassroomId" required>
+                    <select class="form-control" asp-for="ClassroomId">
                         <option value="" disabled selected>--Select a classroom--</option>
                         @foreach (var item in ViewBag.ActiveClassrooms)
                         {
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="form-group mb-4">
-                    <select class="form-control" asp-for="GuardianId" required>
+                    <select class="form-control" asp-for="GuardianId">
                         <option value="" disabled selected>--Select a guardian--</option>
                         @foreach (var item in ViewBag.ActiveGuardians)
                         {

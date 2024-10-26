@@ -71,7 +71,7 @@ namespace BilgeCollege.BLL.Utils
                 {
                     string possibleUsername = firstName + "_" + lastName + i;
                     usernameTaken = await _userManager.FindByNameAsync(possibleUsername);
-                    if (emailTaken == null)
+                    if (usernameTaken == null)
                     {
                         user.UserName = possibleUsername;
                         break;

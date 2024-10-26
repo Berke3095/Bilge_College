@@ -32,6 +32,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult Create(int? selectedMainTopicId)
         {
+            ViewBag.ActiveTeachers = _teacherServiceManager.GetAllActives();
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             ViewBag.AltTopics = _altTopicServiceManager.GetAllActives();
 

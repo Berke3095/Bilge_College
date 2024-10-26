@@ -15,12 +15,14 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
     {
         private readonly I_TeacherServiceManager _teacherServiceManager;
         private readonly I_MainTopicServiceManager _mainTopicServiceManager;
+        private readonly I_AltTopicServiceManager _altTopicServiceManager;
         private readonly UserManager<User> _userManager;
 
-        public TeacherController(I_TeacherServiceManager teacherService, I_MainTopicServiceManager mainTopicServiceManager, UserManager<User> userManager)
+        public TeacherController(I_TeacherServiceManager teacherService, I_MainTopicServiceManager mainTopicServiceManager, I_AltTopicServiceManager altTopicServiceManager, UserManager<User> userManager)
         {
             _teacherServiceManager = teacherService;
             _mainTopicServiceManager = mainTopicServiceManager;
+            _altTopicServiceManager = altTopicServiceManager;
             _userManager = userManager;
         }
 
@@ -63,6 +65,12 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
+            var altTopics = _altTopicServiceManager.GetAllActives().Where(x => x.TeacherId == id);
+            foreach(var item in altTopics)
+            {
+                item.TeacherId = null;
+            }
+
             _teacherServiceManager.Delete(_teacherServiceManager.GetById(id));
             return RedirectToAction("FullList", "Teacher");
         }
@@ -70,6 +78,12 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult DeleteAll()
         {
+            var altTopics = _altTopicServiceManager.GetAllActives();
+            foreach (var item in altTopics)
+            {
+                item.TeacherId = null;
+            }
+
             _teacherServiceManager.DeleteRange(_teacherServiceManager.GetAllActives());
             return RedirectToAction("FullList", "Teacher");
         }
