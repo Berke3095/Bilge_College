@@ -19,6 +19,8 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         private readonly I_AltTopicServiceManager _altTopicServiceManager;
         private readonly UserManager<User> _userManager;
 
+        private static int? _previousMainTopicId;
+
         public TeacherController(I_TeacherServiceManager teacherService, I_MainTopicServiceManager mainTopicServiceManager, I_AltTopicServiceManager altTopicServiceManager, UserManager<User> userManager)
         {
             _teacherServiceManager = teacherService;
@@ -130,8 +132,12 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult Update(int id)
         {
+            _previousMainTopicId = null;
+
             var teacher = _teacherServiceManager.GetById(id);
             TeacherVM teacherVM = Mapper.TeacherToTeacherVM(teacher);
+
+            _previousMainTopicId = teacher.MainTopicId;
 
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             return View(teacherVM);
@@ -144,10 +150,20 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             {
                 var teacher = _teacherServiceManager.GetById(teacherVM.Id);
 
+                if(teacherVM.MainTopicId != _previousMainTopicId)
+                {
+                    var altTopics = _altTopicServiceManager.GetAllActives().Where(x => x.TeacherId == teacher.Id);
+                    foreach(var item in altTopics)
+                    {
+                        item.TeacherId = null;
+                    }
+                }
+
                 teacher.MainTopicId = teacherVM.MainTopicId;
 
                 _teacherServiceManager.Update(teacher);
                 return RedirectToAction("FullList", "Teacher");
+
             }
 
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
