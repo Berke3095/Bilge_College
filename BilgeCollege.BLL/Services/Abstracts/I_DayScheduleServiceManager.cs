@@ -2,7 +2,7 @@
 
 namespace BilgeCollege.BLL.Services.Abstracts
 {
-    public interface I_Classrooms_AltTopicsManager : I_BaseServiceManager<Classrooms_AltTopics>
+    public interface I_DayScheduleServiceManager : I_BaseServiceManager<DaySchedule>
     {
 
     }

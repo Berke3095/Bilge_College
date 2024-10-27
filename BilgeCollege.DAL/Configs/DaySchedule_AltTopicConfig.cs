@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BilgeCollege.DAL.Configs
 {
-    public class Classrooms_AltTopicsConfig : IEntityTypeConfiguration<Classrooms_AltTopics>
+    internal class DaySchedule_AltTopicConfig : IEntityTypeConfiguration<DaySchedule_AltTopic>
     {
-        public void Configure(EntityTypeBuilder<Classrooms_AltTopics> builder)
+        public void Configure(EntityTypeBuilder<DaySchedule_AltTopic> builder)
         {
-            builder.HasKey(x => new {x.ClassroomId, x.AltTopicId});
+            builder.HasKey(x => new { x.DayScheduleId, x.AltTopicId });
 
             builder
                 .Ignore(x => x.Id)

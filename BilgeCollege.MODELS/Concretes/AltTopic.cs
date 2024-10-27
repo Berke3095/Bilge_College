@@ -10,9 +10,9 @@ namespace BilgeCollege.MODELS.Concretes
         public MainTopic? MainTopic { get; set; }
         public int? MainTopicId { get; set; }
 
-        public List<Classrooms_AltTopics>? Classrooms_AltTopics { get; set; }
-
         public Teacher? Teacher { get; set; }
         public int? TeacherId { get; set; }
+
+        public List<DaySchedule_AltTopic>? DaySchedule_AltTopics { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
+using BilgeCollege.BLL.Utils;
 using BilgeCollege.MODELS.Concretes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,14 +11,16 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
     public class ProgramController : Controller
     {
         private readonly I_ClassroomServiceManager _classroomServiceManager;
-        private readonly I_Classrooms_AltTopicsManager _classrooms_AltTopicsManager;
+        private readonly I_DaySchedule_AltTopicManager _daySchedule_AltTopicManager;
         private readonly I_AltTopicServiceManager _altTopicServiceManager;
+        private readonly I_DayScheduleServiceManager _dayScheduleServiceManager;
 
-        public ProgramController(I_ClassroomServiceManager classroomServiceManager, I_Classrooms_AltTopicsManager classrooms_AltTopicsManager, I_AltTopicServiceManager altTopicServiceManager)
+        public ProgramController(I_ClassroomServiceManager classroomServiceManager, I_DaySchedule_AltTopicManager daySchedule_AltTopicManager, I_DayScheduleServiceManager dayScheduleServiceManager, I_AltTopicServiceManager altTopicServiceManager)
         {
             _classroomServiceManager = classroomServiceManager;
-            _classrooms_AltTopicsManager = classrooms_AltTopicsManager;
+            _daySchedule_AltTopicManager = daySchedule_AltTopicManager;
             _altTopicServiceManager = altTopicServiceManager;
+            _dayScheduleServiceManager = dayScheduleServiceManager;
         }
 
         public IActionResult Show(int? id)
@@ -29,17 +32,11 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             }
             else
             {
-                var classroom_altTopic = _classrooms_AltTopicsManager.GetAll().Where(x => x.ClassroomId == id);
-                var altTopics = new List<AltTopic>();
+                var classroom = _classroomServiceManager.GetById((int)id);
 
-                foreach(var item in classroom_altTopic)
-                {
-                    altTopics.Add(_altTopicServiceManager.GetById((int)item.AltTopicId));
-                }
-
-                ViewBag.AltTopics = altTopics;
                 ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
-                return View();
+                ViewBag.Days = ScheduleManager.GetDays();
+                return View(classroom.DaySchedules);
             }
             
         }
