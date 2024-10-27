@@ -10,7 +10,7 @@
         <ul>
             @foreach (var item in ViewBag.ActiveClassrooms)
             {
-                <li class="mb-1"><a asp-area="Admin" asp-controller="Classroom" asp-action="Show" asp-route-id="Id" class="btn btn-primary d-grid">@item.Grade</a></li>
+                <li class="mb-1"><a asp-area="Admin" asp-controller="Program" asp-action="Show" asp-route-id="@item.Id" class="btn btn-primary d-grid">@item.Grade</a></li>
             }
         </ul>
     </div>

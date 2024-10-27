@@ -1,5 +1,4 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
-using BilgeCollege.BLL.Services.Concretes;
 using BilgeCollege.BLL.Utils;
 using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.UI.Areas.Admin.Views.Models;

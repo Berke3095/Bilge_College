@@ -13,7 +13,7 @@ namespace BilgeCollege.MODELS.Concretes
                 new DaySchedule{ClassroomId = Id},
                 new DaySchedule{ClassroomId = Id},
                 new DaySchedule{ClassroomId = Id},
-                new DaySchedule{ClassroomId = Id},
+                new DaySchedule{ClassroomId = Id}
             };
         }
 
