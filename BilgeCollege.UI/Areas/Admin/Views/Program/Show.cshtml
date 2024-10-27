@@ -1,7 +1,8 @@
-﻿@model List<AltTopic>
+﻿@model List<DaySchedule>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Program";
+    int i = 0;
 }
 
 <div class="d-flex">
@@ -27,13 +28,24 @@
                     <th>6. Class</th>
                     <th>7. Class</th>
                     <th>8. Class</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>Monday</th>
-
-                </tr>
+                @foreach (var day in ViewBag.Days)
+                {
+                    <tr>
+                        <th>@day</th>
+                        @if(Model != null)
+                        {
+                            @foreach (var altTopic in Model[i].DaySchedule_AltTopics)
+                            {
+                                <td>altTopic.AltTopic.TopicCode</td>
+                            }
+                        }
+                    </tr>
+                    i++;
+                }
             </tbody>
         </table>
     </div>
