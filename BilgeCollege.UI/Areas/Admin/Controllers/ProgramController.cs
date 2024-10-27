@@ -22,12 +22,10 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult Show(int? id)
         {
-            if(id != null)
+            if(id == null)
             {
-                var classroom = _classroomServiceManager.GetById((int)id);
-
                 ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
-                return View(classroom);
+                return View();
             }
             else
             {
@@ -38,6 +36,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 {
                     altTopics.Add(_altTopicServiceManager.GetById((int)item.AltTopicId));
                 }
+
                 ViewBag.AltTopics = altTopics;
                 ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
                 return View();
