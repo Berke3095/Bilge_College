@@ -10,6 +10,12 @@ namespace BilgeCollege.DAL.Configs
         {
             builder.HasKey(x => new {x.ClassroomId, x.AltTopicId});
 
+            builder
+                .Ignore(x => x.Id)
+                .Ignore(x => x.GuidId)
+                .Ignore(x => x.CreatedDate)
+                .Ignore(x => x.ModifiedDate)
+                .Ignore(x => x.State);
         }
     }
 }

@@ -187,18 +187,18 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0bbc6983-3105-40e0-a6dc-0172d4a3731e",
+                            Id = "507ea68f-9c47-41cb-8947-baf91937199f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9c2494c5-705a-4340-9f4a-c1b945d17331",
-                            CreatedDate = new DateTime(2024, 10, 25, 22, 9, 29, 413, DateTimeKind.Local).AddTicks(5218),
+                            ConcurrencyStamp = "3241ae3b-b500-4ebe-8af4-95d076a032dc",
+                            CreatedDate = new DateTime(2024, 10, 27, 20, 17, 4, 351, DateTimeKind.Local).AddTicks(9964),
                             Email = "berke_aktepe@hotmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BERKE_AKTEPE@HOTMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBc359L0qZEj9kYjB/ID8EHJdRq4GCKUNKKzlmNT8zBugqHSBYB1bXewL5fwdlRhkQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN3XO61c4qRlKynGGK/NnyRi+FTmKFPuRxGoPPSZ7rqOPFbhfoGF4DobQ+L7b9D9XA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9bec8967-7b84-4d91-bf56-70038127c163",
+                            SecurityStamp = "8c0fbde7-60aa-4459-95fe-7d0d358d1d5b",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -583,31 +583,31 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "478bfc15-37f1-48f5-916b-dfa661c92171",
+                            Id = "711c1267-c6f5-4d3f-ab3f-993f295b2848",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
-                            CreatedDate = new DateTime(2024, 10, 25, 22, 9, 29, 448, DateTimeKind.Local).AddTicks(425)
+                            CreatedDate = new DateTime(2024, 10, 27, 20, 17, 4, 386, DateTimeKind.Local).AddTicks(8466)
                         },
                         new
                         {
-                            Id = "099c4eb1-d3b8-4490-992c-acab8070b609",
+                            Id = "4aed5622-c903-46ba-8012-f976818f5aa2",
                             Name = "Teacher",
                             NormalizedName = "TEACHER",
-                            CreatedDate = new DateTime(2024, 10, 25, 22, 9, 29, 448, DateTimeKind.Local).AddTicks(434)
+                            CreatedDate = new DateTime(2024, 10, 27, 20, 17, 4, 386, DateTimeKind.Local).AddTicks(8478)
                         },
                         new
                         {
-                            Id = "8d2603d9-f748-422c-bfd1-de71ab4ce80b",
+                            Id = "4a081e09-3564-47ab-9636-6c60df3cbe17",
                             Name = "Guardian",
                             NormalizedName = "GUARDIAN",
-                            CreatedDate = new DateTime(2024, 10, 25, 22, 9, 29, 448, DateTimeKind.Local).AddTicks(437)
+                            CreatedDate = new DateTime(2024, 10, 27, 20, 17, 4, 386, DateTimeKind.Local).AddTicks(8481)
                         },
                         new
                         {
-                            Id = "ede78b53-e780-404e-bf8d-6734e57a0301",
+                            Id = "bf8c0c23-b5c7-4c84-8c70-0a0c15a51719",
                             Name = "Student",
                             NormalizedName = "STUDENT",
-                            CreatedDate = new DateTime(2024, 10, 25, 22, 9, 29, 448, DateTimeKind.Local).AddTicks(440)
+                            CreatedDate = new DateTime(2024, 10, 27, 20, 17, 4, 386, DateTimeKind.Local).AddTicks(8484)
                         });
                 });
 

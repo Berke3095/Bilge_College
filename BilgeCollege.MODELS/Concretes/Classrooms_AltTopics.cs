@@ -2,7 +2,7 @@
 
 namespace BilgeCollege.MODELS.Concretes
 {
-    public class Classrooms_AltTopics
+    public class Classrooms_AltTopics : BaseEntity
     {
         // Relations
         public AltTopic? AltTopic { get; set; }
