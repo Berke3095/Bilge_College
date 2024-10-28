@@ -26,7 +26,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult Show(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
                 ViewBag.Days = ScheduleManager.GetDays();
@@ -37,9 +37,22 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 var classroom = _classroomServiceManager.GetById((int)id);
                 var daySchedules = _dayScheduleServiceManager.GetAllActives().Where(x => x.ClassroomId == classroom.Id).ToList();
 
+                List<ClassHour> classHours = new List<ClassHour>();
+
+                foreach(var daySchedule in daySchedules)
+                {
+                    var classHoursForItem = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();
+                    
+                    int i = 0;
+                    foreach(var classHour in classHoursForItem)
+                    {
+                        daySchedule.ClassHours[i] = classHour;
+                        i++;
+                    }
+                }
+
                 ViewBag.ActiveAltTopics = _altTopicServiceManager.GetAllActives();
                 ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
-                ViewBag.ClassHours = _classHourServiceManager.GetAll();
 
                 ViewBag.Days = ScheduleManager.GetDays();
                 return View(daySchedules);
@@ -57,7 +70,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 Day = daySchedule.Day
             };
 
-            for(int i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
                 dayScheduleVM.AltTopicIds[i] = (int)classHours[i].AltTopicId;
             }
@@ -70,12 +83,12 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Update(DayScheduleVM dayScheduleVM)
         {
-            if(dayScheduleVM != null)
+            if (dayScheduleVM != null)
             {
                 var daySchedule = _dayScheduleServiceManager.GetById(dayScheduleVM.Id);
                 var classHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();
 
-                for(int i = 0; i < 8; i++) // 8 class hours
+                for (int i = 0; i < 8; i++) // 8 class hours
                 {
 
                     classHours[i].AltTopicId = dayScheduleVM.AltTopicIds[i];
