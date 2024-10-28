@@ -25,7 +25,6 @@ namespace BilgeCollege.DAL.Context
         DbSet<Student> Students { get; set; }
         DbSet<Teacher> Teachers { get; set; }
         DbSet<DaySchedule> DaySchedules { get; set; }
-        DbSet<DaySchedule_AltTopic> DaySchedule_AltTopics { get; set; }
 
         string connectionString = "Server=DESKTOP-F5HL1HE;Database=BilgeCollegeDB;Trusted_Connection=true;TrustServerCertificate=true;";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -47,7 +46,6 @@ namespace BilgeCollege.DAL.Context
             builder.ApplyConfiguration(new MainTopicConfig());
             builder.ApplyConfiguration(new StudentConfig());
             builder.ApplyConfiguration(new TeacherConfig());
-            builder.ApplyConfiguration(new DaySchedule_AltTopicConfig());
             builder.ApplyConfiguration(new DayScheduleConfig());
         }
     }

@@ -12,15 +12,11 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
     {
         private readonly I_ClassroomServiceManager _classroomServiceManager;
         private readonly I_AltTopicServiceManager _altTopicServiceManager;
-        private readonly I_DaySchedule_AltTopicManager _daySchedule_AltTopicManager;
-        private readonly I_DayScheduleServiceManager _dayScheduleServiceManager;
 
-        public ProgramController(I_ClassroomServiceManager classroomServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_DaySchedule_AltTopicManager daySchedule_AltTopicManager, I_DayScheduleServiceManager dayScheduleServiceManager)
+        public ProgramController(I_ClassroomServiceManager classroomServiceManager, I_AltTopicServiceManager altTopicServiceManager)
         {
             _classroomServiceManager = classroomServiceManager;
             _altTopicServiceManager = altTopicServiceManager;
-            _daySchedule_AltTopicManager = daySchedule_AltTopicManager;
-            _dayScheduleServiceManager = dayScheduleServiceManager;
         }
 
         public IActionResult Show(int? id)
@@ -37,10 +33,6 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
                 ViewBag.ActiveAltTopics = _altTopicServiceManager.GetAllActives();
                 ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
-
-                var daySchedules = _dayScheduleServiceManager.GetAll().Where(x => x.ClassroomId == classroom.Id).ToList();
-
-
 
                 ViewBag.Days = ScheduleManager.GetDays();
                 return View(classroom.DaySchedules);

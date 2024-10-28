@@ -4,10 +4,12 @@ namespace BilgeCollege.MODELS.Concretes
 {
     public class DaySchedule : BaseEntity
     {
-        // Relations
-        public Classroom Classroom { get; set; }
-        public int ClassroomId { get; set; }
+        public string Day {  get; set; }
 
-        public List<DaySchedule_AltTopic>? DaySchedule_AltTopics { get; set; }
+        // Relations
+        public Classroom? Classroom { get; set; }
+        public int? ClassroomId { get; set; }
+
+        public List<AltTopic>? AltTopics { get; set; }
     }
 }

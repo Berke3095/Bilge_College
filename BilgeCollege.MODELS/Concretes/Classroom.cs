@@ -9,11 +9,11 @@ namespace BilgeCollege.MODELS.Concretes
             TotalStudents = 0;
             DaySchedules = new List<DaySchedule>
             {
-                new DaySchedule{ClassroomId = Id},
-                new DaySchedule{ClassroomId = Id},
-                new DaySchedule{ClassroomId = Id},
-                new DaySchedule{ClassroomId = Id},
-                new DaySchedule{ClassroomId = Id}
+                new DaySchedule{ClassroomId = Id, Day = "Monday"},
+                new DaySchedule{ClassroomId = Id, Day = "Tuesday"},
+                new DaySchedule{ClassroomId = Id, Day = "Wednesday"},
+                new DaySchedule{ClassroomId = Id, Day = "Thursday"},
+                new DaySchedule{ClassroomId = Id, Day = "Friday"}
             };
         }
 
@@ -24,6 +24,6 @@ namespace BilgeCollege.MODELS.Concretes
         // Relations
         public List<Student>? Students { get; set; }
 
-        public List<DaySchedule> DaySchedules { get; set; }
+        public List<DaySchedule>? DaySchedules { get; set; }
     }
 }
