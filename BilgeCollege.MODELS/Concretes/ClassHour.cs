@@ -8,7 +8,7 @@ namespace BilgeCollege.MODELS.Concretes
         public AltTopic? AltTopic { get; set; }
         public int? AltTopicId { get; set; }
 
-        public DaySchedule DaySchedule { get; set; }
-        public int DayScheduleId { get; set; }
+        public DaySchedule? DaySchedule { get; set; }
+        public int? DayScheduleId { get; set; }
     }
 }

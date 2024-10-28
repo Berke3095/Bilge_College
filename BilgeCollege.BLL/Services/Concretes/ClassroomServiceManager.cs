@@ -51,5 +51,22 @@ namespace BilgeCollege.BLL.Services.Concretes
 
             return null;
         }
+
+        public void HandleOnDestroy(int id, I_DayScheduleServiceManager dayScheduleServiceManager, I_ClassHourServiceManager classHourServiceManager)
+        {
+            var daySchedules = dayScheduleServiceManager.GetAll().Where(x => x.ClassroomId == id).ToList();
+            foreach (var daySchedule in daySchedules)
+            {
+                var classHours = classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();
+                classHourServiceManager.DestroyRange(classHours);
+            }
+            dayScheduleServiceManager.DestroyRange(daySchedules);
+        }
+
+        public void HandleOnDestroyAll(I_DayScheduleServiceManager dayScheduleServiceManager, I_ClassHourServiceManager classHourServiceManager)
+        {
+            classHourServiceManager.DestroyRange(classHourServiceManager.GetAll());
+            dayScheduleServiceManager.DestroyRange(dayScheduleServiceManager.GetAll());
+        }
     }
 }
