@@ -1,7 +1,7 @@
 ﻿@model DayScheduleVM
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Create Day Program";
+    ViewData["Title"] = "Update Day Program";
 }
 
 <head>
@@ -12,7 +12,7 @@
 <body>
     <div class="col-md-5">
         <div class="text-center">
-            <h1 class="display-5">Create Program for @Model.DaySchedule.Day</h1>
+            <h1 class="display-5">Create Program for @Model.Day</h1>
         </div>
 
         <form method="post" class="form-container">
@@ -20,8 +20,8 @@
             @for (int i = 0; i < 8; i++)
             {
                 <div class="form-group mb-4">
-                    <select class="form-control" asp-for="AltTopics[i]" required>
-                        <option value="" disabled selected>--Select an alt topic--</option>
+                    <select class="form-control" asp-for="AltTopicIds[i]">
+                        <option value="0" selected>--Select an alt topic--</option>
                         @foreach (var item in ViewBag.ActiveAltTopics)
                         {
                             <option value="@item.Id">@item.TopicCode</option>

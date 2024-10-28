@@ -14,12 +14,14 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         private readonly I_ClassroomServiceManager _classroomServiceManager;
         private readonly I_AltTopicServiceManager _altTopicServiceManager;
         private readonly I_DayScheduleServiceManager _dayScheduleServiceManager;
+        private readonly I_ClassHourServiceManager _classHourServiceManager;
 
-        public ProgramController(I_ClassroomServiceManager classroomServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_DayScheduleServiceManager dayScheduleServiceManager)
+        public ProgramController(I_ClassroomServiceManager classroomServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_DayScheduleServiceManager dayScheduleServiceManager, I_ClassHourServiceManager classHourServiceManager)
         {
             _classroomServiceManager = classroomServiceManager;
             _altTopicServiceManager = altTopicServiceManager;
             _dayScheduleServiceManager = dayScheduleServiceManager;
+            _classHourServiceManager = classHourServiceManager;
         }
 
         public IActionResult Show(int? id)
@@ -37,46 +39,49 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
                 ViewBag.ActiveAltTopics = _altTopicServiceManager.GetAllActives();
                 ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
+                ViewBag.ClassHours = _classHourServiceManager.GetAll();
 
                 ViewBag.Days = ScheduleManager.GetDays();
                 return View(daySchedules);
             }
         }
 
-        public IActionResult Create(int id)
+        public IActionResult Update(int id)
         {
             var daySchedule = _dayScheduleServiceManager.GetById(id);
 
             DayScheduleVM dayScheduleVM = new DayScheduleVM
             {
                 Id = id,
-                DaySchedule = daySchedule,
+                Day = daySchedule.Day,
             };
 
             ViewBag.ActiveAltTopics = _altTopicServiceManager.GetAllActives();
+            ViewBag.ClassHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();
             return View(dayScheduleVM);
         }
 
         [HttpPost]
-        public IActionResult Create(DayScheduleVM dayScheduleVM)
+        public IActionResult Update(DayScheduleVM dayScheduleVM)
         {
             if(dayScheduleVM != null)
             {
                 var daySchedule = _dayScheduleServiceManager.GetById(dayScheduleVM.Id);
-                daySchedule.AltTopics = new List<AltTopic>();
+                var classHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();
 
-                int i = 0;
-                while(i < 8)
+                for(int i = 0; i < 8; i++) // 8 class hours
                 {
-                    daySchedule.AltTopics.Add(dayScheduleVM.AltTopics[i]);
-                    i++;
+
+                    classHours[i].AltTopicId = dayScheduleVM.AltTopicIds[i];
                 }
 
-                var classroom = _classroomServiceManager.GetById((int)daySchedule.ClassroomId);
-                return RedirectToAction("Show", "Program", new {id = classroom.Id});
-            }
+                _dayScheduleServiceManager.Update(daySchedule);
 
-            return View();
+                var classroom = _classroomServiceManager.GetById((int)daySchedule.ClassroomId);
+                return RedirectToAction("Show", "Program", new { id = classroom.Id });
+
+            }
+            return View(); // Exception
         }
     }
 }

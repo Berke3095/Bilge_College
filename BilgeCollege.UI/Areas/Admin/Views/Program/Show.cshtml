@@ -38,15 +38,19 @@
                         <th>@day</th>
                         @if(Model != null)
                         {
-                            if(Model[i].AltTopics != null)
+                            if(Model[i].ClassHours != null)
                             {
                                 for (int j = 0; j < 8; j++)
                                 {
-                                    <td>@Model[i].AltTopics[j].TopicCode</td>
+                                    if (Model[i].ClassHours[j].AltTopic != null)
+                                    {
+                                        <td>@Model[i].ClassHours[j].AltTopic.TopicCode</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
                                 }
-                                <td>
-                                    <a asp-area="Admin" asp-controller="Program" asp-action="Update" asp-route-id="@Model[i].Id" class="btn btn-warning">Edit</a>
-                                </td>
                             }
                             else
                             {
@@ -54,10 +58,10 @@
                                 {
                                     <td></td>
                                 }
-                                <td>
-                                    <a asp-area="Admin" asp-controller="Program" asp-action="Create" asp-route-id="@Model[i].Id" class="btn btn-primary">Create</a>
-                                </td>
                             }
+                            <td>
+                                <a asp-area="Admin" asp-controller="Program" asp-action="Update" asp-route-id="@Model[i].Id" class="btn btn-warning">Edit</a>
+                            </td>
                         }
                         else
                         {

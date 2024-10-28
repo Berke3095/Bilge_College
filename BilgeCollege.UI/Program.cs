@@ -36,6 +36,7 @@ builder.Services.AddScoped<I_MainTopicServiceManager, MainTopicServiceManager>()
 builder.Services.AddScoped<I_StudentServiceManager, StudentServiceManager>();
 builder.Services.AddScoped<I_TeacherServiceManager, TeacherServiceManager>();
 builder.Services.AddScoped<I_DayScheduleServiceManager, DayScheduleServiceManager>();
+builder.Services.AddScoped<I_ClassHourServiceManager, ClassHourServiceManager>();
 
 var app = builder.Build();
 

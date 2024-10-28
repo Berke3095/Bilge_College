@@ -13,6 +13,6 @@ namespace BilgeCollege.MODELS.Concretes
         public Teacher? Teacher { get; set; }
         public int? TeacherId { get; set; }
 
-        public List<DaySchedule>? DaySchedules { get; set; }
+        public List<ClassHour>? ClassHours { get; set; }
     }
 }
