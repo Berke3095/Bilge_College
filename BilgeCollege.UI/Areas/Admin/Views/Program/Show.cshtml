@@ -44,6 +44,9 @@
                                 {
                                     <td>@Model[i].AltTopics[j].TopicCode</td>
                                 }
+                                <td>
+                                    <a asp-area="Admin" asp-controller="Program" asp-action="Update" asp-route-id="@Model[i].Id" class="btn btn-warning">Edit</a>
+                                </td>
                             }
                             else
                             {
@@ -51,13 +54,10 @@
                                 {
                                     <td></td>
                                 }
+                                <td>
+                                    <a asp-area="Admin" asp-controller="Program" asp-action="Create" asp-route-id="@Model[i].Id" class="btn btn-primary">Create</a>
+                                </td>
                             }
-
-                            <td>
-                                <a asp-area="Admin" asp-controller="Program" asp-action="Update" asp-route-id="@Model[i].GuidId" class="btn btn-warning">Edit</a>
-                                <a asp-area="Admin" asp-controller="Program" asp-action="Create" asp-route-id="@Model[i].GuidId" class="btn btn-primary">Create</a>
-                            </td>
-                            
                         }
                         else
                         {

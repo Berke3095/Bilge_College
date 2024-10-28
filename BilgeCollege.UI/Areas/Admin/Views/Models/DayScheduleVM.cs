@@ -4,8 +4,13 @@ namespace BilgeCollege.UI.Areas.Admin.Views.Models
 {
     public class DayScheduleVM
     {
-        public string GuidId { get; set; }
+        public DayScheduleVM()
+        {
+            AltTopics = new AltTopic[8];
+        }
+
+        public int Id { get; set; }
+        public AltTopic[] AltTopics { get; set; }
         public DaySchedule DaySchedule { get; set; }
-        public AltTopic[] AltTopics = new AltTopic[8];
     }
 }
