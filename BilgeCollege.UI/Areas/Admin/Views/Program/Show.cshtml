@@ -52,6 +52,12 @@
                                     <td></td>
                                 }
                             }
+
+                            <td>
+                                <a asp-area="Admin" asp-controller="Program" asp-action="Update" asp-route-id="@Model[i].GuidId" class="btn btn-warning">Edit</a>
+                                <a asp-area="Admin" asp-controller="Program" asp-action="Create" asp-route-id="@Model[i].GuidId" class="btn btn-primary">Create</a>
+                            </td>
+                            
                         }
                         else
                         {
@@ -60,7 +66,6 @@
                                 <td></td>
                             }
                         }
-                        <td><a asp-area="Admin" asp-controller="Program" asp-action="Create" class="btn btn-primary">Add</a></td>
                     </tr>
                     i++;
                 }

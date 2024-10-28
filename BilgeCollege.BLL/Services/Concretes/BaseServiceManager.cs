@@ -56,6 +56,11 @@ namespace BilgeCollege.BLL.Services.Concretes
             return _repository.GetAllPassives();
         }
 
+        public T GetByGuidId(string id)
+        {
+            return _repository.GetByGuidId(id);
+        }
+
         public T GetById(int id)
         {
             return _repository.GetById(id);

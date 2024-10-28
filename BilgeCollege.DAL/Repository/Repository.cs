@@ -63,6 +63,11 @@ namespace BilgeCollege.DAL.Repository
             return _dbSet.Where(x => x.State == MODELS.Enums.StateEnum.Passive).ToList();
         }
 
+        public T GetByGuidId(Guid id)
+        {
+            return _dbSet.Where(x => x.GuidId == id.ToString()).First();
+        }
+
         public T GetById(int id)
         {
             return _dbSet.Find(id);

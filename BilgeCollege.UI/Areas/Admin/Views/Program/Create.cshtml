@@ -1,0 +1,36 @@
+﻿@model DayScheduleVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create Day Program";
+}
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/submissionForm.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="text-center">
+        <h1 class="display-5">Create Program for @Model.DaySchedule.Day</h1>
+    </div>
+
+    <form method="post" class="form-container">
+
+        @for (int i = 0; i < 8; i++)
+        {
+            <div class="form-group mb-4">
+                <select class="form-control" asp-for="AltTopics[i]" required>
+                    @foreach (var item in ViewBag.ActiveAltTopics)
+                    {
+                        <option value="@item.Id">@item.TopicCode</option>
+                    }
+                </select>
+            </div>
+        }
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-submit">Create</button>
+        </div>
+    </form>
+</body>
+

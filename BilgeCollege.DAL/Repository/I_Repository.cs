@@ -9,6 +9,7 @@ namespace BilgeCollege.DAL.Repository
         public List<T> GetAllPassives();
 
         public T GetById(int id);
+        public T GetByGuidId(string id);
 
         public void Create(T item);
         public void Update(T item);
