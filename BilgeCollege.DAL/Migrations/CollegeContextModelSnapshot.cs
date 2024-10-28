@@ -61,6 +61,17 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("AltTopics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2024, 10, 28, 18, 0, 4, 865, DateTimeKind.Local).AddTicks(9484),
+                            GuidId = "2c0c200a-8cde-4dfe-a45a-3ea1b5765198",
+                            MainTopicId = 1,
+                            State = 0,
+                            TopicCode = "NONE"
+                        });
                 });
 
             modelBuilder.Entity("BilgeCollege.MODELS.Concretes.ClassHour", b =>
@@ -205,18 +216,18 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1b562a5e-d8eb-4326-a870-f228ddcad79a",
+                            Id = "b5d65a18-52cd-40e7-9289-abde6d10d870",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc7a61fc-55e2-405c-a321-88dd83e36617",
-                            CreatedDate = new DateTime(2024, 10, 28, 16, 18, 27, 467, DateTimeKind.Local).AddTicks(703),
+                            ConcurrencyStamp = "8a744800-a4bf-4780-b05f-11227249257b",
+                            CreatedDate = new DateTime(2024, 10, 28, 18, 0, 4, 831, DateTimeKind.Local).AddTicks(6908),
                             Email = "berke_aktepe@hotmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BERKE_AKTEPE@HOTMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDsMvKsYnDe2tw4wZ/m/zAxRH++yNUKV7X2GIANqTOS3cY5Sd1yboU6o7EYx4nNdpw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED24KRlICIynT/Z+hfUu2jk0nIVwGFNL1ehbOuItV1Y9VqhylHAI6B1TUsdn8X2ixA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "322d4651-b375-41cb-a365-0baa31fea847",
+                            SecurityStamp = "115f0211-ece5-4a03-af64-f06db132db01",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -345,6 +356,16 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MainTopics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2024, 10, 28, 18, 0, 4, 866, DateTimeKind.Local).AddTicks(156),
+                            GuidId = "e0313b66-ca99-4a56-9dc8-dca40ef6a53f",
+                            State = 0,
+                            TopicName = "NONE"
+                        });
                 });
 
             modelBuilder.Entity("BilgeCollege.MODELS.Concretes.Student", b =>
@@ -636,31 +657,31 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "58c512b1-c158-4048-98f6-eac993dac6d8",
+                            Id = "f3a53a78-69e7-4028-b8ab-7c5b64587b88",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
-                            CreatedDate = new DateTime(2024, 10, 28, 16, 18, 27, 503, DateTimeKind.Local).AddTicks(492)
+                            CreatedDate = new DateTime(2024, 10, 28, 18, 0, 4, 865, DateTimeKind.Local).AddTicks(9113)
                         },
                         new
                         {
-                            Id = "962b158c-e712-452d-a4e0-9e7f6806b63c",
+                            Id = "0e6670f3-2350-4585-b83b-4d92dc854b6c",
                             Name = "Teacher",
                             NormalizedName = "TEACHER",
-                            CreatedDate = new DateTime(2024, 10, 28, 16, 18, 27, 503, DateTimeKind.Local).AddTicks(503)
+                            CreatedDate = new DateTime(2024, 10, 28, 18, 0, 4, 865, DateTimeKind.Local).AddTicks(9123)
                         },
                         new
                         {
-                            Id = "40fc8a23-01ed-46d7-bc9f-8fac97397b20",
+                            Id = "837f5dc6-ad44-435e-9ae1-ee8f91df4506",
                             Name = "Guardian",
                             NormalizedName = "GUARDIAN",
-                            CreatedDate = new DateTime(2024, 10, 28, 16, 18, 27, 503, DateTimeKind.Local).AddTicks(506)
+                            CreatedDate = new DateTime(2024, 10, 28, 18, 0, 4, 865, DateTimeKind.Local).AddTicks(9126)
                         },
                         new
                         {
-                            Id = "4d703771-0ce2-4f16-80e5-a7c63016b10d",
+                            Id = "7ff32ab6-fbbd-430b-9124-23213a7ff642",
                             Name = "Student",
                             NormalizedName = "STUDENT",
-                            CreatedDate = new DateTime(2024, 10, 28, 16, 18, 27, 503, DateTimeKind.Local).AddTicks(510)
+                            CreatedDate = new DateTime(2024, 10, 28, 18, 0, 4, 865, DateTimeKind.Local).AddTicks(9129)
                         });
                 });
 

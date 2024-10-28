@@ -49,12 +49,18 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         public IActionResult Update(int id)
         {
             var daySchedule = _dayScheduleServiceManager.GetById(id);
+            var classHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == id).ToList();
 
             DayScheduleVM dayScheduleVM = new DayScheduleVM
             {
                 Id = id,
-                Day = daySchedule.Day,
+                Day = daySchedule.Day
             };
+
+            for(int i = 0; i < 8; i++)
+            {
+                dayScheduleVM.AltTopicIds[i] = (int)classHours[i].AltTopicId;
+            }
 
             ViewBag.ActiveAltTopics = _altTopicServiceManager.GetAllActives();
             ViewBag.ClassHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();

@@ -2,6 +2,7 @@
 {
     public enum StateEnum
     {
+        None,
         Passive,
         Active
     }

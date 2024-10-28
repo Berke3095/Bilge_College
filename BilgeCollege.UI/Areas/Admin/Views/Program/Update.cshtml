@@ -21,7 +21,7 @@
             {
                 <div class="form-group mb-4">
                     <select class="form-control" asp-for="AltTopicIds[i]">
-                        <option value="0" selected>--Select an alt topic--</option>
+                        <option value="1" selected>--Select an alt topic--</option>
                         @foreach (var item in ViewBag.ActiveAltTopics)
                         {
                             <option value="@item.Id">@item.TopicCode</option>

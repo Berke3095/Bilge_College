@@ -11,6 +11,13 @@ namespace BilgeCollege.DAL.Configs
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.TopicName).HasMaxLength(50);
+
+            builder.HasData(new MainTopic
+            {
+                Id = 1,
+                TopicName = "NONE",
+                State = MODELS.Enums.StateEnum.None,
+            });
         }
     }
 }
