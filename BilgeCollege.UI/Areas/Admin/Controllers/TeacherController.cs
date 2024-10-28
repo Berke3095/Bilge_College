@@ -33,7 +33,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         {
             ViewBag.ActiveTeachers = _teacherServiceManager.GetAllActives();
             ViewBag.PassiveTeachers = _teacherServiceManager.GetAllPassives();
-            ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
+            _mainTopicServiceManager.GetAllActives();
             return View();
         }
 

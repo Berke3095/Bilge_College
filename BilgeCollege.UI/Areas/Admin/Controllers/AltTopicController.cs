@@ -13,12 +13,14 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         private readonly I_AltTopicServiceManager _altTopicServiceManager;
         private readonly I_MainTopicServiceManager _mainTopicServiceManager;
         private readonly I_TeacherServiceManager _teacherServiceManager;
+        private readonly I_ClassHourServiceManager _classHourServiceManager;
 
-        public AltTopicController(I_AltTopicServiceManager altTopicServiceManager, I_MainTopicServiceManager mainTopicServiceManager, I_TeacherServiceManager teacherServiceManager)
+        public AltTopicController(I_AltTopicServiceManager altTopicServiceManager, I_MainTopicServiceManager mainTopicServiceManager, I_TeacherServiceManager teacherServiceManager, I_ClassHourServiceManager classHourServiceManager)
         {
             _altTopicServiceManager = altTopicServiceManager;
             _mainTopicServiceManager = mainTopicServiceManager;
             _teacherServiceManager = teacherServiceManager;
+            _classHourServiceManager = classHourServiceManager;
         }
 
         public IActionResult FullList()
@@ -32,7 +34,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult Create(int? selectedMainTopicId)
         {
-            ViewBag.ActiveTeachers = _teacherServiceManager.GetAllActives();
+            _teacherServiceManager.GetAllActives();
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             ViewBag.AltTopics = _altTopicServiceManager.GetAllActives();
 
@@ -64,7 +66,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 return RedirectToAction("Create", "AltTopic", new { selectedMainTopicId = mainTopic.Id});
             }
 
-            ViewBag.ActiveTeachers = _teacherServiceManager.GetAllActives();
+            _teacherServiceManager.GetAllActives();
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             ViewBag.AltTopics = _altTopicServiceManager.GetAllActives();
 
@@ -104,8 +106,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            var altTopic = _altTopicServiceManager.GetById(id);
-            altTopic.TeacherId = null;
+            _altTopicServiceManager.HandleOnDelete(id, _classHourServiceManager);
 
             _altTopicServiceManager.Delete(_altTopicServiceManager.GetById(id));
             return RedirectToAction("FullList", "AltTopic");
@@ -114,11 +115,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult DeleteAll()
         {
-            var altTopics = _altTopicServiceManager.GetAllActives();
-            foreach (var item in altTopics)
-            {
-                item.TeacherId = null;
-            }
+            _altTopicServiceManager.HandleOnDeleteAll(_classHourServiceManager);
 
             _altTopicServiceManager.DeleteRange(_altTopicServiceManager.GetAllActives());
             return RedirectToAction("FullList", "AltTopic");

@@ -31,7 +31,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult FullList()
         {
-            ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
+            _classroomServiceManager.GetAllActives();
             ViewBag.ActiveStudents = _studentServiceManager.GetAllActives();
             ViewBag.PassiveStudents = _studentServiceManager.GetAllPassives();
             return View();
@@ -39,7 +39,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
+            _classroomServiceManager.GetAllActives();
             ViewBag.ActiveStudents = _studentServiceManager.GetAllActives();
             ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
             return View();

@@ -34,5 +34,32 @@ namespace BilgeCollege.BLL.Services.Concretes
                 }
             }
         }
+
+        public void HandleOnDelete(int id, I_ClassHourServiceManager classHourServiceManager)
+        {
+            var altTopic = _repository.GetById(id);
+            altTopic.TeacherId = null;
+
+            var classHours = classHourServiceManager.GetAll().Where(x => x.AltTopicId == id).ToList();
+            foreach (var item in classHours)
+            {
+                item.AltTopicId = 1; // NONE
+            }
+        }
+
+        public void HandleOnDeleteAll(I_ClassHourServiceManager classHourServiceManager)
+        {
+            var altTopics = _repository.GetAllActives();
+            foreach (var item in altTopics)
+            {
+                item.TeacherId = null;
+            }
+
+            var classHours = classHourServiceManager.GetAll().Where(x => x.AltTopicId != 1).ToList(); // Get all NONEs
+            foreach (var item in classHours)
+            {
+                item.AltTopicId = 1; // NONE
+            }
+        }
     }
 }
