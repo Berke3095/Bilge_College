@@ -232,8 +232,7 @@ namespace BilgeCollege.DAL.Migrations
                     ClassroomId = table.Column<int>(type: "int", nullable: true),
                     GuidId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    State = table.Column<int>(type: "int", nullable: false)
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -372,26 +371,26 @@ namespace BilgeCollege.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Discriminator", "ModifiedDate", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0e6670f3-2350-4585-b83b-4d92dc854b6c", null, new DateTime(2024, 10, 28, 18, 0, 4, 865, DateTimeKind.Local).AddTicks(9123), "UserRole", null, "Teacher", "TEACHER" },
-                    { "7ff32ab6-fbbd-430b-9124-23213a7ff642", null, new DateTime(2024, 10, 28, 18, 0, 4, 865, DateTimeKind.Local).AddTicks(9129), "UserRole", null, "Student", "STUDENT" },
-                    { "837f5dc6-ad44-435e-9ae1-ee8f91df4506", null, new DateTime(2024, 10, 28, 18, 0, 4, 865, DateTimeKind.Local).AddTicks(9126), "UserRole", null, "Guardian", "GUARDIAN" },
-                    { "f3a53a78-69e7-4028-b8ab-7c5b64587b88", null, new DateTime(2024, 10, 28, 18, 0, 4, 865, DateTimeKind.Local).AddTicks(9113), "UserRole", null, "Admin", "ADMIN" }
+                    { "2c602ea1-82a0-44ac-983d-113513739454", null, new DateTime(2024, 10, 28, 23, 22, 2, 489, DateTimeKind.Local).AddTicks(2987), "UserRole", null, "Student", "STUDENT" },
+                    { "7c5595f8-ce8f-47f8-aaea-c5cbf20c637a", null, new DateTime(2024, 10, 28, 23, 22, 2, 489, DateTimeKind.Local).AddTicks(2979), "UserRole", null, "Teacher", "TEACHER" },
+                    { "a7ba9517-82b1-46d6-8742-eb5aa0b5417c", null, new DateTime(2024, 10, 28, 23, 22, 2, 489, DateTimeKind.Local).AddTicks(2983), "UserRole", null, "Guardian", "GUARDIAN" },
+                    { "cda77446-c58c-4384-97a1-708b04b0696e", null, new DateTime(2024, 10, 28, 23, 22, 2, 489, DateTimeKind.Local).AddTicks(2971), "UserRole", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "b5d65a18-52cd-40e7-9289-abde6d10d870", 0, "8a744800-a4bf-4780-b05f-11227249257b", new DateTime(2024, 10, 28, 18, 0, 4, 831, DateTimeKind.Local).AddTicks(6908), "berke_aktepe@hotmail.com", false, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAED24KRlICIynT/Z+hfUu2jk0nIVwGFNL1ehbOuItV1Y9VqhylHAI6B1TUsdn8X2ixA==", null, false, "115f0211-ece5-4a03-af64-f06db132db01", false, "Admin" });
+                values: new object[] { "cb84d023-0a14-4cfb-a3f4-0cb4362a17cd", 0, "e4cbd2e1-eb7e-4483-a0e5-86e71d504cce", new DateTime(2024, 10, 28, 23, 22, 2, 455, DateTimeKind.Local).AddTicks(9423), "berke_aktepe@hotmail.com", false, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEBf8XtCOzaQTScIo5H03JkPG10Fy+uGkG1EKlic4g88vG1hQLdrSFP7UhaDEnZOdrA==", null, false, "1fd5b0bb-99a4-405d-bac8-e46911d07b95", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "MainTopics",
                 columns: new[] { "Id", "CreatedDate", "GuidId", "ModifiedDate", "State", "TopicName" },
-                values: new object[] { 1, new DateTime(2024, 10, 28, 18, 0, 4, 866, DateTimeKind.Local).AddTicks(156), "e0313b66-ca99-4a56-9dc8-dca40ef6a53f", null, 0, "NONE" });
+                values: new object[] { 1, new DateTime(2024, 10, 28, 23, 22, 2, 489, DateTimeKind.Local).AddTicks(4058), "ec40cc9b-33bb-416d-9696-e059dc7c5344", null, 0, "NONE" });
 
             migrationBuilder.InsertData(
                 table: "AltTopics",
                 columns: new[] { "Id", "CreatedDate", "GuidId", "MainTopicId", "ModifiedDate", "State", "TeacherId", "TopicCode" },
-                values: new object[] { 1, new DateTime(2024, 10, 28, 18, 0, 4, 865, DateTimeKind.Local).AddTicks(9484), "2c0c200a-8cde-4dfe-a45a-3ea1b5765198", 1, null, 0, null, "NONE" });
+                values: new object[] { 1, new DateTime(2024, 10, 28, 23, 22, 2, 489, DateTimeKind.Local).AddTicks(3362), "8448ad85-ca86-4186-8a73-e61125d30083", 1, null, 0, null, "NONE" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AltTopics_MainTopicId",

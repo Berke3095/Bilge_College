@@ -25,8 +25,8 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         {
             ViewBag.ActiveAltTopics = _altTopicServiceManager.GetAllActives();
             ViewBag.PassiveAltTopics = _altTopicServiceManager.GetAllPassives();
-            ViewBag.MainTopics = _mainTopicServiceManager.GetAll();
-            ViewBag.ActiveTeachers = _teacherServiceManager.GetAllActives();
+            _mainTopicServiceManager.GetAll();
+            _teacherServiceManager.GetAllActives();
             return View();
         }
 

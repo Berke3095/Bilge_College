@@ -8,14 +8,14 @@ namespace BilgeCollege.MODELS.Concretes
         {
             ClassHours = new List<ClassHour>
             {
-                new ClassHour{DayScheduleId = Id},
-                new ClassHour{DayScheduleId = Id},
-                new ClassHour{DayScheduleId = Id},
-                new ClassHour{DayScheduleId = Id},
-                new ClassHour{DayScheduleId = Id},
-                new ClassHour{DayScheduleId = Id},
-                new ClassHour{DayScheduleId = Id},
-                new ClassHour{DayScheduleId = Id}
+                new ClassHour{DayScheduleId = Id, AltTopicId = 1}, // NONE alt topic
+                new ClassHour{DayScheduleId = Id, AltTopicId = 1},
+                new ClassHour{DayScheduleId = Id, AltTopicId = 1},
+                new ClassHour{DayScheduleId = Id, AltTopicId = 1},
+                new ClassHour{DayScheduleId = Id, AltTopicId = 1},
+                new ClassHour{DayScheduleId = Id, AltTopicId = 1},
+                new ClassHour{DayScheduleId = Id, AltTopicId = 1},
+                new ClassHour{DayScheduleId = Id, AltTopicId = 1}
             };
         }
 

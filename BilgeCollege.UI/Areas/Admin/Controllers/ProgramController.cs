@@ -35,7 +35,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             else
             {
                 var classroom = _classroomServiceManager.GetById((int)id);
-                var daySchedules = _dayScheduleServiceManager.GetAllActives().Where(x => x.ClassroomId == classroom.Id).ToList();
+                var daySchedules = _dayScheduleServiceManager.GetAll().Where(x => x.ClassroomId == classroom.Id).ToList();
 
                 List<ClassHour> classHours = new List<ClassHour>();
 
@@ -51,8 +51,10 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     }
                 }
 
-                ViewBag.ActiveAltTopics = _altTopicServiceManager.GetAllActives();
+                _altTopicServiceManager.GetAllActives();
                 ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
+
+                ViewData["Class"] = classroom.Grade;
 
                 ViewBag.Days = ScheduleManager.GetDays();
                 return View(daySchedules);
@@ -76,7 +78,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             }
 
             ViewBag.ActiveAltTopics = _altTopicServiceManager.GetAllActives();
-            ViewBag.ClassHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();
+            _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();
             return View(dayScheduleVM);
         }
 

@@ -9,6 +9,8 @@ namespace BilgeCollege.DAL.Configs
         public void Configure(EntityTypeBuilder<DaySchedule> builder)
         {
             builder.HasKey(x => x.Id);
+
+            builder.Ignore(x => x.State);
         }
     }
 }
