@@ -22,7 +22,7 @@ namespace BilgeCollege.BLL.Services.Concretes
             _altTopicServiceManager.UpdateRange(altTopicsToUpdate);
         }
 
-        public void HandleRelationsOnDelete(I_AltTopicServiceManager _altTopicServiceManager, List<AltTopic> passiveAltTopics, int relatedId, I_TeacherServiceManager _teacherServiceManager)
+        public void HandleRelationsOnDelete(I_AltTopicServiceManager _altTopicServiceManager, List<AltTopic> passiveAltTopics, int relatedId, I_TeacherServiceManager _teacherServiceManager, I_ClassHourServiceManager classHourServiceManager)
         {
             var owningTeachers = _teacherServiceManager.GetAll().Where(x => x.MainTopicId == relatedId).ToList();
             if (owningTeachers.Count() > 0)
@@ -36,6 +36,14 @@ namespace BilgeCollege.BLL.Services.Concretes
             var altTopics = _altTopicServiceManager.GetAllActives().Where(x => x.MainTopicId == relatedId).ToList();
             if (altTopics.Count() > 0)
             {
+                foreach (var item in altTopics)
+                {
+                    var classHours = classHourServiceManager.GetAll().Where(x => x.AltTopicId == item.Id);
+                    foreach (var classHour in classHours)
+                    {
+                        classHour.AltTopicId = 1; // NONE
+                    }
+                }
                 _altTopicServiceManager.DeleteRange(altTopics);
             } 
         }

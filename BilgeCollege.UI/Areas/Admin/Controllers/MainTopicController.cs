@@ -1,5 +1,4 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
-using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.UI.Areas.Admin.Views.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +12,14 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         private readonly I_MainTopicServiceManager _mainTopicServiceManager;
         private readonly I_AltTopicServiceManager _altTopicServiceManager;
         private readonly I_TeacherServiceManager _teacherServiceManager;
+        private readonly I_ClassHourServiceManager _classHourServiceManager;
 
-        public MainTopicController(I_MainTopicServiceManager mainTopicServiceManager,I_AltTopicServiceManager altTopicServiceManager, I_TeacherServiceManager teacherServiceManager)
+        public MainTopicController(I_MainTopicServiceManager mainTopicServiceManager,I_AltTopicServiceManager altTopicServiceManager, I_TeacherServiceManager teacherServiceManager, I_ClassHourServiceManager classHourServiceManager)
         {
             _mainTopicServiceManager = mainTopicServiceManager;
             _altTopicServiceManager = altTopicServiceManager;
             _teacherServiceManager = teacherServiceManager;
+            _classHourServiceManager = classHourServiceManager;
         }
 
         public IActionResult FullList()
@@ -54,7 +55,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            _mainTopicServiceManager.HandleRelationsOnDelete(_altTopicServiceManager, _altTopicServiceManager.GetAllPassives(), id, _teacherServiceManager);
+            _mainTopicServiceManager.HandleRelationsOnDelete(_altTopicServiceManager, _altTopicServiceManager.GetAllPassives(), id, _teacherServiceManager, _classHourServiceManager);
             _mainTopicServiceManager.Delete(_mainTopicServiceManager.GetById(id));
 
             return RedirectToAction("FullList", "MainTopic");
@@ -63,6 +64,12 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult DeleteAll()
         {
+            var classHours = _classHourServiceManager.GetAll();
+            foreach(var item in classHours)
+            {
+                item.AltTopicId = 1; // NONE
+            }
+
             _altTopicServiceManager.DeleteRange(_altTopicServiceManager.GetAllActives());
             _mainTopicServiceManager.DeleteRange(_mainTopicServiceManager.GetAllActives());
             return RedirectToAction("FullList", "MainTopic");

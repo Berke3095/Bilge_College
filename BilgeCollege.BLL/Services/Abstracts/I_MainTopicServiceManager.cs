@@ -6,7 +6,7 @@ namespace BilgeCollege.BLL.Services.Abstracts
     {
         public MainTopic SetMainTopic(string topicName);
         public void HandleRelationsOnDestroy(I_AltTopicServiceManager _altTopicServiceManager, List<AltTopic> passiveAltTopics, int relatedId, I_TeacherServiceManager _teacherServiceManager);
-        public void HandleRelationsOnDelete(I_AltTopicServiceManager _altTopicServiceManager, List<AltTopic> passiveAltTopics, int relatedId, I_TeacherServiceManager _teacherServiceManager);
+        public void HandleRelationsOnDelete(I_AltTopicServiceManager _altTopicServiceManager, List<AltTopic> passiveAltTopics, int relatedId, I_TeacherServiceManager _teacherServiceManager, I_ClassHourServiceManager classHourServiceManager);
         public void HandleRelationOnUpdate(I_AltTopicServiceManager _altTopicServiceManager, List<AltTopic> altTopicsToUpdate, MainTopic mainTopic);
     }
 }
