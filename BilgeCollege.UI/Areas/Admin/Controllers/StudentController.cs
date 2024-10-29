@@ -153,8 +153,15 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
             _previousClassroomId = null;
 
-            if (studentVM.ClassroomId != null) _previousClassroomId = (int)studentVM.ClassroomId;
-            else _previousClassroomId = null;
+            if (studentVM.ClassroomId != null)
+            {
+                _previousClassroomId = (int)studentVM.ClassroomId;
+                ViewData["OriginalGrade"] = _classroomServiceManager.GetById((int)_previousClassroomId).Grade;
+            }
+            else
+            {
+                ViewData["OriginalGrade"] = "--Select a classroom--";
+            }
             
 
             ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
@@ -179,6 +186,16 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                         if (classroomForCheck.TotalStudents >= classroomForCheck.MaxCapacity)
                         {
                             ViewData["FullClassroomError"] = "Classroom is full.";
+
+                            if(_previousClassroomId != null)
+                            {
+                                ViewData["OriginalGrade"] = _classroomServiceManager.GetById((int)_previousClassroomId).Grade;
+                            }
+                            else
+                            {
+                                ViewData["OriginalGrade"] = "--Select a classroom--";
+                            }
+
                             ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
                             ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
 
