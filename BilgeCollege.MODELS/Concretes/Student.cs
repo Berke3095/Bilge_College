@@ -1,16 +1,10 @@
 ﻿using BilgeCollege.MODELS.Abstracts;
 using BilgeCollege.MODELS.Enums;
-using BilgeCollege.MODELS.Utils;
 
 namespace BilgeCollege.MODELS.Concretes
 {
     public class Student : BaseEntity, I_UserInterface
     {
-        public Student()
-        {
-            SchoolNo = SchoolNoGenerator.GetSchoolNo();
-        }
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

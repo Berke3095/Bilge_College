@@ -1,4 +1,5 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
+using BilgeCollege.BLL.Utils;
 using BilgeCollege.DAL.Repository;
 using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.MODELS.Concretes.CustomUser;
@@ -37,6 +38,7 @@ namespace BilgeCollege.BLL.Services.Concretes
                         FinishedSchool = finishedSchool,
                         FinalGrade = finalGrade,
                         ClassroomId = classroomId,
+                        SchoolNo = SchoolNoGenerator.GetSchoolNo()
                     };
 
                     return student;

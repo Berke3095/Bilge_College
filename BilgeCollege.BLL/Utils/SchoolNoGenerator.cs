@@ -1,6 +1,4 @@
-﻿using BilgeCollege.MODELS.Concretes;
-
-namespace BilgeCollege.MODELS.Utils
+﻿namespace BilgeCollege.BLL.Utils
 {
     public static class SchoolNoGenerator
     {
