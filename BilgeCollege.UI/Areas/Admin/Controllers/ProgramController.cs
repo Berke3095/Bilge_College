@@ -15,13 +15,15 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         private readonly I_AltTopicServiceManager _altTopicServiceManager;
         private readonly I_DayScheduleServiceManager _dayScheduleServiceManager;
         private readonly I_ClassHourServiceManager _classHourServiceManager;
+        private readonly I_StudentServiceManager _studentServiceManager;
 
-        public ProgramController(I_ClassroomServiceManager classroomServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_DayScheduleServiceManager dayScheduleServiceManager, I_ClassHourServiceManager classHourServiceManager)
+        public ProgramController(I_ClassroomServiceManager classroomServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_DayScheduleServiceManager dayScheduleServiceManager, I_ClassHourServiceManager classHourServiceManager, I_StudentServiceManager studentServiceManager)
         {
             _classroomServiceManager = classroomServiceManager;
             _altTopicServiceManager = altTopicServiceManager;
             _dayScheduleServiceManager = dayScheduleServiceManager;
             _classHourServiceManager = classHourServiceManager;
+            _studentServiceManager = studentServiceManager;
         }
 
         public IActionResult Show(int? id)
@@ -53,6 +55,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
                 _altTopicServiceManager.GetAllActives();
                 ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
+                ViewBag.ActiveStudents = _studentServiceManager.GetAllActives().Where(x => x.ClassroomId == classroom.Id).ToList();
 
                 ViewData["Class"] = classroom.Grade;
 

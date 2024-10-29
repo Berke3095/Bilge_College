@@ -39,7 +39,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            _classroomServiceManager.GetAllActives();
+            ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
             ViewBag.ActiveStudents = _studentServiceManager.GetAllActives();
             ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
             return View();

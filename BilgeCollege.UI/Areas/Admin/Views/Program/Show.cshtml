@@ -78,5 +78,12 @@
                 }
             </tbody>
         </table>
+
+        @if (ViewBag.ActiveStudents != null)
+        {
+            <div>
+                <partial name="_PartialActiveStudentList" model="ViewBag.ActiveStudents" />
+            </div>
+        }
     </div>
 </div>
