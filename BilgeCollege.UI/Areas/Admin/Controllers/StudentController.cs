@@ -60,6 +60,15 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                         if(studentVM.ClassroomId != null)
                         {
                             var classroom = _classroomServiceManager.GetById((int)studentVM.ClassroomId);
+                            if (classroom.TotalStudents >= classroom.MaxCapacity)
+                            {
+                                ViewData["FullClassroomError"] = "Classroom is full.";
+
+                                ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
+                                ViewBag.ActiveStudents = _studentServiceManager.GetAllActives();
+                                ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
+                                return View(studentVM);
+                            }
                             classroom.TotalStudents++;
                         }
 
@@ -162,17 +171,20 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
                 student.GuardianId = studentVM.GuardianId;
 
-                var classroomForCheck = _classroomServiceManager.GetById((int)studentVM.ClassroomId);
-                if (classroomForCheck != null)
+                if(studentVM.ClassroomId != null)
                 {
-                    if(classroomForCheck.TotalStudents >= classroomForCheck.MaxCapacity)
+                    var classroomForCheck = _classroomServiceManager.GetById((int)studentVM.ClassroomId);
+                    if (classroomForCheck != null)
                     {
-                        ViewData["FullClassroomError"] = "Classroom is full.";
-                        ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
-                        ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
+                        if (classroomForCheck.TotalStudents >= classroomForCheck.MaxCapacity)
+                        {
+                            ViewData["FullClassroomError"] = "Classroom is full.";
+                            ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
+                            ViewBag.ActiveGuardians = _guardianServiceManager.GetAllActives();
 
-                        StudentVM studentVMforError = Mapper.StudentToStudentVM(student);
-                        return View(studentVMforError);
+                            StudentVM studentVMforError = Mapper.StudentToStudentVM(student);
+                            return View(studentVMforError);
+                        }
                     }
                 }
 
@@ -185,8 +197,11 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                         var classroomBefore = _classroomServiceManager.GetById((int)_previousClassroomId);
                         classroomBefore.TotalStudents--;
 
-                        var classroomNow = _classroomServiceManager.GetById((int)student.ClassroomId);
-                        classroomNow.TotalStudents++;
+                        if (studentVM.ClassroomId != null)
+                        {
+                            var classroomNow = _classroomServiceManager.GetById((int)student.ClassroomId);
+                            classroomNow.TotalStudents++;
+                        }   
                     }
                 }
                 else

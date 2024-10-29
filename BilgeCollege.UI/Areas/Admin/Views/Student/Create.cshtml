@@ -62,17 +62,20 @@
 
                 <div class="form-group mb-4">
                     <select class="form-control" asp-for="ClassroomId">
-                        <option value="" disabled selected>--Select a classroom--</option>
+                        <option value="" selected>--Select a classroom--</option>
                         @foreach (var item in ViewBag.ActiveClassrooms)
                         {
                             <option value="@item.Id">@item.Grade</option>
                         }
                     </select>
+                    <div>
+                        <span class="form-text text text-danger">@ViewData["FullClassroomError"]</span>
+                    </div>
                 </div>
 
                 <div class="form-group mb-4">
                     <select class="form-control" asp-for="GuardianId">
-                        <option value="" disabled selected>--Select a guardian--</option>
+                        <option value="" selected>--Select a guardian--</option>
                         @foreach (var item in ViewBag.ActiveGuardians)
                         {
                             <option value="@item.Id">@item.FirstName @item.LastName</option>
@@ -86,7 +89,7 @@
             </form>
         </div>
         <div class="col-md-9" style="margin-left:24.7%">
-            <partial name="_PartialActiveStudentList" model="ViewBag.ActiveStudents" />
+            <partial name="/Areas/Admin/Views/Shared/PartialLists/_PartialActiveStudentList.cshtml" model="ViewBag.ActiveStudents" />
         </div>
     </div>
 
