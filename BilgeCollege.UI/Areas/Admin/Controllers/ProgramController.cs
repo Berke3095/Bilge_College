@@ -16,14 +16,18 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         private readonly I_DayScheduleServiceManager _dayScheduleServiceManager;
         private readonly I_ClassHourServiceManager _classHourServiceManager;
         private readonly I_StudentServiceManager _studentServiceManager;
+        private readonly I_GradeServiceManager _gradeServiceManager;
 
-        public ProgramController(I_ClassroomServiceManager classroomServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_DayScheduleServiceManager dayScheduleServiceManager, I_ClassHourServiceManager classHourServiceManager, I_StudentServiceManager studentServiceManager)
+        private static List<int> _classAltTopicIds = new List<int>();
+
+        public ProgramController(I_ClassroomServiceManager classroomServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_DayScheduleServiceManager dayScheduleServiceManager, I_ClassHourServiceManager classHourServiceManager, I_StudentServiceManager studentServiceManager, I_GradeServiceManager gradeServiceManager)
         {
             _classroomServiceManager = classroomServiceManager;
             _altTopicServiceManager = altTopicServiceManager;
             _dayScheduleServiceManager = dayScheduleServiceManager;
             _classHourServiceManager = classHourServiceManager;
             _studentServiceManager = studentServiceManager;
+            _gradeServiceManager = gradeServiceManager;
         }
 
         public IActionResult Show(int? id)
@@ -69,6 +73,8 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             var daySchedule = _dayScheduleServiceManager.GetById(id);
             var classHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == id).ToList();
 
+            _classAltTopicIds = _classroomServiceManager.GetAllAltTopicIds((int)daySchedule.ClassroomId, _dayScheduleServiceManager, _altTopicServiceManager, _classHourServiceManager);
+
             DayScheduleVM dayScheduleVM = new DayScheduleVM
             {
                 Id = id,
@@ -95,13 +101,18 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
                 for (int i = 0; i < 8; i++) // 8 class hours
                 {
-
                     classHours[i].AltTopicId = dayScheduleVM.AltTopicIds[i];
                 }
 
                 _dayScheduleServiceManager.Update(daySchedule);
 
                 var classroom = _classroomServiceManager.GetById((int)daySchedule.ClassroomId);
+
+                var newAltTopics = _classroomServiceManager.GetAllAltTopicIds((int)daySchedule.ClassroomId, _dayScheduleServiceManager, _altTopicServiceManager, _classHourServiceManager);
+                _classroomServiceManager.HandleAltTopics(classroom, _classAltTopicIds, newAltTopics, _gradeServiceManager, _studentServiceManager);
+
+
+
                 return RedirectToAction("Show", "Program", new { id = classroom.Id });
 
             }

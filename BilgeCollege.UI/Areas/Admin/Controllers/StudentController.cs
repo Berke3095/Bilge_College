@@ -1,5 +1,4 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
-using BilgeCollege.BLL.Services.Concretes;
 using BilgeCollege.BLL.Utils;
 using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.MODELS.Concretes.CustomUser;
@@ -18,15 +17,23 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         private readonly I_StudentServiceManager _studentServiceManager;
         private readonly I_GuardianServiceManager _guardianServiceManager;
         private readonly I_ClassroomServiceManager _classroomServiceManager;
+        private readonly I_GradeServiceManager _gradeServiceManager;
+        private readonly I_AltTopicServiceManager _altTopicServiceManager;
+
+
         private readonly UserManager<User> _userManager;
 
         public static int? _previousClassroomId; // For update
 
-        public StudentController(I_StudentServiceManager studentServiceManager, I_GuardianServiceManager guardianServiceManager, I_ClassroomServiceManager classroomServiceManager, UserManager<User> userManager)
+        public StudentController(I_StudentServiceManager studentServiceManager, I_GuardianServiceManager guardianServiceManager, I_ClassroomServiceManager classroomServiceManager, UserManager<User> userManager, I_GradeServiceManager gradeServiceManager, I_AltTopicServiceManager altTopicServiceManager)
         {
             _studentServiceManager = studentServiceManager;
             _guardianServiceManager = guardianServiceManager;
             _classroomServiceManager = classroomServiceManager;
+            _gradeServiceManager = gradeServiceManager;
+            _altTopicServiceManager = altTopicServiceManager;
+
+
             _userManager = userManager;
         }
 
@@ -94,6 +101,9 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
             student.ClassroomId = null;
             student.GuardianId = null;
+
+            var grades = _gradeServiceManager.GetAll().Where(x => x.StudentId == id).ToList();
+            _gradeServiceManager.DestroyRangeWithoutSave(grades);
 
             _studentServiceManager.Delete(student);
             return RedirectToAction("FullList", "Student");
@@ -244,6 +254,9 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
             _guardianServiceManager.GetAllActives();
             _classroomServiceManager.GetAllActives();
+            _gradeServiceManager.GetAll().Where(x => x.StudentId == id).ToList();
+            _altTopicServiceManager.GetAllActives();
+            
 
             return View(student);
         }

@@ -50,6 +50,7 @@ namespace BilgeCollege.DAL.Context
             builder.ApplyConfiguration(new TeacherConfig());
             builder.ApplyConfiguration(new DayScheduleConfig());
             builder.ApplyConfiguration(new ClassHourConfig());
+            builder.ApplyConfiguration(new GradeConfig());
         }
     }
 }

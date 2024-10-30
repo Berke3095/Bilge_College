@@ -48,14 +48,100 @@ namespace BilgeCollege.BLL.Services.Concretes
                 }
             }
             else return bestCode;
+        }
 
-            return null;
+        public void HandleAltTopics(Classroom classroom, List<int> oldAltTopics, List<int> newAltTopics, I_GradeServiceManager gradeServiceManager, I_StudentServiceManager studentServiceManager)
+        {
+            HandleRemovedAltTopics(classroom, oldAltTopics, newAltTopics, gradeServiceManager, studentServiceManager);
+
+            var addedAlts = new List<int>();
+
+            foreach (var item in newAltTopics)
+            {
+                if (!oldAltTopics.Contains(item))
+                {
+                    addedAlts.Add(item);
+                }
+            }
+
+            var gradesToCreate = new List<Grade>();
+
+            var students = studentServiceManager.GetAllActives().Where(x => x.ClassroomId == classroom.Id).ToList();
+            foreach (var student in students)
+            {
+                foreach (var item in addedAlts)
+                {
+                    Grade grade = new Grade
+                    {
+                        AltTopicId = item,
+                        StudentId = student.Id,
+                    };
+
+                    gradesToCreate.Add(grade);
+                }
+            }
+
+            gradeServiceManager.CreateRange(gradesToCreate);
+        }
+
+        public List<int> GetAllAltTopicIds(int id, I_DayScheduleServiceManager dayScheduleServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_ClassHourServiceManager classHourServiceManager)
+        {
+            List<int> altTopicIds = new List<int>();
+
+            var daySchedules = dayScheduleServiceManager.GetAll().Where(x => x.ClassroomId == id).ToList();
+            foreach (var daySchedule in daySchedules)
+            {
+                var classHours = classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id);
+                foreach (var classHour in classHours)
+                {
+                    var altTopicId = (int)classHour.AltTopicId;
+                    if (altTopicId != 1 && !altTopicIds.Contains(altTopicId)) // If not none and doesnt have duplicate
+                    {
+                        altTopicIds.Add(altTopicId);
+                    }
+                }
+            }
+
+            return altTopicIds;
+        }
+
+        public void HandleRemovedAltTopics(Classroom classroom, List<int> oldAltTopics, List<int> newAltTopics, I_GradeServiceManager gradeServiceManager, I_StudentServiceManager studentServiceManager)
+        {
+            var removedAlts = new List<int>();
+
+            foreach (var item in oldAltTopics)
+            {
+                if (!newAltTopics.Contains(item))
+                {
+                    removedAlts.Add(item);
+                }
+            }
+
+            List<Grade> gradesToDestroy = new List<Grade>();
+
+            var students = studentServiceManager.GetAllActives().Where(x => x.ClassroomId == classroom.Id);
+            foreach (var student in students)
+            {
+                foreach (var item in removedAlts)
+                {
+                    if(gradeServiceManager.GetAll().Count() > 0)
+                    {
+                        var grade = gradeServiceManager.GetAll().First(x => x.AltTopicId == item && x.StudentId == student.Id);
+                        gradesToDestroy.Add(grade);
+                    }
+                }
+            }
+
+            if(gradesToDestroy.Count() > 0)
+            {
+                gradeServiceManager.DestroyRangeWithoutSave(gradesToDestroy);
+            }
         }
 
         public void HandleOnDelete(int id, I_StudentServiceManager studentServiceManager)
         {
             var students = studentServiceManager.GetAllActives().Where(x => x.ClassroomId == id);
-            foreach(var student in students)
+            foreach (var student in students)
             {
                 student.ClassroomId = null;
             }
@@ -67,13 +153,13 @@ namespace BilgeCollege.BLL.Services.Concretes
         public void HandleOnDeleteAll(I_StudentServiceManager studentServiceManager)
         {
             var students = studentServiceManager.GetAllActives();
-            foreach(var student in students)
+            foreach (var student in students)
             {
                 student.ClassroomId = null;
             }
 
             var classrooms = _repository.GetAllActives();
-            foreach(var classroom in classrooms)
+            foreach (var classroom in classrooms)
             {
                 classroom.TotalStudents = 0;
             }

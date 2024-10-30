@@ -79,6 +79,11 @@ namespace BilgeCollege.DAL.Repository
             return _dbSet.Find(id);
         }
 
+        public DbSet<T> GetDbSet()
+        {
+            return _dbSet;
+        }
+
         public void Recover(T item)
         {
             item.State = MODELS.Enums.StateEnum.Active;

@@ -1,6 +1,4 @@
-﻿using BilgeCollege.MODELS.Concretes;
-
-namespace BilgeCollege.UI.Areas.Admin.Views.Models
+﻿namespace BilgeCollege.UI.Areas.Admin.Views.Models
 {
     public class DayScheduleVM
     {
