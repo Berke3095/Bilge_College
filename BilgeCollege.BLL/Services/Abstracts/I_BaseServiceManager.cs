@@ -12,6 +12,7 @@ namespace BilgeCollege.BLL.Services.Abstracts
         public T GetByGuidId(string id);
 
         public void Create(T item);
+        public void CreateRange(List<T> items);
         public void Update(T item);
         public void UpdateRange(List<T> items);
         public void Delete(T item);

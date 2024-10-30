@@ -21,6 +21,12 @@ namespace BilgeCollege.DAL.Repository
             _context.SaveChanges();
         }
 
+        public void CreateRange(List<T> items)
+        {
+            _dbSet.AddRange(items);
+            _context.SaveChanges();
+        }
+
         public void Delete(T item)
         {
             item.State = MODELS.Enums.StateEnum.Passive;

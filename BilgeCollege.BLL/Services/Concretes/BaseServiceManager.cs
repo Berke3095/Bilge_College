@@ -19,6 +19,11 @@ namespace BilgeCollege.BLL.Services.Concretes
             else throw new Exception("Item trying to create is null!");
         }
 
+        public void CreateRange(List<T> items)
+        {
+            if (items.Count() > 0) _repository.CreateRange(items);
+        }
+
         public void Delete(T item)
         {
             if(item != null) _repository.Delete(item);
