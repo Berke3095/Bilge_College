@@ -223,8 +223,11 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 }
                 else
                 {
-                    var classroom = _classroomServiceManager.GetById((int)student.ClassroomId);
-                    classroom.TotalStudents++;
+                    if(student.ClassroomId != null)
+                    {
+                        var classroom = _classroomServiceManager.GetById((int)student.ClassroomId);
+                        classroom.TotalStudents++;
+                    }
                 }
 
                 _studentServiceManager.Update(student);

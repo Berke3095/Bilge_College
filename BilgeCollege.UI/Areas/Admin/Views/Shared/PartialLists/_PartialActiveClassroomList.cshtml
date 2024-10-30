@@ -24,7 +24,7 @@
             {
                 <tr>
                     <td>@num</td>
-                    <td><a asp-area="Admin" asp-controller="Classroom" asp-action="Details" asp-route-id="@item.Id">@item.Grade</a></td>
+                    <td><a asp-area="Admin" asp-controller="Program" asp-action="Show" asp-route-id="@item.Id">@item.Grade</a></td>
                     <td>@item.TotalStudents @("/") @item.MaxCapacity</td>
                     <td>
                         <a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="Classroom" asp-action="Update" asp-route-id="@item.Id">Edit</a>

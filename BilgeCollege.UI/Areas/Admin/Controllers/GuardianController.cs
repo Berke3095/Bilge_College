@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using BilgeCollege.BLL.Services.Abstracts;
 using BilgeCollege.BLL.Utils;
+using BilgeCollege.BLL.Services.Concretes;
 
 namespace BilgeCollege.UI.Areas.Admin.Controllers
 {
@@ -121,6 +122,15 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
             _guardianServiceManager.DestroyRange(passiveGuardians);
             return RedirectToAction("FullList", "Guardian");
+        }
+
+        public IActionResult Details(int id)
+        {
+            var guardian = _guardianServiceManager.GetById(id);
+
+            _studentServiceManager.GetAllActives().Where(x => x.GuardianId == id).ToList();
+
+            return View(guardian);
         }
     }
 }
