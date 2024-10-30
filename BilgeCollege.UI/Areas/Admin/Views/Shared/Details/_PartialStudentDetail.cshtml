@@ -19,7 +19,7 @@
                 <h3 class="h5 text-secondary">Classroom:</h3>
                 @if (Model.Classroom != null)
                 {
-                    <p class="h4"><a asp-area="Admin" asp-controller="Classroom" asp-action="Details" asp-route-id="@Model.ClassroomId">@Model.Classroom.Grade</a></p>
+                    <p class="h4"><a asp-area="Admin" asp-controller="Program" asp-action="Show" asp-route-id="@Model.ClassroomId">@Model.Classroom.Grade</a></p>
                 }
                 else
                 {

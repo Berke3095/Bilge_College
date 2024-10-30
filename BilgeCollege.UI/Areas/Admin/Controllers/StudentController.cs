@@ -103,7 +103,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             student.GuardianId = null;
 
             var grades = _gradeServiceManager.GetAll().Where(x => x.StudentId == id).ToList();
-            _gradeServiceManager.DestroyRangeWithoutSave(grades);
+            _gradeServiceManager.DestroyRange(grades);
 
             _studentServiceManager.Delete(student);
             return RedirectToAction("FullList", "Student");

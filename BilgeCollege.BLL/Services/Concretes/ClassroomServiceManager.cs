@@ -134,7 +134,7 @@ namespace BilgeCollege.BLL.Services.Concretes
 
             if(gradesToDestroy.Count() > 0)
             {
-                gradeServiceManager.DestroyRangeWithoutSave(gradesToDestroy);
+                gradeServiceManager.DestroyRange(gradesToDestroy);
             }
         }
 
