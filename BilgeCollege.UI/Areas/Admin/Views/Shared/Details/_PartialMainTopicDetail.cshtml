@@ -1,0 +1,52 @@
+﻿@model MainTopic
+@{
+
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header text-white" style="background-color:purple">
+            <h1 class="h3 mb-0"><strong>Main Topic: @Model.TopicName</strong></h1>
+        </div>
+
+        <div class="card-body">
+            <div>
+                <h3 class="h5 text-secondary">Alt Topics:</h3>
+                @if (Model.AltTopics != null)
+                {
+                    <p>
+                        <ul>
+                            @foreach (var altTopic in Model.AltTopics)
+                            {
+                                <li><a asp-area="Admin" asp-controller="AltTopic" asp-action="Details" asp-route-id="@altTopic.Id">@altTopic.TopicCode</a></li>
+                            }
+                        </ul>
+                    </p>
+                }
+                else
+                {
+                    <p>NONE</p>
+                }
+            </div>
+
+            <div>
+                <h3 class="h5 text-secondary">Teachers:</h3>
+                @if (Model.Teachers != null)
+                {
+                    <p>
+                        <ul>
+                            @foreach (var teacher in Model.Teachers)
+                            {
+                                <li><a asp-area="Admin" asp-controller="Teacher" asp-action="Details" asp-route-id="@teacher.Id">@teacher.FirstName @(" ") @teacher.LastName</a></li>
+                            }
+                        </ul>
+                    </p>
+                }
+                else
+                {
+                    <p>NONE</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

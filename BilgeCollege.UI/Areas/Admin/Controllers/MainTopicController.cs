@@ -1,4 +1,5 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
+using BilgeCollege.BLL.Services.Concretes;
 using BilgeCollege.UI.Areas.Admin.Views.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -149,6 +150,16 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 }
             }
             return View();
+        }
+
+        public IActionResult Details(int id)
+        {
+            var mainTopic = _mainTopicServiceManager.GetById(id);
+
+            _altTopicServiceManager.GetAllActives().Where(x => x.MainTopicId == id).ToList();
+            _teacherServiceManager.GetAllActives().Where(x => x.MainTopicId == id).ToList();
+
+            return View(mainTopic);
         }
     }
 }

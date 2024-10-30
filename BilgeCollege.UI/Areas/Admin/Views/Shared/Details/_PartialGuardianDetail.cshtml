@@ -38,7 +38,7 @@
                         <ul>
                             @foreach (var child in Model.Students)
                             {
-                                <li><a asp-area="Admin" asp-controller="Student" asp-action="Details">@child.FirstName @(" ") @child.LastName</a></li>
+                                <li><a asp-area="Admin" asp-controller="Student" asp-action="Details" asp-route-id="@child.Id">@child.FirstName @(" ") @child.LastName</a></li>
                             }
                         </ul>
                     </p>
