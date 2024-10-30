@@ -1,0 +1,33 @@
+﻿@model AltTopic
+@{
+
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header text-white" style="background-color:purple">
+            <h1 class="h3 mb-0"><strong>Topic Code: @Model.TopicCode</strong></h1>
+        </div>
+
+        <div class="card-body">
+            <div class="mb-4">
+                <h3 class="h5 text-secondary">Main Topic:</h3>
+                <p class="h4"> <a class="text-decoration-none text-primary" asp-area="Admin" asp-controller="MainTopic" asp-action="Details" asp-route-id="@Model.MainTopicId">@Model.MainTopic.TopicName</a></p>
+            </div>
+
+            <div>
+                <h3 class="h5 text-secondary">Teacher:</h3>
+                @if (Model.Teacher != null)
+                {
+                    <p>
+                        <a class="text-decoration-none text-primary" asp-area="Admin" asp-controller="Teacher" asp-action="Details" asp-route-id="@Model.TeacherId"> @Model.Teacher.FirstName @(" ") @Model.Teacher.LastName </a>
+                    </p>
+                }
+                else
+                {
+                    <p class="text-muted">NONE</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -171,5 +171,15 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
             return View(); // Exception
         }
+
+        public IActionResult Details(int id)
+        {
+            var altTopic = _altTopicServiceManager.GetById(id);
+
+            _teacherServiceManager.GetAllActives();
+            _mainTopicServiceManager.GetAllActives();
+
+            return View(altTopic);
+        }
     }
 }

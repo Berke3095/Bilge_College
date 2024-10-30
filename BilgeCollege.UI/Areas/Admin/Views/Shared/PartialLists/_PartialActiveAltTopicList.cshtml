@@ -26,7 +26,7 @@
             {
                 <tr>
                     <td>@num</td>
-                    <td>@item.TopicCode</td>
+                    <td><a asp-area="Admin" asp-controller="AltTopic" asp-action="Details" asp-route-id="@item.Id">@item.TopicCode</a></td>
                     <td>
                         @if(item.MainTopic != null)
                         {
