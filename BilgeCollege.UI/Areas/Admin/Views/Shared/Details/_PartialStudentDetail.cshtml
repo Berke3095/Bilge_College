@@ -1,0 +1,70 @@
+﻿@model Student
+@{
+
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header text-white" style="background-color:purple">
+            <h1 class="h3 mb-0"><strong>Student: @Model.FirstName @(" ") @Model.LastName</strong></h1>
+        </div>
+
+        <div class="card-body">
+            <div class="mb-4">
+                <h3 class="h5 text-secondary">School No:</h3>
+                <p class="h4">@Model.SchoolNo</p>
+            </div>
+
+            <div class="mb-4">
+                <h3 class="h5 text-secondary">Classroom:</h3>
+                @if (Model.Classroom != null)
+                {
+                    <p class="h4"><a asp-area="Admin" asp-controller="Classroom" asp-action="Details" asp-route-id="@Model.ClassroomId">@Model.Classroom.Grade</a></p>
+                }
+                else
+                {
+                    <p>NONE</p>
+                }
+
+            </div>
+
+            <div>
+                <h3 class="h5 text-secondary">Gender:</h3>
+                <p>@Model.Gender</p>
+            </div>
+
+            <div>
+                <h3 class="h5 text-secondary">Email Address:</h3>
+                <p>@Model.Email</p>
+            </div>
+
+            <div>
+                <h3 class="h5 text-secondary">TCK:</h3>
+                <p>@Model.TCK</p>
+            </div>
+
+            <div>
+                <h3 class="h5 text-secondary">Finished School:</h3>
+                <p>@Model.FinishedSchool</p>
+            </div>
+
+            <div>
+                <h3 class="h5 text-secondary">Final Grade:</h3>
+                <p>@Model.FinalGrade</p>
+            </div>
+
+            <div>
+                <h3 class="h5 text-secondary">Guardian:</h3>
+                @if (Model.Guardian != null)
+                {
+                    <p class="h4"><a asp-area="Admin" asp-controller="Guardian" asp-action="Details" asp-route-id="@Model.GuardianId">@Model.Guardian.FirstName @(" ") @Model.Guardian.LastName</a></p>
+                }
+                else
+                {
+                    <p>NONE</p>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

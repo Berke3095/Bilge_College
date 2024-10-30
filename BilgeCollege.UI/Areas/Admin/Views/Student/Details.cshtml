@@ -1,0 +1,9 @@
+﻿@model Student
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Student Details";
+}
+
+<div>
+    <partial name="/Areas/Admin/Views/Shared/Details/_PartialStudentDetail.cshtml" model=Model />
+</div>

@@ -33,7 +33,7 @@
                     <td>
                         @if (item.Classroom != null)
                         {
-                            @item.Classroom.Grade
+                            <a asp-area="Admin" asp-controller="Program" asp-action="Show" asp-route-id="@item.ClassroomId">@item.Classroom.Grade</a>
                         }
                     </td>
                     <td><a asp-area="Admin" asp-controller="Student" asp-action="Details" asp-route-id="@item.Id">@item.FirstName</a></td>
