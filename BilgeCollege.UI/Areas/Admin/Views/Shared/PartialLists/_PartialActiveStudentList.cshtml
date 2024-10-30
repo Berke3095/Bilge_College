@@ -36,8 +36,8 @@
                             @item.Classroom.Grade
                         }
                     </td>
-                    <td>@item.FirstName</td>
-                    <td>@item.LastName</td>
+                    <td><a asp-area="Admin" asp-controller="Student" asp-action="Details" asp-route-id="@item.Id">@item.FirstName</a></td>
+                    <td><a asp-area="Admin" asp-controller="Student" asp-action="Details" asp-route-id="@item.Id">@item.LastName</a></td>
                     <td>@item.Gender</td>
                     <td>
                         <a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="Student" asp-action="Update" asp-route-id="@item.Id">Edit</a>

@@ -30,17 +30,14 @@
             {
                 <tr style="background-color:bisque;">
                     <td>@num</td>
-                    <td>@item.TopicCode</td>
+                    <td><a asp-area="Admin" asp-controller="AltTopic" asp-action="Details" asp-route-id="@item.Id">@item.TopicCode</a></td>
                     <td>
-                        @if (item.MainTopic != null)
-                        {
-                            @item.MainTopic.TopicName
-                        }
+                        <a asp-area="Admin" asp-controller="MainTopic" asp-action="Details" asp-route-id="@item.MainTopicId">@item.MainTopic.TopicName</a>
                     </td>
                     <td>
                         @if (item.Teacher != null)
                         {
-                            @item.Teacher.FirstName @(" ") @item.Teacher.LastName
+                            <a asp-area="Admin" asp-controller="Teacher" asp-action="Details" asp-route-id="@item.TeacherId">@item.Teacher.FirstName @(" ") @item.Teacher.LastName</a>
                         }
                     </td>
                     <td>

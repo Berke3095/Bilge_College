@@ -23,7 +23,7 @@
             {
                 <tr>
                     <td>@num</td>
-                    <td>@item.TopicName</td>
+                    <td><a asp-area="Admin" asp-controller="MainTopic" asp-action="Details" asp-route-id="@item.Id">@item.TopicName</a></td>
                     <td>
                         <a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="MainTopic" asp-action="Update" asp-route-id="@item.Id">Edit</a>
 
