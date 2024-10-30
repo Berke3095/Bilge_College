@@ -14,12 +14,14 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         private readonly I_ClassroomServiceManager _classroomServiceManager;
         private readonly I_DayScheduleServiceManager _dayScheduleServiceManager;
         private readonly I_ClassHourServiceManager _classHourServiceManager;
+        private readonly I_StudentServiceManager _studentServiceManager;
 
-        public ClassroomController(I_ClassroomServiceManager classroomServiceManager, I_DayScheduleServiceManager dayScheduleServiceManager, I_ClassHourServiceManager classHourServiceManager)
+        public ClassroomController(I_ClassroomServiceManager classroomServiceManager, I_DayScheduleServiceManager dayScheduleServiceManager, I_ClassHourServiceManager classHourServiceManager, I_StudentServiceManager studentServiceManager)
         {
             _classroomServiceManager = classroomServiceManager;
             _dayScheduleServiceManager = dayScheduleServiceManager;
             _classHourServiceManager = classHourServiceManager;
+            _studentServiceManager = studentServiceManager;
         }
 
         public IActionResult FullList()
@@ -74,6 +76,8 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
+            _classroomServiceManager.HandleOnDelete(id, _studentServiceManager);
+
             _classroomServiceManager.Delete(_classroomServiceManager.GetById(id));
             return RedirectToAction("FullList", "Classroom");
         }
@@ -81,6 +85,8 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult DeleteAll()
         {
+            _classroomServiceManager.HandleOnDeleteAll(_studentServiceManager);
+
             _classroomServiceManager.DeleteRange(_classroomServiceManager.GetAllActives());
             return RedirectToAction("FullList", "Classroom");
         }
