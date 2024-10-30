@@ -1,0 +1,62 @@
+﻿@model Teacher
+@{
+
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header text-white" style="background-color:purple">
+            <h1 class="h3 mb-0"><strong>Teacher: @Model.FirstName @(" ") @Model.LastName</strong></h1>
+        </div>
+
+        <div class="card-body">
+            <div>
+                <h3 class="h5 text-secondary">Email Address:</h3>
+                <p>@Model.Email</p>
+            </div>
+
+            <div>
+                <h3 class="h5 text-secondary">TCK:</h3>
+                <p>@Model.TCK</p>
+            </div>
+
+            <div>
+                <h3 class="h5 text-secondary">Phone Number:</h3>
+                <p>@Model.PhoneNumber</p>
+            </div>
+
+            <div>
+                <h3 class="h5 text-secondary">Main Topic:</h3>
+                @if(Model.MainTopic != null)
+                {
+                    <p><a asp-area="Admin" asp-controller="MainTopic" asp-action="Details" asp-route-id="@Model.MainTopicId">@Model.MainTopic.TopicName</a></p>
+                }
+                else
+                {
+                    <p>NONE</p>
+                }
+
+            </div>
+
+            <div>
+                <h3 class="h5 text-secondary">Alt Topics:</h3>
+                @if (Model.AltTopics != null)
+                {
+                    <p>
+                        <ul>
+                            @foreach (var altTopic in Model.AltTopics)
+                            {
+                                <li><a asp-area="Admin" asp-controller="AltTopic" asp-action="Details" asp-route-id="@altTopic.Id">@altTopic.TopicCode</a></li>
+                            }
+                        </ul>
+                    </p>
+                }
+                else
+                {
+                    <p>NONE</p>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -34,7 +34,7 @@
                     <td>
                         @if(item.MainTopic != null)
                         {
-                            @item.MainTopic.TopicName;
+                            <a asp-area="Admin" asp-controller="MainTopic" asp-action="Details" asp-route-id="@item.MainTopicId">@item.MainTopic.TopicName</a>
                         }
                     </td>
                     <td>

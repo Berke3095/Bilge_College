@@ -1,4 +1,5 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
+using BilgeCollege.BLL.Services.Concretes;
 using BilgeCollege.BLL.Utils;
 using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.MODELS.Concretes.CustomUser;
@@ -168,6 +169,16 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
             ViewBag.MainTopics = _mainTopicServiceManager.GetAllActives();
             return View();
+        }
+
+        public IActionResult Details(int id)
+        {
+            var teacher = _teacherServiceManager.GetById(id);
+
+            _mainTopicServiceManager.GetAllActives();
+            _altTopicServiceManager.GetAllActives();
+
+            return View(teacher);
         }
     }
 }
