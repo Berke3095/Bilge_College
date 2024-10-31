@@ -111,6 +111,8 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 var newAltTopics = _classroomServiceManager.GetAllAltTopics((int)daySchedule.ClassroomId, _dayScheduleServiceManager, _altTopicServiceManager, _classHourServiceManager);
                 _classroomServiceManager.HandleAltTopics(classroom, currentAltTopics, newAltTopics, _gradeServiceManager, _studentServiceManager);
 
+                _classroomServiceManager.Update(classroom);
+
                 return RedirectToAction("Show", "Program", new { id = classroom.Id });
 
             }

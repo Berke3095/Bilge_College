@@ -20,7 +20,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         private readonly I_AltTopicServiceManager _altTopicServiceManager;
         private readonly UserManager<User> _userManager;
 
-        private int? _previousMainTopicId; // For update
+        private static int? _previousMainTopicId; // For update
 
         public TeacherController(I_TeacherServiceManager teacherService, I_MainTopicServiceManager mainTopicServiceManager, I_AltTopicServiceManager altTopicServiceManager, UserManager<User> userManager)
         {

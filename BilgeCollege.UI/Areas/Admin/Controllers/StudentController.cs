@@ -23,7 +23,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         private readonly UserManager<User> _userManager;
 
-        public int? _previousClassroomId; // For update
+        public static int? _previousClassroomId; // For update
 
         public StudentController(I_StudentServiceManager studentServiceManager, I_GuardianServiceManager guardianServiceManager, I_ClassroomServiceManager classroomServiceManager, UserManager<User> userManager, I_GradeServiceManager gradeServiceManager, I_AltTopicServiceManager altTopicServiceManager)
         {
@@ -224,11 +224,26 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     {
                         var classroomBefore = _classroomServiceManager.GetById((int)_previousClassroomId);
                         classroomBefore.TotalStudents--;
+                        _gradeServiceManager.GetAll().Where(x => x.StudentId == student.Id).ToList().Clear();
 
                         if (studentVM.ClassroomId != null)
                         {
+                            _altTopicServiceManager.GetAllActives();
+                            
                             var classroomNow = _classroomServiceManager.GetById((int)student.ClassroomId);
                             classroomNow.TotalStudents++;
+
+                            if(classroomNow.AltTopics != null)
+                            {
+                                foreach (var altTopic in classroomNow.AltTopics)
+                                {
+                                    Grade grade = new Grade
+                                    {
+                                        AltTopicId = altTopic.Id,
+                                        StudentId = student.Id,
+                                    };
+                                }
+                            }
                         }   
                     }
                 }
@@ -236,8 +251,22 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 {
                     if(student.ClassroomId != null)
                     {
+                        _altTopicServiceManager.GetAllActives();
+
                         var classroom = _classroomServiceManager.GetById((int)student.ClassroomId);
                         classroom.TotalStudents++;
+
+                        if (classroom.AltTopics != null)
+                        {
+                            foreach (var altTopic in classroom.AltTopics)
+                            {
+                                Grade grade = new Grade
+                                {
+                                    AltTopicId = altTopic.Id,
+                                    StudentId = student.Id,
+                                };
+                            }
+                        }
                     }
                 }
 

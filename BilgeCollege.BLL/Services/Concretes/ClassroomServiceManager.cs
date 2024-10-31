@@ -61,6 +61,7 @@ namespace BilgeCollege.BLL.Services.Concretes
                 if (!oldAltTopics.Contains(item))
                 {
                     addedAlts.Add(item);
+                    classroom.AltTopics.Add(item);
                 }
             }
 
