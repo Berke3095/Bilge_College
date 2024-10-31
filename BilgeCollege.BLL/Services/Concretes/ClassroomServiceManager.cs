@@ -50,11 +50,11 @@ namespace BilgeCollege.BLL.Services.Concretes
             else return bestCode;
         }
 
-        public void HandleAltTopics(Classroom classroom, List<int> oldAltTopics, List<int> newAltTopics, I_GradeServiceManager gradeServiceManager, I_StudentServiceManager studentServiceManager)
+        public void HandleAltTopics(Classroom classroom, List<AltTopic> oldAltTopics, List<AltTopic> newAltTopics, I_GradeServiceManager gradeServiceManager, I_StudentServiceManager studentServiceManager)
         {
             HandleRemovedAltTopics(classroom, oldAltTopics, newAltTopics, gradeServiceManager, studentServiceManager);
 
-            var addedAlts = new List<int>();
+            var addedAlts = new List<AltTopic>();
 
             foreach (var item in newAltTopics)
             {
@@ -73,7 +73,7 @@ namespace BilgeCollege.BLL.Services.Concretes
                 {
                     Grade grade = new Grade
                     {
-                        AltTopicId = item,
+                        AltTopicId = item.Id,
                         StudentId = student.Id,
                     };
 
@@ -84,58 +84,57 @@ namespace BilgeCollege.BLL.Services.Concretes
             gradeServiceManager.CreateRange(gradesToCreate);
         }
 
-        public List<int> GetAllAltTopicIds(int id, I_DayScheduleServiceManager dayScheduleServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_ClassHourServiceManager classHourServiceManager)
+        public List<AltTopic> GetAllAltTopics(int id, I_DayScheduleServiceManager dayScheduleServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_ClassHourServiceManager classHourServiceManager)
         {
-            List<int> altTopicIds = new List<int>();
+            List<AltTopic> altTopics = new List<AltTopic>();
 
             var daySchedules = dayScheduleServiceManager.GetAll().Where(x => x.ClassroomId == id).ToList();
             foreach (var daySchedule in daySchedules)
             {
-                var classHours = classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id);
+                var classHours = classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();
                 foreach (var classHour in classHours)
                 {
-                    var altTopicId = (int)classHour.AltTopicId;
-                    if (altTopicId != 1 && !altTopicIds.Contains(altTopicId)) // If not none and doesnt have duplicate
+                    var altTopic = classHour.AltTopic;
+                    if(altTopic != null && altTopic.Id != 1)
                     {
-                        altTopicIds.Add(altTopicId);
+                        if (!altTopics.Contains(altTopic))
+                        {
+                            altTopics.Add(classHour.AltTopic);
+                        }
                     }
                 }
             }
 
-            return altTopicIds;
+            return altTopics;
         }
 
-        public void HandleRemovedAltTopics(Classroom classroom, List<int> oldAltTopics, List<int> newAltTopics, I_GradeServiceManager gradeServiceManager, I_StudentServiceManager studentServiceManager)
+        public void HandleRemovedAltTopics(Classroom classroom, List<AltTopic> oldAltTopics, List<AltTopic> newAltTopics, I_GradeServiceManager gradeServiceManager, I_StudentServiceManager studentServiceManager)
         {
-            var removedAlts = new List<int>();
+            var removedAlts = new List<AltTopic>();
 
             foreach (var item in oldAltTopics)
             {
                 if (!newAltTopics.Contains(item))
                 {
                     removedAlts.Add(item);
+                    classroom.AltTopics.Remove(item);
                 }
             }
 
             List<Grade> gradesToDestroy = new List<Grade>();
-
-            var students = studentServiceManager.GetAllActives().Where(x => x.ClassroomId == classroom.Id);
+            var students = studentServiceManager.GetAllActives().Where(x => x.ClassroomId == classroom.Id).ToList();
             foreach (var student in students)
             {
                 foreach (var item in removedAlts)
                 {
-                    if(gradeServiceManager.GetAll().Count() > 0)
+                    if (gradeServiceManager.GetAll().Count() > 0)
                     {
-                        var grade = gradeServiceManager.GetAll().First(x => x.AltTopicId == item && x.StudentId == student.Id);
+                        var grade = gradeServiceManager.GetAll().First(x => x.AltTopicId == item.Id && x.StudentId == student.Id);
                         gradesToDestroy.Add(grade);
                     }
                 }
             }
-
-            if(gradesToDestroy.Count() > 0)
-            {
-                gradeServiceManager.DestroyRange(gradesToDestroy);
-            }
+            gradeServiceManager.DestroyRange(gradesToDestroy);
         }
 
         public void HandleOnDelete(int id, I_StudentServiceManager studentServiceManager)

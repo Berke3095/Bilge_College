@@ -23,7 +23,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
         private readonly UserManager<User> _userManager;
 
-        public static int? _previousClassroomId; // For update
+        public int? _previousClassroomId; // For update
 
         public StudentController(I_StudentServiceManager studentServiceManager, I_GuardianServiceManager guardianServiceManager, I_ClassroomServiceManager classroomServiceManager, UserManager<User> userManager, I_GradeServiceManager gradeServiceManager, I_AltTopicServiceManager altTopicServiceManager)
         {

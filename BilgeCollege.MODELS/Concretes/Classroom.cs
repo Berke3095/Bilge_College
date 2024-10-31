@@ -7,6 +7,7 @@ namespace BilgeCollege.MODELS.Concretes
         public Classroom()
         {
             TotalStudents = 0;
+            AltTopics = new List<AltTopic>();
             DaySchedules = new List<DaySchedule>
             {
                 new DaySchedule{ClassroomId = Id, Day = "Monday"},
@@ -23,7 +24,7 @@ namespace BilgeCollege.MODELS.Concretes
 
         // Relations
         public List<Student>? Students { get; set; }
-
         public List<DaySchedule>? DaySchedules { get; set; }
+        public List<AltTopic>? AltTopics { get; set; }
     }
 }

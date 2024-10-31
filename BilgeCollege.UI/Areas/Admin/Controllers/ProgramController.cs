@@ -18,8 +18,6 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         private readonly I_StudentServiceManager _studentServiceManager;
         private readonly I_GradeServiceManager _gradeServiceManager;
 
-        private static List<int> _classAltTopicIds = new List<int>();
-
         public ProgramController(I_ClassroomServiceManager classroomServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_DayScheduleServiceManager dayScheduleServiceManager, I_ClassHourServiceManager classHourServiceManager, I_StudentServiceManager studentServiceManager, I_GradeServiceManager gradeServiceManager)
         {
             _classroomServiceManager = classroomServiceManager;
@@ -73,8 +71,6 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             var daySchedule = _dayScheduleServiceManager.GetById(id);
             var classHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == id).ToList();
 
-            _classAltTopicIds = _classroomServiceManager.GetAllAltTopicIds((int)daySchedule.ClassroomId, _dayScheduleServiceManager, _altTopicServiceManager, _classHourServiceManager);
-
             DayScheduleVM dayScheduleVM = new DayScheduleVM
             {
                 Id = id,
@@ -96,22 +92,24 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         {
             if (dayScheduleVM != null)
             {
+                _altTopicServiceManager.GetAllActives();
+                _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == dayScheduleVM.Id).ToList();
+
                 var daySchedule = _dayScheduleServiceManager.GetById(dayScheduleVM.Id);
                 var classHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();
+                var currentAltTopics = _classroomServiceManager.GetAllAltTopics((int)daySchedule.ClassroomId, _dayScheduleServiceManager, _altTopicServiceManager, _classHourServiceManager);
 
                 for (int i = 0; i < 8; i++) // 8 class hours
                 {
                     classHours[i].AltTopicId = dayScheduleVM.AltTopicIds[i];
                 }
 
-                _dayScheduleServiceManager.Update(daySchedule);
+                _classHourServiceManager.UpdateRange(classHours);
 
                 var classroom = _classroomServiceManager.GetById((int)daySchedule.ClassroomId);
 
-                var newAltTopics = _classroomServiceManager.GetAllAltTopicIds((int)daySchedule.ClassroomId, _dayScheduleServiceManager, _altTopicServiceManager, _classHourServiceManager);
-                _classroomServiceManager.HandleAltTopics(classroom, _classAltTopicIds, newAltTopics, _gradeServiceManager, _studentServiceManager);
-
-
+                var newAltTopics = _classroomServiceManager.GetAllAltTopics((int)daySchedule.ClassroomId, _dayScheduleServiceManager, _altTopicServiceManager, _classHourServiceManager);
+                _classroomServiceManager.HandleAltTopics(classroom, currentAltTopics, newAltTopics, _gradeServiceManager, _studentServiceManager);
 
                 return RedirectToAction("Show", "Program", new { id = classroom.Id });
 

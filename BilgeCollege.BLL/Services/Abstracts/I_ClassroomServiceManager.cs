@@ -10,8 +10,8 @@ namespace BilgeCollege.BLL.Services.Abstracts
         public void HandleOnDelete(int id, I_StudentServiceManager studentServiceManager);
         public void HandleOnDeleteAll(I_StudentServiceManager studentServiceManager);
 
-        public List<int> GetAllAltTopicIds(int id, I_DayScheduleServiceManager dayScheduleServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_ClassHourServiceManager classHourServiceManager);
-        public void HandleRemovedAltTopics(Classroom classroom, List<int> oldAltTopics, List<int> newAltTopics, I_GradeServiceManager gradeServiceManager, I_StudentServiceManager studentServiceManager);
-        public void HandleAltTopics(Classroom classroom, List<int> oldAltTopics, List<int> newAltTopics, I_GradeServiceManager gradeServiceManager, I_StudentServiceManager studentServiceManager);
+        public List<AltTopic> GetAllAltTopics(int id, I_DayScheduleServiceManager dayScheduleServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_ClassHourServiceManager classHourServiceManager);
+        public void HandleRemovedAltTopics(Classroom classroom, List<AltTopic> oldAltTopics, List<AltTopic> newAltTopics, I_GradeServiceManager gradeServiceManager, I_StudentServiceManager studentServiceManager);
+        public void HandleAltTopics(Classroom classroom, List<AltTopic> oldAltTopics, List<AltTopic> newAltTopics, I_GradeServiceManager gradeServiceManager, I_StudentServiceManager studentServiceManager);
     }
 }

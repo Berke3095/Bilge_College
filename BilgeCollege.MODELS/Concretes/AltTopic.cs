@@ -4,6 +4,11 @@ namespace BilgeCollege.MODELS.Concretes
 {
     public class AltTopic : BaseEntity
     {
+        public AltTopic()
+        {
+            Classrooms = new List<Classroom>();
+        }
+
         public string TopicCode { get; set; }
 
         // Relations
@@ -15,5 +20,6 @@ namespace BilgeCollege.MODELS.Concretes
 
         public List<ClassHour>? ClassHours { get; set; }
         public List<Grade>? Grades { get; set; }
+        public List<Classroom>? Classrooms { get; set; }
     }
 }

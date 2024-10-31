@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BilgeCollege.DAL.Migrations
 {
     [DbContext(typeof(CollegeContext))]
-    [Migration("20241030200851_Initial")]
+    [Migration("20241031185612_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -24,6 +24,21 @@ namespace BilgeCollege.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AltTopicClassroom", b =>
+                {
+                    b.Property<int>("AltTopicsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClassroomsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AltTopicsId", "ClassroomsId");
+
+                    b.HasIndex("ClassroomsId");
+
+                    b.ToTable("AltTopicClassroom");
+                });
 
             modelBuilder.Entity("BilgeCollege.MODELS.Concretes.AltTopic", b =>
                 {
@@ -69,8 +84,8 @@ namespace BilgeCollege.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 10, 30, 23, 8, 51, 226, DateTimeKind.Local).AddTicks(1406),
-                            GuidId = "0afd0633-52bd-48a5-8e7c-b8b7e7aae64a",
+                            CreatedDate = new DateTime(2024, 10, 31, 21, 56, 12, 219, DateTimeKind.Local).AddTicks(6219),
+                            GuidId = "0750e39c-ac43-4b14-8699-778379ad7d8c",
                             MainTopicId = 1,
                             State = 0,
                             TopicCode = "NONE"
@@ -219,18 +234,18 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "35dc5166-9228-480f-ad6a-956479810d30",
+                            Id = "992ad16d-7583-40a7-b57b-a6fe9e8c4672",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6973eced-4f87-4572-896b-669d27f6e526",
-                            CreatedDate = new DateTime(2024, 10, 30, 23, 8, 51, 191, DateTimeKind.Local).AddTicks(9291),
+                            ConcurrencyStamp = "a260613a-5be4-41e2-a067-a39619530e41",
+                            CreatedDate = new DateTime(2024, 10, 31, 21, 56, 12, 183, DateTimeKind.Local).AddTicks(6161),
                             Email = "berke_aktepe@hotmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BERKE_AKTEPE@HOTMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFu66dxsntJw7vj/ncMe3xQg4bRsbYMcIUUv1FnFGLRRcqetUhZaVOJiT0ULDcuUIA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMrymm4VJSMLWW9GeBmQIUCaWKEYAUeX17U5k2oTaab4cXQOKy3mrWUwjKzN3nhe8w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "73f17845-9c92-4627-8cae-b3645408d6c4",
+                            SecurityStamp = "fc9c7373-aeba-452a-a39e-a3b607c167f6",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -396,8 +411,8 @@ namespace BilgeCollege.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 10, 30, 23, 8, 51, 226, DateTimeKind.Local).AddTicks(2121),
-                            GuidId = "ebd5fd04-b296-4f5b-aaab-19629fb16ba2",
+                            CreatedDate = new DateTime(2024, 10, 31, 21, 56, 12, 219, DateTimeKind.Local).AddTicks(6959),
+                            GuidId = "b60be4c9-0fc5-4309-ac0e-28ae2a7ef3f0",
                             State = 0,
                             TopicName = "NONE"
                         });
@@ -692,32 +707,47 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b609c365-4939-4a8e-927f-e213b6431df2",
+                            Id = "751be756-06c4-42b4-b05d-286cff8f3db7",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
-                            CreatedDate = new DateTime(2024, 10, 30, 23, 8, 51, 226, DateTimeKind.Local).AddTicks(1005)
+                            CreatedDate = new DateTime(2024, 10, 31, 21, 56, 12, 219, DateTimeKind.Local).AddTicks(5868)
                         },
                         new
                         {
-                            Id = "c275a657-fe98-42db-a34b-37b8e5ecc30e",
+                            Id = "58223614-85ca-4069-a59c-b9cf34b6ccfd",
                             Name = "Teacher",
                             NormalizedName = "TEACHER",
-                            CreatedDate = new DateTime(2024, 10, 30, 23, 8, 51, 226, DateTimeKind.Local).AddTicks(1015)
+                            CreatedDate = new DateTime(2024, 10, 31, 21, 56, 12, 219, DateTimeKind.Local).AddTicks(5879)
                         },
                         new
                         {
-                            Id = "94713298-b4ac-4199-9080-773e5edbc2bb",
+                            Id = "c965a232-7c70-4e64-96df-4930c5547cea",
                             Name = "Guardian",
                             NormalizedName = "GUARDIAN",
-                            CreatedDate = new DateTime(2024, 10, 30, 23, 8, 51, 226, DateTimeKind.Local).AddTicks(1019)
+                            CreatedDate = new DateTime(2024, 10, 31, 21, 56, 12, 219, DateTimeKind.Local).AddTicks(5882)
                         },
                         new
                         {
-                            Id = "ff031716-fd01-4a6d-9fa0-ae2f850296df",
+                            Id = "4732dc86-75cb-445f-ae44-048af7d694d7",
                             Name = "Student",
                             NormalizedName = "STUDENT",
-                            CreatedDate = new DateTime(2024, 10, 30, 23, 8, 51, 226, DateTimeKind.Local).AddTicks(1022)
+                            CreatedDate = new DateTime(2024, 10, 31, 21, 56, 12, 219, DateTimeKind.Local).AddTicks(5885)
                         });
+                });
+
+            modelBuilder.Entity("AltTopicClassroom", b =>
+                {
+                    b.HasOne("BilgeCollege.MODELS.Concretes.AltTopic", null)
+                        .WithMany()
+                        .HasForeignKey("AltTopicsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BilgeCollege.MODELS.Concretes.Classroom", null)
+                        .WithMany()
+                        .HasForeignKey("ClassroomsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BilgeCollege.MODELS.Concretes.AltTopic", b =>
