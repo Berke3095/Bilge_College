@@ -233,7 +233,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                         {
                             _altTopicServiceManager.GetAllActives();
 
-                            var classroomNow = _classroomServiceManager.GetDbSet().Include(x => x.AltTopics).First(x => x.Id == (int)student.ClassroomId);
+                            var classroomNow = _classroomServiceManager.GetClassroomWithAltTopics((int)student.ClassroomId);
                             classroomNow.TotalStudents++;
 
                             if(classroomNow.AltTopics != null)
@@ -255,7 +255,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 {
                     if(student.ClassroomId != null)
                     {
-                        var classroom = _classroomServiceManager.GetDbSet().Include(x => x.AltTopics).First(x => x.Id == (int)student.ClassroomId);
+                        var classroom = _classroomServiceManager.GetClassroomWithAltTopics((int)student.ClassroomId);
                         classroom.TotalStudents++;
 
                         if (classroom.AltTopics != null)

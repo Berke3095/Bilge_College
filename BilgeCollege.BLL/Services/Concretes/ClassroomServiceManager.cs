@@ -1,6 +1,7 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
 using BilgeCollege.DAL.Repository;
 using BilgeCollege.MODELS.Concretes;
+using Microsoft.EntityFrameworkCore;
 
 namespace BilgeCollege.BLL.Services.Concretes
 {
@@ -180,6 +181,11 @@ namespace BilgeCollege.BLL.Services.Concretes
         {
             classHourServiceManager.DestroyRange(classHourServiceManager.GetAll());
             dayScheduleServiceManager.DestroyRange(dayScheduleServiceManager.GetAll());
+        }
+
+        public Classroom GetClassroomWithAltTopics(int id)
+        {
+            return _repository.GetDbSet().Include(x => x.AltTopics).First(x => x.Id == id);
         }
     }
 }
