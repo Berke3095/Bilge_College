@@ -1,6 +1,7 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
 using BilgeCollege.DAL.Repository;
 using BilgeCollege.MODELS.Abstracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace BilgeCollege.BLL.Services.Concretes
 {
@@ -69,6 +70,11 @@ namespace BilgeCollege.BLL.Services.Concretes
         public T GetById(int id)
         {
             return _repository.GetById(id);
+        }
+
+        public DbSet<T> GetDbSet()
+        {
+            return _repository.GetDbSet();
         }
 
         public void Recover(T item)

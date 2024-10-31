@@ -7,6 +7,7 @@ using BilgeCollege.UI.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BilgeCollege.UI.Areas.Admin.Controllers
 {
@@ -186,6 +187,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             if (studentVM != null)
             {
                 var student = _studentServiceManager.GetById(studentVM.Id);
+                var gradesToCreate = new List<Grade>();
 
                 student.GuardianId = studentVM.GuardianId;
 
@@ -224,13 +226,14 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     {
                         var classroomBefore = _classroomServiceManager.GetById((int)_previousClassroomId);
                         classroomBefore.TotalStudents--;
-                        _gradeServiceManager.GetAll().Where(x => x.StudentId == student.Id).ToList().Clear();
+                        var gradesToRemove = _gradeServiceManager.GetAll().Where(x => x.StudentId == student.Id).ToList();
+                        _gradeServiceManager.DestroyRange(gradesToRemove);
 
                         if (studentVM.ClassroomId != null)
                         {
                             _altTopicServiceManager.GetAllActives();
-                            
-                            var classroomNow = _classroomServiceManager.GetById((int)student.ClassroomId);
+
+                            var classroomNow = _classroomServiceManager.GetDbSet().Include(x => x.AltTopics).First(x => x.Id == (int)student.ClassroomId);
                             classroomNow.TotalStudents++;
 
                             if(classroomNow.AltTopics != null)
@@ -242,6 +245,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                                         AltTopicId = altTopic.Id,
                                         StudentId = student.Id,
                                     };
+                                    gradesToCreate.Add(grade);
                                 }
                             }
                         }   
@@ -251,9 +255,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 {
                     if(student.ClassroomId != null)
                     {
-                        _altTopicServiceManager.GetAllActives();
-
-                        var classroom = _classroomServiceManager.GetById((int)student.ClassroomId);
+                        var classroom = _classroomServiceManager.GetDbSet().Include(x => x.AltTopics).First(x => x.Id == (int)student.ClassroomId);
                         classroom.TotalStudents++;
 
                         if (classroom.AltTopics != null)
@@ -265,11 +267,12 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                                     AltTopicId = altTopic.Id,
                                     StudentId = student.Id,
                                 };
+                                gradesToCreate.Add(grade);
                             }
                         }
                     }
                 }
-
+                _gradeServiceManager.CreateRange(gradesToCreate);
                 _studentServiceManager.Update(student);
                 return RedirectToAction("FullList", "Student");
             }
@@ -285,7 +288,6 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             _classroomServiceManager.GetAllActives();
             _gradeServiceManager.GetAll().Where(x => x.StudentId == id).ToList();
             _altTopicServiceManager.GetAllActives();
-            
 
             return View(student);
         }

@@ -1,4 +1,5 @@
 ﻿using BilgeCollege.MODELS.Abstracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace BilgeCollege.BLL.Services.Abstracts
 {
@@ -21,5 +22,7 @@ namespace BilgeCollege.BLL.Services.Abstracts
         public void RecoverRange(List<T> items);
         public void Destroy(T item);
         public void DestroyRange(List<T> items);
+
+        public DbSet<T> GetDbSet();
     }
 }
