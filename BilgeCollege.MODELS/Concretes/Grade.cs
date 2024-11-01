@@ -4,9 +4,49 @@ namespace BilgeCollege.MODELS.Concretes
 {
     public class Grade : BaseEntity
     {
-        public double MidTermGrade { get; set; }
-        public double FinalGrade { get; set; }
-        public double PerformanceGrade { get; set; }
+        private double _midtermGrade;
+        private double _finalGrade;
+        private double _performanceGrade;
+
+        public double MidTermGrade 
+        { 
+            get
+            {
+                return _midtermGrade;
+            }
+            set
+            {
+                if(value < 0) _midtermGrade = 0;
+                else if(value > 100) _midtermGrade = 100;
+                else _midtermGrade = value;
+            }
+        }
+        public double FinalGrade
+        {
+            get
+            {
+                return _finalGrade;
+            }
+            set
+            {
+                if (value < 0) _finalGrade = 0;
+                else if (value > 100) _finalGrade = 100;
+                else _finalGrade = value;
+            }
+        }
+        public double PerformanceGrade
+        {
+            get
+            {
+                return _performanceGrade;
+            }
+            set
+            {
+                if (value < 0) _performanceGrade = 0;
+                else if (value > 100) _performanceGrade = 100;
+                else _performanceGrade = value;
+            }
+        }
         public double Score
         {
             get
