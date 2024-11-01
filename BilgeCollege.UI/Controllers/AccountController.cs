@@ -25,6 +25,8 @@ namespace BilgeCollege.UI.Controllers
             _studentServiceManager = studentServiceManager;
         }
 
+        public static int? AccountId { get; set; }
+
         public IActionResult Login()
         {
             return View();
@@ -41,9 +43,11 @@ namespace BilgeCollege.UI.Controllers
                     var roles = await _userManager.GetRolesAsync(user);
                     if (roles.Contains("Teacher"))
                     {
+                        AccountId = 
                         if (!_teacherServiceManager.GetAllActives().Any(x => x.UserId == user.Id))
                         {
                             ViewData["LoginError"] = "You account has been deactivated, contact the college.";
+                            AccountId = null;
                             return View(loginVM);
                         }
                     }
@@ -52,6 +56,7 @@ namespace BilgeCollege.UI.Controllers
                         if (!_guardianServiceManager.GetAllActives().Any(x => x.UserId == user.Id))
                         {
                             ViewData["LoginError"] = "You account has been deactivated, contact the college.";
+                            AccountId = null;
                             return View(loginVM);
                         }
                     }
@@ -60,6 +65,7 @@ namespace BilgeCollege.UI.Controllers
                         if (!_studentServiceManager.GetAllActives().Any(x => x.UserId == user.Id))
                         {
                             ViewData["LoginError"] = "You account has been deactivated, contact the college.";
+                            AccountId = null;
                             return View(loginVM);
                         }
                     }
@@ -68,10 +74,12 @@ namespace BilgeCollege.UI.Controllers
 
                     if (result.Succeeded)
                     {
+                        AccountId = user.Id;
                         return RedirectToAction("Index", "Home");
                     }
                     else 
                     {
+                        AccountId = null;
                         ViewData["LoginError"] = "Login failed, check your email and password.";
                         return View(loginVM);
                     } 
