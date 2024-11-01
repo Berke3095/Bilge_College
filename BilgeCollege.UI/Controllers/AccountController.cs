@@ -25,8 +25,6 @@ namespace BilgeCollege.UI.Controllers
             _studentServiceManager = studentServiceManager;
         }
 
-        public static int? AccountId { get; set; }
-
         public IActionResult Login()
         {
             return View();
@@ -43,29 +41,28 @@ namespace BilgeCollege.UI.Controllers
                     var roles = await _userManager.GetRolesAsync(user);
                     if (roles.Contains("Teacher"))
                     {
-                        AccountId = 
-                        if (!_teacherServiceManager.GetAllActives().Any(x => x.UserId == user.Id))
+                        var teacher = _teacherServiceManager.GetAllActives().First(x => x.UserId == user.Id);
+                        if (teacher == null)
                         {
                             ViewData["LoginError"] = "You account has been deactivated, contact the college.";
-                            AccountId = null;
                             return View(loginVM);
                         }
                     }
                     else if (roles.Contains("Guardian"))
                     {
-                        if (!_guardianServiceManager.GetAllActives().Any(x => x.UserId == user.Id))
+                        var guardian = _guardianServiceManager.GetAllActives().First(y => y.UserId == user.Id);
+                        if (guardian == null)
                         {
                             ViewData["LoginError"] = "You account has been deactivated, contact the college.";
-                            AccountId = null;
                             return View(loginVM);
                         }
                     }
                     else if (roles.Contains("Student"))
                     {
-                        if (!_studentServiceManager.GetAllActives().Any(x => x.UserId == user.Id))
+                        var student = _studentServiceManager.GetAllActives().First(x => x.UserId == user.Id);
+                        if (student == null)
                         {
                             ViewData["LoginError"] = "You account has been deactivated, contact the college.";
-                            AccountId = null;
                             return View(loginVM);
                         }
                     }
@@ -74,12 +71,10 @@ namespace BilgeCollege.UI.Controllers
 
                     if (result.Succeeded)
                     {
-                        AccountId = user.Id;
                         return RedirectToAction("Index", "Home");
                     }
                     else 
                     {
-                        AccountId = null;
                         ViewData["LoginError"] = "Login failed, check your email and password.";
                         return View(loginVM);
                     } 
