@@ -1,7 +1,8 @@
-﻿@model Classroom
+﻿@model List<Grade>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "MyClass";
+    int num = 1;
 }
 
 <div class="d-flex">
@@ -15,15 +16,63 @@
         </ul>
     </div>
 
-    @if (Model != null)
+    @if (ViewBag.ClassroomId != null)
     {
         <div>
             <ul>
                 @foreach (var altTopic in ViewBag.AltTopics)
                 {
-                    <li><a asp-area="Teacher" asp-controller="MyClass" asp-action="Show" asp-route-classroomId="@Model.Id" asp-route-altTopicId="@altTopic.Id">@altTopic.TopicCode</a></li>
+                    <li><a asp-area="Teacher" asp-controller="MyClass" asp-action="Show" asp-route-classroomId="@ViewBag.ClassroomId" asp-route-altTopicId="@altTopic.Id">@altTopic.TopicCode</a></li>
                 }
             </ul>
         </div>
+    }
+
+    @if(Model != null)
+    {
+        @if (Model.Count() > 0)
+        {
+            <div>
+                <h3 class="h5 text-secondary">Grades:</h3>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Student</th>
+                            <th>Midterm</th>
+                            <th>Final</th>
+                            <th>Performance</th>
+                            <th class="text-decoration-underline"><strong>Score</strong></th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var grade in Model)
+                        {
+                            <form method="post" asp-area="Teacher" asp-controller="MyClass" asp-action="Show" asp-route-gradeId="@grade.Id">
+
+                            <tr>
+                                <td>@num</td>
+                                <td>@grade.Student.FirstName @(" ") @grade.Student.LastName</td>
+                                <td><input type="number" asp-for="@grade.MidTermGrade" /></td>
+                                <td><input type="number" asp-for="@grade.FinalGrade" /></td>
+                                <td><input type="number" asp-for="@grade.PerformanceGrade" /></td>
+                                <td><strong>@grade.Score</strong></td>
+                                <td>
+                                    <div>
+                                        <button type="submit" class="btn btn-submit">Save</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            </form>
+                            num++;
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        }
     }
 </div>

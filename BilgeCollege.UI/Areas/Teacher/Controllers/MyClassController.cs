@@ -15,13 +15,17 @@ namespace BilgeCollege.UI.Areas.Teacher.Controllers
         private readonly I_ClassroomServiceManager _classroomServiceManager;
         private readonly I_AltTopicServiceManager _altTopicServiceManager;
         private readonly I_TeacherServiceManager _teacherServiceManager;
+        private readonly I_StudentServiceManager _studentServiceManager;
+        private readonly I_GradeServiceManager _gradeServiceManager;
         private readonly UserManager<User> _userManager;
 
-        public MyClassController(I_ClassroomServiceManager classroomServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_TeacherServiceManager teacherServiceManager, UserManager<User> userManager)
+        public MyClassController(I_ClassroomServiceManager classroomServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_TeacherServiceManager teacherServiceManager, I_StudentServiceManager studentServiceManager, I_GradeServiceManager gradeServiceManager, UserManager<User> userManager)
         {
             _classroomServiceManager = classroomServiceManager;
             _altTopicServiceManager = altTopicServiceManager;
             _teacherServiceManager = teacherServiceManager;
+            _studentServiceManager = studentServiceManager;
+            _gradeServiceManager = gradeServiceManager;
             _userManager = userManager;
         }
 
@@ -42,15 +46,37 @@ namespace BilgeCollege.UI.Areas.Teacher.Controllers
             if(classroomId != null)
             {
                 var classroom = _classroomServiceManager.GetDbSet().Include(x => x.AltTopics).First(x => x.Id == classroomId);
-                ViewBag.AltTopics = classroom.AltTopics.Where(x => x.TeacherId == thisTeacher.Id);
+                ViewBag.AltTopics = classroom.AltTopics.Where(x => x.TeacherId == thisTeacher.Id).ToList();
 
-                if(altTopicId != null)
+                ViewBag.ClassroomId = classroom.Id;
+
+                if (altTopicId != null)
                 {
-                    
+                    var grades = _gradeServiceManager.GetDbSet().Include(x => x.Student).Where(x => x.AltTopicId == altTopicId).ToList();
+                    return View(grades);
                 }
-
-                return View(classroom);
             }
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Show(Grade grade, int gradeId)
+        {
+            if(grade != null)
+            {
+                var originalGrade = _gradeServiceManager.GetById(gradeId);
+                originalGrade.MidTermGrade = grade.MidTermGrade;
+                originalGrade.FinalGrade = grade.FinalGrade;
+                originalGrade.PerformanceGrade = grade.PerformanceGrade;
+
+                _gradeServiceManager.Update(originalGrade);
+
+                var altTopic = _altTopicServiceManager.GetById((int)originalGrade.AltTopicId);
+                var student = _studentServiceManager.GetById((int)originalGrade.StudentId);
+
+                RedirectToAction("Show", "MyClass", new { classroomId = student.ClassroomId, altTopicId = altTopic });
+            }
+
             return View();
         }
     }
