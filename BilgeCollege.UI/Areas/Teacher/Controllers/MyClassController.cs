@@ -74,7 +74,7 @@ namespace BilgeCollege.UI.Areas.Teacher.Controllers
                 var altTopic = _altTopicServiceManager.GetById((int)originalGrade.AltTopicId);
                 var student = _studentServiceManager.GetById((int)originalGrade.StudentId);
 
-                RedirectToAction("Show", "MyClass", new { classroomId = student.ClassroomId, altTopicId = altTopic });
+                return RedirectToAction("Show", "MyClass", new { classroomId = student.ClassroomId, altTopicId = altTopic.Id });
             }
 
             return View();
