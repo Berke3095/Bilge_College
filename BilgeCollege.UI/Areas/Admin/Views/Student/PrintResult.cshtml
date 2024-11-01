@@ -6,7 +6,7 @@
 
 <div>
     <div class="border-1">
-        @if(ViewBag.YearScore > 70)
+        @if (ViewBag.YearScore > 70 && ViewBag.YearScore < 80)
         {
             <div>
                 Tesekkur Belgesi
@@ -36,7 +36,7 @@
                 @Model.FirstName @(" ") @Model.LastName isimli ogrenci, @ViewBag.YearScore not ortalamasiyla bu belgeyi haketmistir.
             </div>
         }
-        else if(ViewBag.YearScore > 80)
+        else if (ViewBag.YearScore > 80 && ViewBag.YearScore < 90)
         {
             <div>
                 Takdir Belgesi
@@ -65,7 +65,7 @@
                 @Model.FirstName @(" ") @Model.LastName isimli ogrenci, @ViewBag.YearScore not ortalamasiyla bu belgeyi haketmistir.
             </div>
         }
-        else if (ViewBag.YearScore > 90)
+        else if (ViewBag.YearScore > 90 && ViewBag.YearScore <= 100)
         {
             <div>
                 Onur Belgesi

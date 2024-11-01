@@ -51,25 +51,28 @@
 
                         @foreach (var grade in Model)
                         {
-                            <form method="post" asp-area="Teacher" asp-controller="MyClass" asp-action="Show" asp-route-gradeId="@grade.Id">
+                            if(grade.Student.ClassroomId == ViewBag.ClassroomId)
+                            {
+                                <form method="post" asp-area="Teacher" asp-controller="MyClass" asp-action="Show" asp-route-gradeId="@grade.Id">
 
-                            <tr>
-                                <td>@num</td>
-                                <td>@grade.Student.SchoolNo</td>
-                                <td>@grade.Student.FirstName @(" ") @grade.Student.LastName</td>
-                                <td><input type="number" asp-for="@grade.MidTermGrade" /></td>
-                                <td><input type="number" asp-for="@grade.FinalGrade" /></td>
-                                <td><input type="number" asp-for="@grade.PerformanceGrade" /></td>
-                                <td><strong>@grade.Score</strong></td>
-                                <td>
-                                    <div>
-                                        <button type="submit" class="btn btn-submit btn-success">Save</button>
-                                    </div>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>@num</td>
+                                    <td>@grade.Student.SchoolNo</td>
+                                    <td>@grade.Student.FirstName @(" ") @grade.Student.LastName</td>
+                                    <td><input type="number" asp-for="@grade.MidTermGrade" /></td>
+                                    <td><input type="number" asp-for="@grade.FinalGrade" /></td>
+                                    <td><input type="number" asp-for="@grade.PerformanceGrade" /></td>
+                                    <td><strong>@grade.Score</strong></td>
+                                    <td>
+                                        <div>
+                                            <button type="submit" class="btn btn-submit btn-success">Save</button>
+                                        </div>
+                                    </td>
+                                </tr>
 
-                            </form>
-                            num++;
+                                </form>
+                                num++;
+                            }
                         }
 
                     </tbody>
