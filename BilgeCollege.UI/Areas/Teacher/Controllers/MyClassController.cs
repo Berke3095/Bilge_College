@@ -25,7 +25,7 @@ namespace BilgeCollege.UI.Areas.Teacher.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Show(int? id)
+        public IActionResult Show(int? classroomId, int? altTopicId)
         {
             var userId = _userManager.GetUserId(User);
             var thisTeacher = _teacherServiceManager.GetAllActives().First(x => x.UserId == userId);
@@ -39,9 +39,16 @@ namespace BilgeCollege.UI.Areas.Teacher.Controllers
 
             ViewBag.Classrooms = classrooms;
             
-            if(id != null)
+            if(classroomId != null)
             {
-                var classroom = _classroomServiceManager.GetById((int)id);
+                var classroom = _classroomServiceManager.GetDbSet().Include(x => x.AltTopics).First(x => x.Id == classroomId);
+                ViewBag.AltTopics = classroom.AltTopics.Where(x => x.TeacherId == thisTeacher.Id);
+
+                if(altTopicId != null)
+                {
+                    
+                }
+
                 return View(classroom);
             }
             return View();
