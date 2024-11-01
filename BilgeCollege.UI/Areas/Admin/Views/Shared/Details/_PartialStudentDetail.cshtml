@@ -71,10 +71,11 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th class="text-decoration-underline">Topic Code / Terms</th>
-                            <th>Topic / Grade</th>
+                            <th class="text-decoration-underline"><strong>Topic Code / Terms</strong></th>
                             <th>Midterm</th>
                             <th>Final</th>
+                            <th>Performance</th>
+                            <th class="text-decoration-underline"><strong>Score</strong></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,9 +84,11 @@
                             foreach (var grade in Model.Grades)
                             {
                                 <tr>
-                                    <th><a asp-area="Admin" asp-controller="AltTopic" asp-action="Details" asp-route-id="@grade.AltTopicId">@grade.AltTopic.TopicCode</a></th>
+                                    <th><a asp-area="Admin" asp-controller="AltTopic" asp-action="Details" asp-route-id="@grade.AltTopicId"><strong>@grade.AltTopic.TopicCode</strong></a></th>
                                     <td>@grade.MidTermGrade</td>
                                     <td>@grade.FinalGrade</td>
+                                    <td>@grade.PerformanceGrade</td>
+                                    <td><strong>@grade.Score</strong></td>
                                 </tr>
                             }
                         }

@@ -66,9 +66,11 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     {
                         Student student = await _studentServiceManager.SetupStudent(user, _userManager, studentVM.FirstName, studentVM.LastName, studentVM.TCK, studentVM.Gender, studentVM.FinishedSchool, studentVM.FinalGrade, studentVM.ClassroomId, studentVM.GuardianId);
 
-                        if(studentVM.ClassroomId != null)
+                        var gradesToCreate = new List<Grade>();
+
+                        if (studentVM.ClassroomId != null)
                         {
-                            var classroom = _classroomServiceManager.GetById((int)studentVM.ClassroomId);
+                            var classroom = _classroomServiceManager.GetClassroomWithAltTopics((int)studentVM.ClassroomId);
                             if (classroom.TotalStudents >= classroom.MaxCapacity)
                             {
                                 ViewData["FullClassroomError"] = "Classroom is full.";
@@ -79,9 +81,31 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                                 return View(studentVM);
                             }
                             classroom.TotalStudents++;
+
+                            if (classroom.AltTopics != null)
+                            {
+                                foreach (var altTopic in classroom.AltTopics)
+                                {
+                                    Grade grade = new Grade
+                                    {
+                                        AltTopicId = altTopic.Id
+                                    };
+                                    gradesToCreate.Add(grade);
+                                }
+                            }
                         }
 
                         _studentServiceManager.Create(student);
+
+                        if(gradesToCreate.Count() > 0)
+                        {
+                            foreach(var grade in gradesToCreate)
+                            {
+                                grade.StudentId = student.Id;
+                            }
+                            _gradeServiceManager.CreateRange(gradesToCreate);
+                        }
+
                         return RedirectToAction("Create", "Student");
                     }
                 }
