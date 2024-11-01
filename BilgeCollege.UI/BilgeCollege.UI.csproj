@@ -22,4 +22,8 @@
     <ProjectReference Include="..\BilgeCollege.BLL\BilgeCollege.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Teacher\Views\Models\" />
+  </ItemGroup>
+
 </Project>

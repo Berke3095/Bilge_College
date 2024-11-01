@@ -1,0 +1,16 @@
+﻿@model Classroom
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "MyClass";
+}
+
+<div class="d-flex">
+    <div>
+        <ul>
+            @foreach (var item in ViewBag.ActiveClassrooms)
+            {
+                <li class="mb-1"><a asp-area="Teacher" asp-controller="MyClass" asp-action="Show" asp-route-id="@item.Id" class="btn btn-primary d-grid" style="background-color:purple">@item.Grade</a></li>
+            }
+        </ul>
+    </div>
+</div>

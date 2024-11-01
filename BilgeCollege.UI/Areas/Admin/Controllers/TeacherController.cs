@@ -55,7 +55,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     User user = await UserIntegrateServiceManager.CreateUserAsync(_userManager, teacherVM.FirstName, teacherVM.LastName, teacherVM.TCK);
                     if (user != null)
                     {
-                        Teacher teacher = await _teacherServiceManager.SetupTeacher(user, _userManager, teacherVM.FirstName, teacherVM.LastName, teacherVM.TCK, teacherVM.PhoneNumber, teacherVM.MainTopicId);
+                        var teacher = await _teacherServiceManager.SetupTeacher(user, _userManager, teacherVM.FirstName, teacherVM.LastName, teacherVM.TCK, teacherVM.PhoneNumber, teacherVM.MainTopicId);
                         _teacherServiceManager.Create(teacher);
                         return RedirectToAction("Create", "Teacher");
                     }
