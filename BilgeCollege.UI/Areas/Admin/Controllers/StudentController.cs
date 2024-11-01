@@ -315,5 +315,28 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
 
             return View(student);
         }
+
+        public IActionResult PrintResult(int id)
+        {
+            var student = _studentServiceManager.GetById(id);
+            var grades = _gradeServiceManager.GetAll().Where(x => x.StudentId == id).ToList();
+
+            double yearScore = 0;
+            ViewBag.YearScore = yearScore;
+
+            if(grades.Count() > 0)
+            {
+                foreach(var grade in grades)
+                {
+                    yearScore += grade.Score;
+                }
+
+                ViewBag.YearScore = yearScore / grades.Count();
+            }
+
+            _altTopicServiceManager.GetAllActives();
+            ViewBag.Date = DateTime.Today;
+            return View(student);
+        }
     }
 }
