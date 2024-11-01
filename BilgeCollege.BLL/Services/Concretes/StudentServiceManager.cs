@@ -5,7 +5,6 @@ using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.MODELS.Concretes.CustomUser;
 using BilgeCollege.MODELS.Enums;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace BilgeCollege.BLL.Services.Concretes
 {
