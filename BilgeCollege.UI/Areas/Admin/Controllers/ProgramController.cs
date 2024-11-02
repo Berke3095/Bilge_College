@@ -4,6 +4,7 @@ using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.UI.Areas.Admin.Views.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BilgeCollege.UI.Areas.Admin.Controllers
 {
@@ -69,6 +70,17 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         public IActionResult Update(int id)
         {
             var daySchedule = _dayScheduleServiceManager.GetById(id);
+
+            var daySchedules = _dayScheduleServiceManager.GetDbSet().Include(x => x.ClassHours).ThenInclude(x => x.AltTopic).Where(x => x.Day == daySchedule.Day).ToList();
+            daySchedules.Remove(daySchedule);
+
+            foreach(var dayS in daySchedules)
+            {
+                dayS.ClassHours = dayS.ClassHours.Skip(8).Take(8).ToList();
+            }
+
+            ViewBag.DaySchedules = daySchedules;
+
             var classHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == id).ToList();
 
             DayScheduleVM dayScheduleVM = new DayScheduleVM
@@ -96,6 +108,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                 _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == dayScheduleVM.Id).ToList();
 
                 var daySchedule = _dayScheduleServiceManager.GetById(dayScheduleVM.Id);
+
                 var classHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();
                 var currentAltTopics = _classroomServiceManager.GetAllAltTopics((int)daySchedule.ClassroomId, _dayScheduleServiceManager, _altTopicServiceManager, _classHourServiceManager);
 

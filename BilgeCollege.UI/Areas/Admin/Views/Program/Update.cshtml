@@ -2,6 +2,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Update Day Program";
+    bool pass = true;
 }
 
 <head>
@@ -24,7 +25,19 @@
                         <option value="1" selected>--Select an alt topic--</option>
                         @foreach (var item in ViewBag.ActiveAltTopics)
                         {
-                            <option value="@item.Id">@item.TopicCode</option>
+                            pass = true;
+                            foreach(var daySchedule in ViewBag.DaySchedules)
+                            {
+                                if (daySchedule.ClassHours[i].AltTopicId != 1 && daySchedule.ClassHours[i].AltTopic.TeacherId == item.TeacherId)
+                                {
+                                    pass = false;
+                                    break;
+                                }
+                            }
+                            if(pass == true)
+                            {
+                                <option value="@item.Id">@item.TopicCode</option>
+                            }
                         }
                     </select>
                 </div>
