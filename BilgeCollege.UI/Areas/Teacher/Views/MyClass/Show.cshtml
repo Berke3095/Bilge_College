@@ -3,10 +3,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "MyClass";
     int num = 1;
+    int i = 0;
 }
 
 <div>
-
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th class="text-decoration-underline">Day / Class</th>
+                <th>1. Class</th>
+                <th>2. Class</th>
+                <th>3. Class</th>
+                <th>4. Class</th>
+                <th>5. Class</th>
+                <th>6. Class</th>
+                <th>7. Class</th>
+                <th>8. Class</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var day in ViewBag.Days)
+            {
+                <tr>
+                    <th>@day</th>
+                    @for (int j = 0; j < 8; j++)
+                    {
+                        <td>@ViewBag.AltTopicsForSchedule[i].TopicCode</td>
+                        i++;
+                    }
+                </tr>
+            }
+            
+        </tbody>
+    </table>
 </div>
 
 <div class="d-flex">

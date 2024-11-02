@@ -1,4 +1,5 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
+using BilgeCollege.BLL.Utils;
 using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.MODELS.Concretes.CustomUser;
 using Microsoft.AspNetCore.Authorization;
@@ -34,12 +35,34 @@ namespace BilgeCollege.UI.Areas.Teacher.Controllers
             var userId = _userManager.GetUserId(User);
             var thisTeacher = _teacherServiceManager.GetAllActives().First(x => x.UserId == userId);
             var altTopics = _altTopicServiceManager.GetAllActives().Where(x => x.TeacherId == thisTeacher.Id).ToList();
+
             var classrooms = new List<Classroom>();
             foreach (var altTopic in altTopics)
             {
                 var classroomToAdd = _classroomServiceManager.GetDbSet().Include(x => x.AltTopics).Where(x => x.AltTopics.Contains(altTopic) && x.State == MODELS.Enums.StateEnum.Active).ToList();
                 classrooms.AddRange(classroomToAdd);
             }
+
+            List<int> altTopicsIdForSchedule = new List<int>();
+            foreach(var classroom in classrooms)
+            {
+                foreach(var daySchedule in classroom.DaySchedules)
+                {
+                    foreach(var classHour in daySchedule.ClassHours)
+                    {
+                        altTopicsIdForSchedule.Add((int)classHour.AltTopicId);
+                    }
+                }
+            }
+
+            List<AltTopic> altT = new List<AltTopic>();
+            foreach(var itemId in altTopicsIdForSchedule)
+            {
+                altT.Add(_altTopicServiceManager.GetById(itemId));
+            }
+
+            ViewBag.AltTopicsForSchedule = altT;
+            ViewBag.Days = ScheduleManager.GetDays();
 
             ViewBag.Classrooms = classrooms;
             
