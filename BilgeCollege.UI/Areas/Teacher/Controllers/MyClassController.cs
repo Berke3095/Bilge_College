@@ -50,55 +50,6 @@ namespace BilgeCollege.UI.Areas.Teacher.Controllers
                 }
             }
 
-
-
-            ///////////////////////////
-            var cs = new List<Classroom>();
-            foreach (var altTopic in altTopics)
-            {
-                var csToAdd = _classroomServiceManager.GetDbSet().Include(x => x.DaySchedules).ThenInclude(x => x.ClassHours).Where(x => x.AltTopics.Contains(altTopic) && x.State == MODELS.Enums.StateEnum.Active).ToList();
-
-                foreach (var item in csToAdd)
-                {
-                    if (!cs.Contains(item))
-                    {
-                        cs.Add(item);
-                    }
-                }
-            }
-
-
-            int[] altTopicsIdForSchedule = new int[40];
-            Array.Fill(altTopicsIdForSchedule, 1);
-
-            int i = 0;
-            foreach (var classroom in cs)
-            {
-                foreach(var daySchedule in classroom.DaySchedules)
-                {
-                    foreach(var classHour in daySchedule.ClassHours)
-                    {
-                        if(_altTopicServiceManager.GetById((int)classHour.AltTopicId).TeacherId == thisTeacher.Id)
-                        {
-                            altTopicsIdForSchedule[i] = ((int)classHour.AltTopicId);
-                        }
-                        i++;
-                    }
-                }
-            }
-
-            List<AltTopic> altT = new List<AltTopic>();
-            foreach(var itemId in altTopicsIdForSchedule)
-            {
-                altT.Add(_altTopicServiceManager.GetById(itemId));
-            }
-
-            ViewBag.AltTopicsForSchedule = altT;
-            ViewBag.Days = ScheduleManager.GetDays();
-
-            ///////////////////////
-
-
             ViewBag.Classrooms = classrooms;
             
             if(classroomId != null)

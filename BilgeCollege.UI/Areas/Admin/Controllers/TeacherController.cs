@@ -18,15 +18,19 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         private readonly I_TeacherServiceManager _teacherServiceManager;
         private readonly I_MainTopicServiceManager _mainTopicServiceManager;
         private readonly I_AltTopicServiceManager _altTopicServiceManager;
+        private readonly I_DayScheduleServiceManager _dayScheduleServiceManager;
+        private readonly I_ClassHourServiceManager _classHourServiceManager;
         private readonly UserManager<User> _userManager;
 
         private static int? _previousMainTopicId; // For update
 
-        public TeacherController(I_TeacherServiceManager teacherService, I_MainTopicServiceManager mainTopicServiceManager, I_AltTopicServiceManager altTopicServiceManager, UserManager<User> userManager)
+        public TeacherController(I_TeacherServiceManager teacherService, I_MainTopicServiceManager mainTopicServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_DayScheduleServiceManager dayScheduleServiceManager, I_ClassHourServiceManager classHourServiceManager, UserManager<User> userManager)
         {
             _teacherServiceManager = teacherService;
             _mainTopicServiceManager = mainTopicServiceManager;
             _altTopicServiceManager = altTopicServiceManager;
+            _dayScheduleServiceManager = dayScheduleServiceManager;
+            _classHourServiceManager = classHourServiceManager;
             _userManager = userManager;
         }
 
@@ -96,6 +100,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         public async Task<IActionResult> Destroy(int id)
         {
             var foundTeacher = _teacherServiceManager.GetById(id);
+            var daySchedulesToDestroy = _dayScheduleServiceManager.GetAll().Where(x => x.TeacherId == foundTeacher.Id).ToList();
+            foreach(var daySchedule in daySchedulesToDestroy)
+            {
+                var classHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();
+                _classHourServiceManager.DestroyRange(classHours);
+            }
+            _dayScheduleServiceManager.DestroyRange(daySchedulesToDestroy);
             await _teacherServiceManager.HandleOnDestroy(_userManager, foundTeacher);
 
             _teacherServiceManager.Destroy(foundTeacher);
@@ -109,6 +120,13 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             var passiveTeachers = _teacherServiceManager.GetAllPassives();
             foreach(var item in passiveTeachers)
             {
+                var daySchedulesToDestroy = _dayScheduleServiceManager.GetAll().Where(x => x.TeacherId == item.Id).ToList();
+                foreach (var daySchedule in daySchedulesToDestroy)
+                {
+                    var classHours = _classHourServiceManager.GetAll().Where(x => x.DayScheduleId == daySchedule.Id).ToList();
+                    _classHourServiceManager.DestroyRange(classHours);
+                }
+                _dayScheduleServiceManager.DestroyRange(daySchedulesToDestroy);
                 await _teacherServiceManager.HandleOnDestroy(_userManager, item);
             }
 

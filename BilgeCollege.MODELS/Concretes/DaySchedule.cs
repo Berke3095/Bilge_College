@@ -25,6 +25,9 @@ namespace BilgeCollege.MODELS.Concretes
         public Classroom? Classroom { get; set; }
         public int? ClassroomId { get; set; }
 
+        public Teacher? Teacher { get; set; }
+        public int? TeacherId { get; set; }
+
         public List<ClassHour>? ClassHours { get; set; }
     }
 }
