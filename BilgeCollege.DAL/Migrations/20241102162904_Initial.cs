@@ -423,26 +423,26 @@ namespace BilgeCollege.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Discriminator", "ModifiedDate", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "130df0d4-6251-4c24-90cb-e036025eeaac", null, new DateTime(2024, 11, 2, 18, 22, 54, 441, DateTimeKind.Local).AddTicks(5723), "UserRole", null, "Guardian", "GUARDIAN" },
-                    { "4795851a-d4d7-4696-8068-6298f6d622cb", null, new DateTime(2024, 11, 2, 18, 22, 54, 441, DateTimeKind.Local).AddTicks(5727), "UserRole", null, "Student", "STUDENT" },
-                    { "49be50e8-d474-4ba4-9d16-bfe31d29a7b5", null, new DateTime(2024, 11, 2, 18, 22, 54, 441, DateTimeKind.Local).AddTicks(5719), "UserRole", null, "Teacher", "TEACHER" },
-                    { "f27d8171-7278-4828-a549-07a02cdc2cf9", null, new DateTime(2024, 11, 2, 18, 22, 54, 441, DateTimeKind.Local).AddTicks(5710), "UserRole", null, "Admin", "ADMIN" }
+                    { "2b326f4a-3a76-4db8-9977-36380603c4ae", null, new DateTime(2024, 11, 2, 19, 29, 4, 128, DateTimeKind.Local).AddTicks(6907), "UserRole", null, "Guardian", "GUARDIAN" },
+                    { "430b65d3-1368-47c1-90ac-7cffd422ca53", null, new DateTime(2024, 11, 2, 19, 29, 4, 128, DateTimeKind.Local).AddTicks(6898), "UserRole", null, "Teacher", "TEACHER" },
+                    { "d1ecd9ab-446c-4ea7-9de5-528902f7df38", null, new DateTime(2024, 11, 2, 19, 29, 4, 128, DateTimeKind.Local).AddTicks(6887), "UserRole", null, "Admin", "ADMIN" },
+                    { "fc719dd3-4716-46c2-b32d-70a59023de35", null, new DateTime(2024, 11, 2, 19, 29, 4, 128, DateTimeKind.Local).AddTicks(6911), "UserRole", null, "Student", "STUDENT" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "f3765133-5182-409d-bfd3-293557bfbc7f", 0, "7cb7c396-e6ff-420b-a835-b254ec797558", new DateTime(2024, 11, 2, 18, 22, 54, 405, DateTimeKind.Local).AddTicks(9665), "berke_aktepe@hotmail.com", false, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEFT8TjGGr5jpwlkTtRQ2qAvdPOlUr0DgZexh4QKQqhYPVYXp4/zYQVYprt1soo38Tw==", null, false, "d3b5f08e-2bd7-4c23-9cca-1466c8937928", false, "Admin" });
+                values: new object[] { "63018f1e-46ef-449d-9376-764d330125e6", 0, "27391f09-17a8-4e06-8bed-03bcb076b260", new DateTime(2024, 11, 2, 19, 29, 4, 94, DateTimeKind.Local).AddTicks(570), "berke_aktepe@hotmail.com", false, false, null, null, "BERKE_AKTEPE@HOTMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAECIc4WtapEoDAiCBw2XUBspeOAy6wRlHypuEB/MMQ4qlKb2Hpc21rcdSzWXzCrDLYA==", null, false, "e0238b9e-3a1f-479d-8a09-3f32f7cb5caa", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "MainTopics",
                 columns: new[] { "Id", "CreatedDate", "GuidId", "ModifiedDate", "State", "TopicName" },
-                values: new object[] { 1, new DateTime(2024, 11, 2, 18, 22, 54, 441, DateTimeKind.Local).AddTicks(6901), "449f6c3d-b29b-4d0f-830b-9aaf1b4b0ca2", null, 0, "NONE" });
+                values: new object[] { 1, new DateTime(2024, 11, 2, 19, 29, 4, 128, DateTimeKind.Local).AddTicks(8205), "d1014ba3-b41c-44aa-bfb0-a92326ebdf5c", null, 0, "NONE" });
 
             migrationBuilder.InsertData(
                 table: "AltTopics",
                 columns: new[] { "Id", "CreatedDate", "GuidId", "MainTopicId", "ModifiedDate", "State", "TeacherId", "TopicCode" },
-                values: new object[] { 1, new DateTime(2024, 11, 2, 18, 22, 54, 441, DateTimeKind.Local).AddTicks(6157), "ed3ff4da-31e1-4327-a86a-ae57eb54cd89", 1, null, 0, null, "NONE" });
+                values: new object[] { 1, new DateTime(2024, 11, 2, 19, 29, 4, 128, DateTimeKind.Local).AddTicks(7370), "77cdf7d1-725e-479c-b6da-4f79cf33f028", 1, null, 0, null, "NONE" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AltTopicClassroom_ClassroomsId",

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BilgeCollege.DAL.Migrations
 {
     [DbContext(typeof(CollegeContext))]
-    [Migration("20241102152254_Initial")]
+    [Migration("20241102162904_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -84,8 +84,8 @@ namespace BilgeCollege.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 11, 2, 18, 22, 54, 441, DateTimeKind.Local).AddTicks(6157),
-                            GuidId = "ed3ff4da-31e1-4327-a86a-ae57eb54cd89",
+                            CreatedDate = new DateTime(2024, 11, 2, 19, 29, 4, 128, DateTimeKind.Local).AddTicks(7370),
+                            GuidId = "77cdf7d1-725e-479c-b6da-4f79cf33f028",
                             MainTopicId = 1,
                             State = 0,
                             TopicCode = "NONE"
@@ -234,18 +234,18 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f3765133-5182-409d-bfd3-293557bfbc7f",
+                            Id = "63018f1e-46ef-449d-9376-764d330125e6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7cb7c396-e6ff-420b-a835-b254ec797558",
-                            CreatedDate = new DateTime(2024, 11, 2, 18, 22, 54, 405, DateTimeKind.Local).AddTicks(9665),
+                            ConcurrencyStamp = "27391f09-17a8-4e06-8bed-03bcb076b260",
+                            CreatedDate = new DateTime(2024, 11, 2, 19, 29, 4, 94, DateTimeKind.Local).AddTicks(570),
                             Email = "berke_aktepe@hotmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BERKE_AKTEPE@HOTMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFT8TjGGr5jpwlkTtRQ2qAvdPOlUr0DgZexh4QKQqhYPVYXp4/zYQVYprt1soo38Tw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECIc4WtapEoDAiCBw2XUBspeOAy6wRlHypuEB/MMQ4qlKb2Hpc21rcdSzWXzCrDLYA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d3b5f08e-2bd7-4c23-9cca-1466c8937928",
+                            SecurityStamp = "e0238b9e-3a1f-479d-8a09-3f32f7cb5caa",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -414,8 +414,8 @@ namespace BilgeCollege.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 11, 2, 18, 22, 54, 441, DateTimeKind.Local).AddTicks(6901),
-                            GuidId = "449f6c3d-b29b-4d0f-830b-9aaf1b4b0ca2",
+                            CreatedDate = new DateTime(2024, 11, 2, 19, 29, 4, 128, DateTimeKind.Local).AddTicks(8205),
+                            GuidId = "d1014ba3-b41c-44aa-bfb0-a92326ebdf5c",
                             State = 0,
                             TopicName = "NONE"
                         });
@@ -710,31 +710,31 @@ namespace BilgeCollege.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f27d8171-7278-4828-a549-07a02cdc2cf9",
+                            Id = "d1ecd9ab-446c-4ea7-9de5-528902f7df38",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
-                            CreatedDate = new DateTime(2024, 11, 2, 18, 22, 54, 441, DateTimeKind.Local).AddTicks(5710)
+                            CreatedDate = new DateTime(2024, 11, 2, 19, 29, 4, 128, DateTimeKind.Local).AddTicks(6887)
                         },
                         new
                         {
-                            Id = "49be50e8-d474-4ba4-9d16-bfe31d29a7b5",
+                            Id = "430b65d3-1368-47c1-90ac-7cffd422ca53",
                             Name = "Teacher",
                             NormalizedName = "TEACHER",
-                            CreatedDate = new DateTime(2024, 11, 2, 18, 22, 54, 441, DateTimeKind.Local).AddTicks(5719)
+                            CreatedDate = new DateTime(2024, 11, 2, 19, 29, 4, 128, DateTimeKind.Local).AddTicks(6898)
                         },
                         new
                         {
-                            Id = "130df0d4-6251-4c24-90cb-e036025eeaac",
+                            Id = "2b326f4a-3a76-4db8-9977-36380603c4ae",
                             Name = "Guardian",
                             NormalizedName = "GUARDIAN",
-                            CreatedDate = new DateTime(2024, 11, 2, 18, 22, 54, 441, DateTimeKind.Local).AddTicks(5723)
+                            CreatedDate = new DateTime(2024, 11, 2, 19, 29, 4, 128, DateTimeKind.Local).AddTicks(6907)
                         },
                         new
                         {
-                            Id = "4795851a-d4d7-4696-8068-6298f6d622cb",
+                            Id = "fc719dd3-4716-46c2-b32d-70a59023de35",
                             Name = "Student",
                             NormalizedName = "STUDENT",
-                            CreatedDate = new DateTime(2024, 11, 2, 18, 22, 54, 441, DateTimeKind.Local).AddTicks(5727)
+                            CreatedDate = new DateTime(2024, 11, 2, 19, 29, 4, 128, DateTimeKind.Local).AddTicks(6911)
                         });
                 });
 
