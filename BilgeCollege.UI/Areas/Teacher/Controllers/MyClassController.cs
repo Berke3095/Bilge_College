@@ -33,7 +33,15 @@ namespace BilgeCollege.UI.Areas.Teacher.Controllers
         public IActionResult Show(int? classroomId, int? altTopicId)
         {
             var userId = _userManager.GetUserId(User);
-            var thisTeacher = _teacherServiceManager.GetAllActives().First(x => x.UserId == userId);
+            var thisTeacher = _teacherServiceManager.GetDbSet().Include(x => x.DaySchedules).ThenInclude(x => x.ClassHours).ThenInclude(x => x.AltTopic).First(x => x.UserId == userId);
+            var daySchedules = thisTeacher.DaySchedules.Skip(5).Take(5).ToList();
+            var classHours = new List<ClassHour>();
+            foreach ( var daySchedule in daySchedules )
+            {
+                var classhs = daySchedule.ClassHours.Skip(8).Take(8).ToList();
+                classHours.AddRange(classhs);
+            }
+            
             var altTopics = _altTopicServiceManager.GetAllActives().Where(x => x.TeacherId == thisTeacher.Id).ToList();
 
             var classrooms = new List<Classroom>();
@@ -49,6 +57,14 @@ namespace BilgeCollege.UI.Areas.Teacher.Controllers
                     }
                 }
             }
+
+            var altTopicsForSchedule = new List<AltTopic>();
+            foreach(var classHour in classHours)
+            {
+                altTopicsForSchedule.Add(classHour.AltTopic);
+            }
+            ViewBag.AltTopicsForSchedule = altTopicsForSchedule;
+            ViewBag.Days = ScheduleManager.GetDays();
 
             ViewBag.Classrooms = classrooms;
             
