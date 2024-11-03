@@ -58,6 +58,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     }
                 }
 
+                _teacherServiceManager.GetAllActives();
                 _altTopicServiceManager.GetAllActives();
                 ViewBag.ActiveClassrooms = _classroomServiceManager.GetAllActives();
                 ViewBag.ActiveStudents = _studentServiceManager.GetAllActives().Where(x => x.ClassroomId == classroom.Id).ToList();

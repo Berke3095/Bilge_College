@@ -28,7 +28,14 @@
                     <th>@day</th>
                     @for (int j = 0; j < 8; j++)
                     {
-                        <td>@ViewBag.AltTopicsForSchedule[i].TopicCode</td>
+                        if (@ViewBag.AltTopicsForSchedule[i].Id != 1)
+                        {
+                            <td>@ViewBag.AltTopicsForSchedule[i].TopicCode</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
                         i++;
                     }
                 </tr>

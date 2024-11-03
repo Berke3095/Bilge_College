@@ -39,15 +39,22 @@
                 {
                     <tr>
                         <th>@day</th>
-                        @if(Model != null)
+                        @if (Model != null)
                         {
-                            if(Model[i].ClassHours != null)
+                            if (Model[i].ClassHours != null)
                             {
                                 for (int j = 0; j < 8; j++)
                                 {
                                     if (Model[i].ClassHours[j].AltTopic != null)
                                     {
-                                        <td>@Model[i].ClassHours[j].AltTopic.TopicCode</td>
+                                        <td>
+                                            <div>
+                                                @Model[i].ClassHours[j].AltTopic.TopicCode
+                                            </div>
+                                            <div>
+                                                @Model[i].ClassHours[j].AltTopic.Teacher.FirstName @(" ") @Model[i].ClassHours[j].AltTopic.Teacher.LastName
+                                            </div>
+                                        </td>
                                     }
                                     else
                                     {
