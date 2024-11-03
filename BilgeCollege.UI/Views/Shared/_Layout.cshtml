@@ -140,6 +140,12 @@
                         <a asp-area="Guardian" asp-controller="Children" asp-action="Show" class="btn sideNavLi" style="background-color: thistle; color: black;">MyChildren</a>
                     </li>
                 }
+                else if (User.IsInRole("Student"))
+                {
+                    <li class="mb-1" style="margin-top:10px;">
+                        <a asp-area="Student" asp-controller="Display" asp-action="Show" class="btn sideNavLi" style="background-color: thistle; color: black;">MyStatus</a>
+                    </li>
+                }
             </ul>
         </div>
         <div class="main-content">

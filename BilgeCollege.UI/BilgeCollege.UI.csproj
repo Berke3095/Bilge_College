@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Guardian\Views\Models\" />
+    <Folder Include="Areas\Student\Views\Models\" />
     <Folder Include="Areas\Teacher\Views\Models\" />
   </ItemGroup>
 

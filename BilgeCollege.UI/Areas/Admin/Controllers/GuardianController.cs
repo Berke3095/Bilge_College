@@ -124,6 +124,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             return RedirectToAction("FullList", "Guardian");
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var guardian = _guardianServiceManager.GetById(id);

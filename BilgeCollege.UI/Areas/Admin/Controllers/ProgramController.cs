@@ -31,6 +31,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             _teacherServiceManager = teacherServiceManager;
         }
 
+        [AllowAnonymous]
         public IActionResult Show(int? id)
         {
             if (id == null)
