@@ -38,6 +38,10 @@
                             {
                                 <option value="@item.Id">@item.TopicCode</option>
                             }
+                            else
+                            {
+                                <option value="@item.Id" disabled>@item.TopicCode</option>
+                            }
                         }
                     </select>
                 </div>

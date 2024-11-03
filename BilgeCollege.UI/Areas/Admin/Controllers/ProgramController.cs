@@ -73,10 +73,10 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         {
             var daySchedule = _dayScheduleServiceManager.GetById(id);
 
-            var daySchedules = _dayScheduleServiceManager.GetDbSet().Include(x => x.ClassHours).ThenInclude(x => x.AltTopic).Where(x => x.Day == daySchedule.Day).ToList();
+            var daySchedules = _dayScheduleServiceManager.GetDbSet().Include(x => x.ClassHours).ThenInclude(x => x.AltTopic).Where(x => x.Day == daySchedule.Day && x.TeacherId == null).ToList();
             daySchedules.Remove(daySchedule);
 
-            foreach(var dayS in daySchedules)
+            foreach (var dayS in daySchedules)
             {
                 dayS.ClassHours = dayS.ClassHours.Skip(8).Take(8).ToList();
             }
