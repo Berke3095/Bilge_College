@@ -64,7 +64,7 @@ namespace BilgeCollege.UI.Controllers
             return View(inboxVM);
         }
 
-        public IActionResult SendMessage(string? resultSuccess, string? resultFail)
+        public async Task<IActionResult> SendMessage(string? resultSuccess, string? resultFail, string? receiverEmail)
         {
             if(resultSuccess != null)
             {
@@ -75,7 +75,13 @@ namespace BilgeCollege.UI.Controllers
                 ViewData["FailMessage"] = resultFail;
             }
 
-            return View();
+            SendMessageVM sendMessageVM = new SendMessageVM();
+            if(receiverEmail != null)
+            {
+                sendMessageVM.Email = receiverEmail;
+            }
+
+            return View(sendMessageVM);
         }
 
         [HttpPost]

@@ -104,8 +104,13 @@
                                     <td><input type="number" asp-for="@grade.PerformanceGrade" /></td>
                                     <td><strong>@grade.Score</strong></td>
                                     <td>
-                                        <div>
-                                            <button type="submit" class="btn btn-submit btn-success">Save</button>
+                                        <div class="d-flex">
+                                            <div>
+                                                <button type="submit" class="btn btn-submit btn-success">Save</button>
+                                            </div>
+                                            <div style="margin-left:5px;">
+                                                <a class="btn btn-primary" asp-area="" asp-controller="Message" asp-action="SendMessage" asp-route-receiverEmail="@grade.Student.Email">Send Message</a>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
