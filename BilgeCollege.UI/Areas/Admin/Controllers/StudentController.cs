@@ -1,4 +1,5 @@
 ﻿using BilgeCollege.BLL.Services.Abstracts;
+using BilgeCollege.BLL.Services.Concretes;
 using BilgeCollege.BLL.Utils;
 using BilgeCollege.MODELS.Concretes;
 using BilgeCollege.MODELS.Concretes.CustomUser;
@@ -20,21 +21,19 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         private readonly I_ClassroomServiceManager _classroomServiceManager;
         private readonly I_GradeServiceManager _gradeServiceManager;
         private readonly I_AltTopicServiceManager _altTopicServiceManager;
-
-
+        private readonly I_MessageServiceManager _messageServiceManager;
         private readonly UserManager<User> _userManager;
 
         public static int? _previousClassroomId; // For update
 
-        public StudentController(I_StudentServiceManager studentServiceManager, I_GuardianServiceManager guardianServiceManager, I_ClassroomServiceManager classroomServiceManager, UserManager<User> userManager, I_GradeServiceManager gradeServiceManager, I_AltTopicServiceManager altTopicServiceManager)
+        public StudentController(I_StudentServiceManager studentServiceManager, I_GuardianServiceManager guardianServiceManager, I_ClassroomServiceManager classroomServiceManager, UserManager<User> userManager, I_GradeServiceManager gradeServiceManager, I_AltTopicServiceManager altTopicServiceManager, I_MessageServiceManager messageServiceManager)
         {
             _studentServiceManager = studentServiceManager;
             _guardianServiceManager = guardianServiceManager;
             _classroomServiceManager = classroomServiceManager;
             _gradeServiceManager = gradeServiceManager;
             _altTopicServiceManager = altTopicServiceManager;
-
-
+            _messageServiceManager = messageServiceManager;
             _userManager = userManager;
         }
 
@@ -171,14 +170,28 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Destroy(int id)
         {
-            _studentServiceManager.Destroy(_studentServiceManager.GetById(id));
+            var student = _studentServiceManager.GetById(id);
+
+            var messages = _messageServiceManager.GetAll().Where(x => x.SenderId == student.UserId || x.ReceiverId == student.UserId).ToList();
+            _messageServiceManager.DestroyRange(messages);
+
+            _studentServiceManager.Destroy(student);
+            
             return RedirectToAction("FullList", "Student");
         }
 
         [HttpPost]
         public ActionResult DestroyAll()
         {
-            _studentServiceManager.DestroyRange(_studentServiceManager.GetAllPassives());
+            var students = _studentServiceManager.GetAllPassives();
+
+            foreach(var student in students)
+            {
+                var messages = _messageServiceManager.GetAll().Where(x => x.SenderId == student.UserId || x.ReceiverId == student.UserId).ToList();
+                _messageServiceManager.DestroyRange(messages);
+            }
+
+            _studentServiceManager.DestroyRange(students);
             return RedirectToAction("FullList", "Student");
         }
 

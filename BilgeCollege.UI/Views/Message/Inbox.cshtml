@@ -1,0 +1,53 @@
+﻿@model InboxVM
+@{
+    ViewData["Title"] = "Inbox";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="card-header">
+        <h1>Inbox</h1>
+    </div>
+    <div class="card-body">
+        @if (Model != null && Model.ReceivedMessages.Count() > 0)
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Sent Date</th>
+                        <th>Sender</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(int i = 0; i < Model.ReceivedMessages.Count(); i++)
+                    {
+                        <tr>
+                            <td>@Model.ReceivedMessages[i].CreatedDate</td>
+                            <td>@Model.ReceivedMessages[i].Text</td>
+                            @if (Model.Senders[i] is Teacher teacher)
+                            {
+                                <td><a asp-area="Admin" asp-controller="Teacher" asp-action="Details" asp-route-id="@teacher.Id">@teacher.Email</a></td>
+                            }
+                            else if (Model.Senders[i] is Guardian guardian)
+                            {
+                                <td><a asp-area="Admin" asp-controller="Guardian" asp-action="Details" asp-route-id="@guardian.Id">@guardian.Email</a></td>
+                            }
+                            else if(Model.Senders[i] is Student student)
+                            {
+                                <td><a asp-area="Admin" asp-controller="Student" asp-action="Details" asp-route-id="@student.Id">@student.Email</a></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div>
+                No Messages in the inbox
+            </div>
+        }
+    </div>
+    
+</div>

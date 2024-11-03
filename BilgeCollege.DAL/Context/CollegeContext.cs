@@ -27,6 +27,7 @@ namespace BilgeCollege.DAL.Context
         DbSet<DaySchedule> DaySchedules { get; set; }
         DbSet<ClassHour> ClassHours { get; set; }
         DbSet<Grade> Grades { get; set; }
+        DbSet<Message> Messages { get; set; }
 
         string connectionString = "Server=DESKTOP-F5HL1HE;Database=BilgeCollegeDB;Trusted_Connection=true;TrustServerCertificate=true;";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -51,6 +52,7 @@ namespace BilgeCollege.DAL.Context
             builder.ApplyConfiguration(new DayScheduleConfig());
             builder.ApplyConfiguration(new ClassHourConfig());
             builder.ApplyConfiguration(new GradeConfig());
+            builder.ApplyConfiguration(new MessageConfig());
         }
     }
 }

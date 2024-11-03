@@ -16,12 +16,14 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
     {
         private readonly I_GuardianServiceManager _guardianServiceManager;
         private readonly I_StudentServiceManager _studentServiceManager;
+        private readonly I_MessageServiceManager _messageServiceManager;
         private readonly UserManager<User> _userManager;
 
-        public GuardianController(I_GuardianServiceManager guardianServiceManager, I_StudentServiceManager studentServiceManager, UserManager<User> userManager)
+        public GuardianController(I_GuardianServiceManager guardianServiceManager, I_StudentServiceManager studentServiceManager, I_MessageServiceManager messageServiceManager, UserManager<User> userManager)
         {
             _guardianServiceManager = guardianServiceManager;
             _studentServiceManager = studentServiceManager;
+            _messageServiceManager = messageServiceManager;
             _userManager = userManager;
         }
 
@@ -105,6 +107,10 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         public async Task<IActionResult> Destroy(int id)
         {
             var foundGuardian = _guardianServiceManager.GetById(id);
+
+            var messages = _messageServiceManager.GetAll().Where(x => x.SenderId == foundGuardian.UserId || x.ReceiverId == foundGuardian.UserId).ToList();
+            _messageServiceManager.DestroyRange(messages);
+
             await _guardianServiceManager.HandleOnDestroy(_userManager, foundGuardian);
 
             _guardianServiceManager.Destroy(foundGuardian);
@@ -117,6 +123,8 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             var passiveGuardians = _guardianServiceManager.GetAllPassives();
             foreach(var item in passiveGuardians)
             {
+                var messages = _messageServiceManager.GetAll().Where(x => x.SenderId == item.UserId || x.ReceiverId == item.UserId).ToList();
+                _messageServiceManager.DestroyRange(messages);
                 await _guardianServiceManager.HandleOnDestroy(_userManager, item);
             }
 

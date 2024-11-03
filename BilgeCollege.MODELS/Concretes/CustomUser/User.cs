@@ -12,5 +12,7 @@ namespace BilgeCollege.MODELS.Concretes.CustomUser
 
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
+        public List<Message>? SentMessages { get; set; }
+        public List<Message>? ReceivedMessages { get; set; }
     }
 }

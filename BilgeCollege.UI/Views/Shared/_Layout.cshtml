@@ -133,17 +133,50 @@
                     <li class="mb-1" style="margin-top:10px;">
                         <a asp-area="Teacher" asp-controller="MyClass" asp-action="Show" class="btn sideNavLi" style="background-color: thistle; color: black;">MyClasses</a>
                     </li>
+                    <li class="mb-1" style="margin-top:10px;">
+                        <button class="btn align-items-center rounded collapsed sideNavHeads" data-bs-toggle="collapse" data-bs-target="#Messages" aria-expanded="false">
+                            Messages
+                        </button>
+                        <div class="collapse mt-1 sideNavUl" id="Messages">
+                            <ul>
+                                <li><a asp-controller="Message" asp-action="Inbox" class="btn btn-sm sideNavAltLi" style="background-color: thistle; color: black;">Inbox</a></li>
+                                <li><a asp-controller="Message" asp-action="SendMessage" class="btn btn-sm sideNavAltLi" style="background-color: thistle; color: black;">SendMessage</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 }
                 else if (User.IsInRole("Guardian"))
                 {
                     <li class="mb-1" style="margin-top:10px;">
                         <a asp-area="Guardian" asp-controller="Children" asp-action="Show" class="btn sideNavLi" style="background-color: thistle; color: black;">MyChildren</a>
                     </li>
+                    <li class="mb-1" style="margin-top:10px;">
+                        <button class="btn align-items-center rounded collapsed sideNavHeads" data-bs-toggle="collapse" data-bs-target="#Messages" aria-expanded="false">
+                            Messages
+                        </button>
+                        <div class="collapse mt-1 sideNavUl" id="Messages">
+                            <ul>
+                                <li><a asp-controller="Message" asp-action="Inbox" class="btn btn-sm sideNavAltLi" style="background-color: thistle; color: black;">Inbox</a></li>
+                                <li><a asp-controller="Message" asp-action="SendMessage" class="btn btn-sm sideNavAltLi" style="background-color: thistle; color: black;">SendMessage</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 }
                 else if (User.IsInRole("Student"))
                 {
                     <li class="mb-1" style="margin-top:10px;">
                         <a asp-area="Student" asp-controller="Display" asp-action="Show" class="btn sideNavLi" style="background-color: thistle; color: black;">MyStatus</a>
+                    </li>
+                    <li class="mb-1" style="margin-top:10px;">
+                        <button class="btn align-items-center rounded collapsed sideNavHeads" data-bs-toggle="collapse" data-bs-target="#Messages" aria-expanded="false">
+                            Messages
+                        </button>
+                        <div class="collapse mt-1 sideNavUl" id="Messages">
+                            <ul>
+                                <li><a asp-controller="Message" asp-action="Inbox" class="btn btn-sm sideNavAltLi" style="background-color: thistle; color: black;">Inbox</a></li>
+                                <li><a asp-controller="Message" asp-action="SendMessage" class="btn btn-sm sideNavAltLi" style="background-color: thistle; color: black;">SendMessage</a></li>
+                            </ul>
+                        </div>
                     </li>
                 }
             </ul>
