@@ -48,7 +48,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
                     User user = await UserIntegrateServiceManager.CreateUserAsync(_userManager, guardianVM.FirstName, guardianVM.LastName, guardianVM.TCK);
                     if (user != null)
                     {
-                        Guardian guardian = await _guardianServiceManager.SetupGuardian(user, _userManager, guardianVM.FirstName, guardianVM.LastName, guardianVM.TCK, guardianVM.PhoneNumber, guardianVM.HomeAddress);
+                        var guardian = await _guardianServiceManager.SetupGuardian(user, _userManager, guardianVM.FirstName, guardianVM.LastName, guardianVM.TCK, guardianVM.PhoneNumber, guardianVM.HomeAddress);
                         _guardianServiceManager.Create(guardian);
                         return RedirectToAction("Create", "Guardian");
                     }

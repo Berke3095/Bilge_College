@@ -172,6 +172,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             return View(); // Exception
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var altTopic = _altTopicServiceManager.GetById(id);

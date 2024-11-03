@@ -189,6 +189,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var teacher = _teacherServiceManager.GetById(id);

@@ -304,6 +304,7 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
             return View(); // Exception
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var student = _studentServiceManager.GetById(id);

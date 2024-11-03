@@ -128,10 +128,16 @@
                         </div>
                     </li>
                 }
-                @if (User.IsInRole("Teacher"))
+                else if (User.IsInRole("Teacher"))
                 {
                     <li class="mb-1" style="margin-top:10px;">
                         <a asp-area="Teacher" asp-controller="MyClass" asp-action="Show" class="btn sideNavLi" style="background-color: thistle; color: black;">MyClasses</a>
+                    </li>
+                }
+                else if (User.IsInRole("Guardian"))
+                {
+                    <li class="mb-1" style="margin-top:10px;">
+                        <a asp-area="Guardian" asp-controller="Children" asp-action="Show" class="btn sideNavLi" style="background-color: thistle; color: black;">MyChildren</a>
                     </li>
                 }
             </ul>
