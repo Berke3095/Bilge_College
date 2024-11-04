@@ -170,10 +170,12 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Destroy(int id)
         {
-            var student = _studentServiceManager.GetById(id);
+            var student = _studentServiceManager.GetDbSet().Include(x => x.Grades).First(x => x.Id == id);
 
             var messages = _messageServiceManager.GetAll().Where(x => x.SenderId == student.UserId || x.ReceiverId == student.UserId).ToList();
             _messageServiceManager.DestroyRange(messages);
+
+            _gradeServiceManager.DestroyRange(student.Grades);
 
             _studentServiceManager.Destroy(student);
             
@@ -184,6 +186,8 @@ namespace BilgeCollege.UI.Areas.Admin.Controllers
         public ActionResult DestroyAll()
         {
             var students = _studentServiceManager.GetAllPassives();
+
+            _gradeServiceManager.DestroyRange(_gradeServiceManager.GetAll());
 
             foreach(var student in students)
             {
